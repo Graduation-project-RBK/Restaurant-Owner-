@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import "./signup.css"
 function Signup() {
     const [inputs, setInputs] = useState({});
     const navigate = useNavigate()
@@ -14,15 +14,16 @@ function Signup() {
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const { data } = await axios.post("http://localhost:3000/", inputs);
-            console.log("user added successfully", data)
-            navigate("/Login")
-        } catch (error) {
-            console.log(error)
-        }
+        // try {
+        //     const { data } = await axios.post("http://localhost:3000/", inputs);
+        //     console.log("user added successfully", data)
+        //     navigate("/Login")
+        // } catch (error) {
+        //     console.log(error)
+        // }
     }
     return (
+        
         <form>
             <label htmlFor="firstName"> First Name: </label>
             <input
