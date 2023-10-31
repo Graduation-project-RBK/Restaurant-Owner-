@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./login.css"
 
 function Login() {
@@ -21,19 +23,26 @@ function Login() {
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // try {
-        //     const { data } = await axios.post("http://localhost:3000/", inputs);
-        //     console.log("user added successfully", data)
-        //     navigate("/Login")
-        // } catch (error) {
-        //     console.log(error)
-        // }
+        try {
+            const { data } = await axios.post("http://localhost:3000/api/owners/signin", inputs);
+            console.log("user logged successfully", data)
+            toast.success("Successfully Logged In")
+            navigate("/Signup")
+        } catch (error) {
+            if (error.response && error.response.status === 410 && error.response.data.error === "Email doesn't exist") {
+                toast.error("Please provide a correct email");
+            } else if (error.response && error.response.status === 411 && error.response.data.error === "unvalid password") {
+                toast.error("Please provide a correct password");
+            } else {
+                console.log(error);
+            }
+        }
     }
     return (
         <div className="bg-img">
             <div className="content">
                 <header>Login Form</header>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="field">
                         <span className="fa fa-user"></span>
                         <label htmlFor="email"></label>
@@ -61,7 +70,7 @@ function Login() {
                         <span>Forgot Password?</span>
                     </div>
                     <div className="field">
-                        <input type="submit" onSubmit={handleSubmit} value="LOGIN" />
+                        <input type="submit" value="LOGIN" />
                     </div>
                     <div className="signup">
                         Don't have an account? <span onClick={() => navigate("/Signup")}>Register here</span>

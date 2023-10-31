@@ -38,7 +38,7 @@ function Signup() {
             try {
                 const { data } = await axios.post("http://localhost:3000/api/owners/", inputs);
                 console.log("user added successfully", data)
-                toast.success("successfully signed up")
+                toast.success("Successfully Signed Up")
                 navigate("/Login")
             } catch (error) {
                 if (error.response && error.response.status === 400 && error.response.data.error === "Email already exists") {
