@@ -43,17 +43,24 @@ const RestaurantForm = () => {
     };
 
     return (
-        <div>
-            {renderView()}
-            {currentView > 1 && (
-                <button onClick={handlePreviousClick}>Previous</button>
-            )}
-
-            {currentView < 8 ? (
-                <button onClick={handleNextClick}>Next</button>
-            ) : (
-                <button>Submit</button>
-            )}
+        <div className='container'>
+            <div className='view'>
+                {renderView()}
+            </div>
+            <div className='footer'>
+                <div className='leftBtn'>
+                    {currentView > 1 && (
+                        <button onClick={handlePreviousClick}>Previous</button>
+                    )}
+                </div>
+                <div className='righttBtn'>
+                {currentView < 8 ? (
+                    <button onClick={handleNextClick}>Next</button>
+                ) : (
+                    <button>Submit</button>
+                )}
+                </div>
+            </div>
         </div>
     );
 }

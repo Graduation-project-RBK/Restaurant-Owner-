@@ -16,6 +16,7 @@ const CategoriesView = () => {
     'Steakhouse',
     'Breakfast',
     'Mexican',
+    'French',
   ];
 
   const handleCategorySelect = (category) => {
@@ -24,7 +25,7 @@ const CategoriesView = () => {
 
   return (
     <div className="categories-view">
-      <h2>Select a Category:</h2>
+      <h2>Select a Category</h2>
       <div className="category-cards">
         {categories.map((category) => (
           <CategoryCard
