@@ -1,0 +1,16 @@
+.category-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.category-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.category-card.selected {
+  background-color: #4caf50;
+  color: #fff;
+}

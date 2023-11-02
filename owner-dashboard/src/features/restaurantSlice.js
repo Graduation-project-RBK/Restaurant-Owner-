@@ -13,7 +13,6 @@ const initialState = {
   closingTime: "",
   quotes: "",
 };
-
 const restaurantSlice = createSlice({
   name: "restaurant",
   initialState,
