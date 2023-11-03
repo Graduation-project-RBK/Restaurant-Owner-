@@ -5,7 +5,8 @@ body {
   width: 100vw;
   height: 100vh;
 }
-.category-cards {
+.category-cards,
+.city-cards {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -13,7 +14,8 @@ body {
 h2 {
   padding-bottom: 30px;
 }
-.category-card {
+.category-card,
+.city-card {
   box-sizing: border-box;
   width: 150px;
   height: 150px;
@@ -36,11 +38,22 @@ h2 {
   border: 1px solid black;
   transform: scale(1.05);
 }
+.city-card:hover {
+  border: 1px solid black;
+  transform: scale(1.05);
+}
 
 .category-card:active {
   transform: scale(0.95) rotateZ(1.7deg);
 }
+.city-card:active {
+  transform: scale(0.95) rotateZ(1.7deg);
+}
 .category-card.selected {
+  background-color: #979b97;
+  color: #fff;
+}
+.city-card.selected {
   background-color: #979b97;
   color: #fff;
 }
@@ -72,11 +85,81 @@ button:active {
 .view {
   margin-top: 250px;
   flex-grow: 1;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .footer {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.input-wrapper {
+  position: relative;
+  width: 200px;
+  margin: 50px auto;
+}
+
+.input-box {
+  font-size: 16px;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  color: #08aeea;
+  width: 100%;
+  background-color: transparent;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #08aeea;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.input-box:focus {
+  border-color: #08aeea;
+  outline: none;
+}
+
+.input-box:focus + .underline {
+  transform: scaleX(1);
+}
+button:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+.timeQuotascontainer {
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.timeQuotasLabel {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.timeQuotasInput {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+input[type="number"] {
+  width: 50%;
 }

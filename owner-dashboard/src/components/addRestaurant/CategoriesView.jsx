@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCategory } from '../../features/restaurantSlice';
+import { setCategory, setIsNextDisabled } from '../../features/restaurantSlice';
 import CategoryCard from './CategoryCard';
 import "./style.css"
 
@@ -19,10 +19,19 @@ const CategoriesView = () => {
     'French',
   ];
 
+  useEffect(() => {
+    if (!selectedCategory) {
+      dispatch(setIsNextDisabled(true));
+    } else {
+      dispatch(setIsNextDisabled(false));
+    }
+  }, [dispatch, selectedCategory]);
+
   const handleCategorySelect = (category) => {
     dispatch(setCategory(category));
+    dispatch(setIsNextDisabled(false)); 
   };
-
+  
   return (
     <div className="categories-view">
       <h2>Select a Category</h2>

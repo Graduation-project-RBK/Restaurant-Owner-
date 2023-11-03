@@ -12,6 +12,7 @@ const initialState = {
   openingTime: "",
   closingTime: "",
   quotes: "",
+  isNextDisabled: true,
 };
 const restaurantSlice = createSlice({
   name: "restaurant",
@@ -50,6 +51,9 @@ const restaurantSlice = createSlice({
     setQuotes: (state, action) => {
       state.quotes = action.payload;
     },
+    setIsNextDisabled: (state, action) => {
+      state.isNextDisabled = action.payload;
+    },
   },
 });
 
@@ -65,6 +69,7 @@ export const {
   setOpeningTime,
   setClosingTime,
   setQuotes,
+  setIsNextDisabled,
 } = restaurantSlice.actions;
 
 export default restaurantSlice.reducer;

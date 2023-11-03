@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CategoryCard = ({ category, selected, onSelect }) => {
+const CategoryCard = ({ category, selected, onSelect}) => {
   const handleClick = () => {
     onSelect(category);
   };
