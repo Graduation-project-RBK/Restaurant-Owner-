@@ -3,15 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   name: "",
   description: "",
-  phoneNumber: "",
-  category: "",
+  phoneNumber: 0,
+  categories: [],
   city: "",
   mainImage: "",
   menuImages: [],
   extraImages: [],
   openingTime: "",
   closingTime: "",
-  quotes: "",
+  quota: 0,
   isNextDisabled: true,
 };
 const restaurantSlice = createSlice({
@@ -27,8 +27,8 @@ const restaurantSlice = createSlice({
     setPhoneNumber: (state, action) => {
       state.phoneNumber = action.payload;
     },
-    setCategory: (state, action) => {
-      state.category = action.payload;
+    setCategories: (state, action) => {
+      state.categories = action.payload;
     },
     setCity: (state, action) => {
       state.city = action.payload;
@@ -61,7 +61,7 @@ export const {
   setName,
   setDescription,
   setPhoneNumber,
-  setCategory,
+  setCategories,
   setCity,
   setMainImage,
   setMenuImages,
