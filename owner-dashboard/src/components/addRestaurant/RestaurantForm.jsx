@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import NameDescriptionPhoneView from './NameDescriptionPhoneView';
 import CategoriesView from './CategoriesView';
@@ -13,14 +13,23 @@ const RestaurantForm = () => {
     const [currentView, setCurrentView] = useState(1);
     const { isNextDisabled } = useSelector(state => state.restaurant);
 
+    useEffect(() => {
+        const storedView = localStorage.getItem('currentView');
+        if (storedView) {
+            setCurrentView(parseInt(storedView));
+        }
+    }, []);
+
     const handleNextClick = () => {
         if (currentView === 1 || !isNextDisabled) {
             setCurrentView(currentView + 1);
+            localStorage.setItem('currentView', currentView + 1);
         }
     };
 
     const handlePreviousClick = () => {
         setCurrentView(currentView - 1);
+        localStorage.setItem('currentView', currentView - 1);
     };
 
     const renderView = () => {

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   name: "",
   description: "",
-  phoneNumber: 0,
+  phoneNumber: "",
   categories: [],
   city: "",
   mainImage: "",
@@ -11,7 +11,7 @@ const initialState = {
   extraImages: [],
   openingTime: "",
   closingTime: "",
-  quota: 0,
+  reservationQuota: "",
   isNextDisabled: true,
 };
 const restaurantSlice = createSlice({
@@ -48,8 +48,8 @@ const restaurantSlice = createSlice({
     setClosingTime: (state, action) => {
       state.closingTime = action.payload;
     },
-    setQuotes: (state, action) => {
-      state.quotes = action.payload;
+    setReservationQuota: (state, action) => {
+      state.reservationQuota = action.payload;
     },
     setIsNextDisabled: (state, action) => {
       state.isNextDisabled = action.payload;
@@ -68,7 +68,7 @@ export const {
   setExtraImages,
   setOpeningTime,
   setClosingTime,
-  setQuotes,
+  setReservationQuota,
   setIsNextDisabled,
 } = restaurantSlice.actions;
 
