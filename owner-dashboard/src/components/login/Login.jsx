@@ -26,7 +26,6 @@ function Login() {
         try {
             await axios.post("http://localhost:3000/api/owners/signin", inputs);
             toast.success("Successfully Logged In")
-            navigate("/Signup")
         } catch (error) {
             if (error.response && error.response.status === 410 && error.response.data.error === "Email doesn't exist") {
                 toast.error("Please provide a correct email");
