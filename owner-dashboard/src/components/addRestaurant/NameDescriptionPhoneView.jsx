@@ -34,30 +34,38 @@ function NameDescriptionPhoneView() {
 
   return (
     <div className="input-wrapper">
+      <label>Name:</label>
       <input
         className="input-box"
         type="textarea"
         name="restaurantName"
         value={name}
         onChange={handleNameChange}
-        placeholder="Enter your restaurant name" />
+        placeholder="Enter your restaurant name"
+        required />
       <span className="underline"></span>
-      <input
-        className="input-box"
-        type="textarea"
-        name="restaurantPhoneNumber"
-        value={phoneNumber}
-        onChange={handlePhoneNumberChange}
-        placeholder="Enter your restaurant phone number" />
-      <span className="underline"></span>
+      <label>Description:</label>
       <input
         className="input-box"
         type="textarea"
         name="restaurantDescription"
         value={description}
         onChange={handleDescriptionChange}
-        placeholder="Enter your restaurant Description" />
+        placeholder="Enter your restaurant Description"
+        required />
       <span className="underline"></span>
+      <label>Phone Number:</label>
+      <input
+        className="input-box"
+        type="tel"
+        name="restaurantPhoneNumber"
+        value={phoneNumber}
+        onChange={handlePhoneNumberChange}
+        placeholder="99 999 999"
+        pattern="[0-9]{2}-[0-9]{3}-[0-9]{3}"
+        required />
+      <span className="underline"></span>
+
     </div>
   )
 }

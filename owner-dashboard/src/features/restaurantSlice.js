@@ -4,14 +4,14 @@ const initialState = {
   name: "",
   description: "",
   phoneNumber: "",
-  category: "",
+  categories: [],
   city: "",
-  mainImage: "",
+  mainImage: null,
   menuImages: [],
   extraImages: [],
   openingTime: "",
   closingTime: "",
-  quotes: "",
+  reservationQuota: "",
   isNextDisabled: true,
 };
 const restaurantSlice = createSlice({
@@ -27,8 +27,8 @@ const restaurantSlice = createSlice({
     setPhoneNumber: (state, action) => {
       state.phoneNumber = action.payload;
     },
-    setCategory: (state, action) => {
-      state.category = action.payload;
+    setCategories: (state, action) => {
+      state.categories = action.payload;
     },
     setCity: (state, action) => {
       state.city = action.payload;
@@ -48,8 +48,8 @@ const restaurantSlice = createSlice({
     setClosingTime: (state, action) => {
       state.closingTime = action.payload;
     },
-    setQuotes: (state, action) => {
-      state.quotes = action.payload;
+    setReservationQuota: (state, action) => {
+      state.reservationQuota = action.payload;
     },
     setIsNextDisabled: (state, action) => {
       state.isNextDisabled = action.payload;
@@ -61,14 +61,14 @@ export const {
   setName,
   setDescription,
   setPhoneNumber,
-  setCategory,
+  setCategories,
   setCity,
   setMainImage,
   setMenuImages,
   setExtraImages,
   setOpeningTime,
   setClosingTime,
-  setQuotes,
+  setReservationQuota,
   setIsNextDisabled,
 } = restaurantSlice.actions;
 

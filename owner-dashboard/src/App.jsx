@@ -12,21 +12,20 @@ function App() {
     <Router>
       <Routes>
         <Route
-          path="/Signup"
-          element={<Signup />}
-        />
-        <Route
-          path="/Login"
+          path="/"
           element={<Login />}
         />
         <Route
-
+          path="/signup"
+          element={<Signup />}
+        />
+        <Route
           path="/home"
           element={<Home />}
-           />
-        <Roure
-        path="/AddRestaurant"
-        element={<RestaurantForm/>}
+        />
+        <Route
+          path="/add-restaurant"
+          element={<RestaurantForm />}
         />
       </Routes>
     </Router>

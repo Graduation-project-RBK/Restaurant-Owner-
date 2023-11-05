@@ -26,7 +26,7 @@ function Signup() {
             return false;
         }
         if (!passwordRegex.test(inputs.password)) {
-            toast.error("Password must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number, and be at least 8 characters long.");
+            toast.error("Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number and at least 8 characters long.");
             return false;
         }
         return true;
@@ -39,7 +39,7 @@ function Signup() {
                 const { data } = await axios.post("http://localhost:3000/api/owners/", inputs);
                 console.log("user added successfully", data)
                 toast.success("Successfully Signed Up")
-                navigate("/Login")
+                navigate("/add-restaurant")
             } catch (error) {
                 if (error.response && error.response.status === 400 && error.response.data.error === "Email already exists") {
                     toast.error("Email already exists. Please use a different email address.");
