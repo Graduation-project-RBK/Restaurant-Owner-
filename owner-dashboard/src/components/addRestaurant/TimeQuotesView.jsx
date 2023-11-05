@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import TimePicker from 'react-time-picker';
 import 'react-time-picker/dist/TimePicker.css';
@@ -7,6 +7,10 @@ import { setOpeningTime, setClosingTime, setReservationQuota, setIsNextDisabled 
 function TimeQuotasView() {
     const { openingTime, closingTime, reservationQuota } = useSelector(state => state.restaurant);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        checkIsNextDisabled(openingTime, closingTime, reservationQuota);
+    }, []);
 
     const handleOpeningTimeChange = (newOpeningTime) => {
         dispatch(setOpeningTime(newOpeningTime));

@@ -6,7 +6,7 @@ const initialState = {
   phoneNumber: "",
   categories: [],
   city: "",
-  mainImage: "",
+  mainImage: null,
   menuImages: [],
   extraImages: [],
   openingTime: "",

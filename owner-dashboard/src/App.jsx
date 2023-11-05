@@ -9,15 +9,15 @@ function App() {
     <Router>
       <Routes>
         <Route
-          path="/Signup"
-          element={<Signup />}
-        />
-        <Route
-          path="/Login"
+          path="/"
           element={<Login />}
         />
         <Route
-        path="/AddRestaurant"
+          path="/signup"
+          element={<Signup />}
+        />
+        <Route
+        path="/add-restaurant"
         element={<RestaurantForm/>}
         />
       </Routes>
