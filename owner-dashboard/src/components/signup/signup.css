@@ -1,4 +1,4 @@
-body {
+/* body {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,4 +40,4 @@ button:hover {
 .error-message {
   color: var(--dark);
   font-size: 15px;
-}
+} */
