@@ -33,6 +33,15 @@ const imageData = [
   }
 ];
 
+function acceptReservation(reservationIndex) {
+
+}
+
+function declineReservation(reservationIndex) {
+ 
+}
+
+
 const renderSlides = imageData.map((image) => (
   <div key={image.alt}>
     <img src={image.url} alt={image.alt} />   
@@ -132,6 +141,34 @@ function Home() {
             <button type="button">Save</button>
           </form>
         </div>
+        <div className="reservation-table">
+        <h2>Reservations</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+           
+              <tr>
+                <td>name</td>
+                <td>date</td>
+                <td>time</td>
+                <td>number</td>
+                <td>
+                  <button >Accept</button>
+                  <button>Decline</button>
+                </td>
+              </tr>
+       
+          </tbody>
+        </table>
+      </div>
       </div>
   );
 }
