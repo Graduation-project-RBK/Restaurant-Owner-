@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+.restaurantDetails {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 63.5vh;
+  margin-right: 1100px;
+}
+.carousel-container {
+  max-width: 700px;
+}

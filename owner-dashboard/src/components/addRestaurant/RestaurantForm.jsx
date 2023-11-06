@@ -101,7 +101,7 @@ const RestaurantForm = () => {
             <div className='view'>
                 {renderView()}
             </div>
-            <div className='footer'>
+            <div className='footer' >
                 <div className='leftBtn'>
                     {currentView > 1 && (
                         <button onClick={handlePreviousClick}>Back</button>

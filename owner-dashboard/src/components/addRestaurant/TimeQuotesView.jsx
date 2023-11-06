@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import TimePicker from 'react-time-picker';
 import 'react-time-picker/dist/TimePicker.css';

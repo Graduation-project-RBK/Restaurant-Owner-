@@ -81,7 +81,7 @@ function Signup() {
                 <button type="submit" onClick={handleSubmit}> Signup </button>
             </div>
             <p>
-                Already have a account? <span onClick={() => navigate("/Login")}>Login here</span>
+                Already have a account? <span onClick={() => navigate("/")}>Login here</span>
             </p>
         </form>
     )
