@@ -38,6 +38,7 @@ function ReservationHistory() {
 
     useEffect(() => {
         getExpiredReservations()
+        console.log(ownerId)
     }, [])
 
 

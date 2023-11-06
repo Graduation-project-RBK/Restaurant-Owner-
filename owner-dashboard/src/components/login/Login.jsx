@@ -86,7 +86,7 @@ function Login() {
                         <input type="submit" value="LOGIN" />
                     </div>
                     <div className="signup">
-                        Don't have an account? <span onClick={() => navigate("/Signup")}>Register here</span>
+                        Don't have an account? <span onClick={() => navigate("/signup")}>Register here</span>
                     </div>
                 </form>
             </div >
