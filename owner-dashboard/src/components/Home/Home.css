@@ -1,67 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Poppins', sans-serif;
-  background-color: #fcfcfc;
-}
-
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
-}
-
-.navbar {
-  height: 90px;
-  background-color: #dd6f6f;
-  position: relative;
-}
-
-.logo {
-}
-
-.nav-elements {
-}
-
-.nav-elements ul {
-  display: flex;
-  justify-content: space-between;
-  list-style-type: none;
-}
-
-.nav-elements ul li:not(:last-child) {
-  margin-right: 60px;
-}
-
-.nav-elements ul a {
-  font-size: 16px;
-  font-weight: 400;
-  color: #2f234f;
-  text-decoration: none;
-}
-
-.nav-elements ul a.active {
-  color: #574c4c;
-  font-weight: 500;
-  position: relative;
-}
-
-.nav-elements ul a.active::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: #574c4c;
-}
-
 .App {
   display: flex;
   justify-content: center;
@@ -69,46 +5,14 @@ body {
   height: 63.5vh;
   margin-right: 1100px;
 }
+
 .carousel-container {
   max-width: 700px;
 }
 
-.reservation-table {
-  margin-top: 20px;
-  border: 1px solid #ccc;
-  padding: 20px;
-  background-color: #f9f9f9;
-}
 
-.reservation-table h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-table th, table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-
-table th {
-  background-color: #f2f2f2;
-}
-
-table tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-table tr:hover {
-  background-color: #ddd;
-}
-
-button {
+.save {
   background-color: #4caf50;
   color: white;
   border: none;
@@ -116,6 +20,6 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.save:hover {
   background-color: #45a049;
 }

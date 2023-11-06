@@ -1,24 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import { NavLink } from 'react-router-dom'
-import { Sidebar } from 'flowbite-react';
-import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser } from 'react-icons/hi';
 import './Home.css'
 import { useSelector } from 'react-redux';
 import axios from "axios";
+import NavBar from "./Navbar.jsx";
 
 
-
-
-
-function acceptReservation(reservationIndex) {
-
-}
-
-function declineReservation(reservationIndex) {
-
-}
 
 
 
@@ -88,33 +76,8 @@ function Home() {
 
   return (
     <div>
-      <div>
-        <nav className="navbar">
-          <div className="container">
-            <div className="logo">
-            </div>
-            <div className="nav-elements">
-              <ul>
-                <li>
-                  <NavLink to="/">Home</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/blog">Blog</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/projects">Projects</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/about">About</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/contact">Contact</NavLink>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
+      <NavBar />
+
       <div className="App">
         <Carousel
           showArrows={true}
@@ -170,36 +133,8 @@ function Home() {
             />
           </div>
 
-          <button type="button">Save</button>
+          <button className='save' type="button">Save</button>
         </form>
-      </div>
-      <div className="reservation-table">
-        <h2>Reservations</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-
-            <tr>
-              <td>name</td>
-              <td>date</td>
-              <td>time</td>
-              <td>number</td>
-              <td>
-                <button >Accept</button>
-                <button>Decline</button>
-              </td>
-            </tr>
-
-          </tbody>
-        </table>
       </div>
     </div>
   );
