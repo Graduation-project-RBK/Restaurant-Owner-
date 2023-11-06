@@ -17,8 +17,8 @@ function App() {
           element={<Login />}
         />
         <Route
-        path="/AddRestaurant"
-        element={<RestaurantForm/>}
+          path="/AddRestaurant"
+          element={<RestaurantForm />}
         />
       </Routes>
     </Router>
