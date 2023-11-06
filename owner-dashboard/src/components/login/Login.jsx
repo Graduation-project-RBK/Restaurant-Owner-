@@ -4,11 +4,15 @@ import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./login.css"
+import { useDispatch } from 'react-redux';
+import { setOwnerId } from '../../features/restaurantSlice';
+
 
 function Login() {
     const [inputs, setInputs] = useState({});
     const [passwordVisible, setPasswordVisible] = useState(false);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
@@ -25,8 +29,18 @@ function Login() {
         e.preventDefault();
         try {
             const { data } = await axios.post("http://localhost:3000/api/owners/signin", inputs);
-            console.log("user logged successfully", data)
             toast.success("Successfully Logged In")
+            console.log(data.message === "owner successfully logged in")
+            if (data.message === "User hasn't created a restaurant") {
+                dispatch(setOwnerId(data.owner));
+                navigate("/add-restaurant")
+            }
+            else if (data.message === "owner successfully logged in") {
+                dispatch(setOwnerId(data.owner));
+                navigate('/home')
+
+            }
+
         } catch (error) {
             if (error.response && error.response.status === 410 && error.response.data.error === "Email doesn't exist") {
                 toast.error("Please provide a correct email");
