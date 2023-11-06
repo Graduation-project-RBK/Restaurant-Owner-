@@ -3,11 +3,15 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
+
 
 import "./signup.css"
 function Signup() {
     const [inputs, setInputs] = useState({});
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
 
     const handleChange = (e) => {
         e.preventDefault()
@@ -39,6 +43,8 @@ function Signup() {
                 const { data } = await axios.post("http://localhost:3000/api/owners/", inputs);
                 console.log("user added successfully", data)
                 toast.success("Successfully Signed Up")
+                dispatch(setOwnerId(data.owner));
+
                 navigate("/add-restaurant")
             } catch (error) {
                 if (error.response && error.response.status === 400 && error.response.data.error === "Email already exists") {

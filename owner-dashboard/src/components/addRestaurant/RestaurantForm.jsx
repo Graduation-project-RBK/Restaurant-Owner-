@@ -23,6 +23,7 @@ const RestaurantForm = () => {
         if (storedView) {
             setCurrentView(parseInt(storedView));
         }
+        console.log(ownerId)
     }, []);
 
     const handleNextClick = () => {
