@@ -1,0 +1,128 @@
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
+import axios from "axios";
+import moment from 'moment';
+import NameDescriptionPhoneView from './NameDescriptionPhoneView';
+import CategoriesView from './CategoriesView';
+import CityView from "./CityView"
+import MainImageView from './MainImageView';
+import MenuImagesView from './MenuImagesView';
+import ExtraImagesView from './ExtraImagesView'
+import TimeQuotasView from './TimeQuotesView';
+import IntroductionView from './IntroductionView';
+
+const RestaurantForm = () => {
+    const navigate = useNavigate()
+    const [currentView, setCurrentView] = useState(1);
+    const [loading, setLoading] = useState(false);
+    const { name, description, phoneNumber, categories, city, mainImage, menuImages, extraImages, openingTime, closingTime, reservationQuota, isNextDisabled, ownerId } = useSelector(state => state.restaurant);
+
+    useEffect(() => {
+        const storedView = localStorage.getItem('currentView');
+        if (storedView) {
+            setCurrentView(parseInt(storedView));
+        }
+    }, []);
+
+    const handleNextClick = () => {
+        if (currentView === 1 || !isNextDisabled) {
+            setCurrentView(currentView + 1);
+            localStorage.setItem('currentView', currentView + 1);
+        }
+    };
+
+    const handlePreviousClick = () => {
+        setCurrentView(currentView - 1);
+        localStorage.setItem('currentView', currentView - 1);
+    };
+    const handleSubmit = async () => {
+        setLoading(true);
+        const formattedOpeningTime = moment(openingTime, 'HH:mm:ss').toISOString();
+        const formattedClosingTime = moment(closingTime, 'HH:mm:ss').toISOString();
+        try {
+            const formData = new FormData();
+            formData.append("name", name);
+            formData.append("description", description);
+            formData.append("phoneNumber", phoneNumber);
+            categories.forEach((category, index) => {
+                formData.append(`categories[${index}]`, category);
+            });
+            menuImages.forEach((image, index) => {
+                formData.append(`menuImages[${index}]`, image);
+            });
+            extraImages.forEach((image, index) => {
+                formData.append(`extraImages[${index}]`, image);
+            });
+            formData.append("City", city);
+            formData.append("mainImage", mainImage);
+            formData.append("openingTime", formattedOpeningTime);
+            formData.append("closingTime", formattedClosingTime);
+            formData.append("reservationQuota", reservationQuota);
+            formData.append("ownerId", ownerId);
+
+            await axios.post("http://localhost:3000/api/restaurants/", formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            setLoading(false);
+            localStorage.clear();
+            navigate("/");
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const renderView = () => {
+        switch (currentView) {
+            case 1:
+                return <IntroductionView />
+            case 2:
+                return <NameDescriptionPhoneView />;
+            case 3:
+                return <CategoriesView />;
+            case 4:
+                return <CityView />;
+            case 5:
+                return <TimeQuotasView />;
+            case 6:
+                return <MainImageView />;
+            case 7:
+                return <MenuImagesView />
+            case 8:
+                return <ExtraImagesView />
+            default:
+                return null;
+        }
+    };
+
+    return (
+        <div className='container'>
+            <div className='view'>
+                {renderView()}
+            </div>
+            <div className='footer'>
+                <div className='leftBtn'>
+                    {currentView > 1 && (
+                        <button onClick={handlePreviousClick}>Back</button>
+                    )}
+                </div>
+                <div className='righttBtn'>
+                    {currentView < 8 ? (
+                        <button onClick={handleNextClick} disabled={currentView === 1 ? false : isNextDisabled}>Next</button>
+                    ) : (
+                        <button onClick={handleSubmit}>Submit</button>
+                    )}
+                </div>
+            </div>
+            {loading && (
+                <div className='loading'>
+                    <div className='spinner'></div>
+                </div>
+            )}
+        </div>
+    );
+}
+
+export default RestaurantForm;
