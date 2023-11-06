@@ -7,7 +7,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import "./signup.css"
 function Signup() {
     const [inputs, setInputs] = useState({});
+    const [passwordVisible, setPasswordVisible] = useState(false);
     const navigate = useNavigate();
+
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+    };
 
     const handleChange = (e) => {
         e.preventDefault()
@@ -51,39 +56,58 @@ function Signup() {
 
     }
     return (
-
-        <form>
-            <label htmlFor="firstName"> First Name: </label>
-            <input
-                type="text"
-                name="firstName"
-                onChange={handleChange}
-                placeholder="Enter your first name" />
-            <label htmlFor="lastName"> Last Name: </label>
-            <input
-                type="text"
-                name="lastName"
-                onChange={handleChange}
-                placeholder="Enter your last name" />
-            <label htmlFor="email"> Email: </label>
-            <input
-                type="email"
-                name="email"
-                onChange={handleChange}
-                placeholder="Enter your email" />
-            <label htmlFor="password"> Password: </label>
-            <input
-                type="password"
-                name="password"
-                onChange={handleChange}
-                placeholder="Enter your password" />
-            <div>
-                <button type="submit" onClick={handleSubmit}> Signup </button>
+        <div className="bg-img">
+            <div className="content">
+                <header>Login Form</header>
+                <form style={{ width: "100%" }} onSubmit={handleSubmit}>
+                    <div className="field">
+                        <label htmlFor="firstName"></label>
+                        <input
+                            type="text"
+                            name="firstName"
+                            onChange={handleChange}
+                            placeholder="Enter your first name" />
+                    </div>
+                    <div className="field space">
+                        <label htmlFor="lastName"></label>
+                        <input
+                            type="text"
+                            name="lastName"
+                            onChange={handleChange}
+                            placeholder="Enter your last name" />
+                    </div>
+                    <div className="field space">
+                        <span className="fa fa-user"></span>
+                        <label htmlFor="email"></label>
+                        <input
+                            type="email"
+                            name="email"
+                            onChange={handleChange}
+                            placeholder="Enter your email" />
+                    </div>
+                    <div className="field space">
+                        <span className="fa fa-lock"></span>
+                        <label htmlFor="password"></label>
+                        <input
+                            className="pass-key"
+                            type={passwordVisible ? 'text' : 'password'}
+                            name="password"
+                            onChange={handleChange}
+                            placeholder="Enter your password"
+                        />
+                        <span className="show" onClick={togglePasswordVisibility}>
+                            {passwordVisible ? 'HIDE' : 'SHOW'}
+                        </span>
+                    </div>
+                    <div className="field space">
+                        <input type="submit" value="Signup" />
+                    </div>
+                    <div className="login">
+                        Already have a account? <span onClick={() => navigate("/")}>Login here</span>
+                    </div>
+                </form>
             </div>
-            <p>
-                Already have a account? <span onClick={() => navigate("/")}>Login here</span>
-            </p>
-        </form>
+        </div>
     )
 }
 
