@@ -2,11 +2,62 @@
 
 .restaurantDetails {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 63.5vh;
-  margin-right: 1100px;
+  background-color: #f7f7f7;
+  padding: 20px;
 }
 .carousel-container {
   max-width: 700px;
 }
+
+.restaurant-image {
+  width: 100%;
+  height: 400px;
+  background-image: url("path/to/main-restaurant.jpg");
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 20px;
+}
+
+.menu-images {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.menu-images img {
+  width: 100px;
+  height: 100px;
+}
+
+.extra-images {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.extra img {
+  width: 150px;
+  height: 150px;
+}
+
+.restaurant-details {
+  text-align: center;
+}
+
+.restaurant-details h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.restaurant-details p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+/* Add more custom styles as needed */

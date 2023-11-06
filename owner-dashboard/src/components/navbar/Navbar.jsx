@@ -6,10 +6,8 @@ function Navbar() {
     return (
         <div className="navbar-container">
             <nav className="navbar">
-                <div className="logo">
-                </div>
                 <div className="nav-elements">
-                    <ul>
+                    <ul className="list">
                         <li>
                             <NavLink to="/">Home</NavLink>
                         </li>

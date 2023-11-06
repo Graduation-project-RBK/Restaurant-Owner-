@@ -6,13 +6,10 @@ import "./Home.css"
 function Home() {
   return (
     <>
-
       <Navbar />
-
-
       <RestaurantDetails />
-
     </>
+
   )
 }
 

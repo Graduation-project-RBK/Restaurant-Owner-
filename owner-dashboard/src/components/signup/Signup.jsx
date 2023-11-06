@@ -58,7 +58,7 @@ function Signup() {
     return (
         <div className="bg-img">
             <div className="content">
-                <header>Login Form</header>
+                <header>Signup Form</header>
                 <form style={{ width: "100%" }} onSubmit={handleSubmit}>
                     <div className="field">
                         <label htmlFor="firstName"></label>
