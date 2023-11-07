@@ -51,8 +51,7 @@ function Signup() {
                     inputs
                 );
                 console.log("user added successfully", data);
-                toast.success("Successfully Signed Up");
-                navigate("/add-restaurant");
+                toast.success("registered successfully. Please check your email for verification instructions.");
             } catch (error) {
                 if (
                     error.response &&
