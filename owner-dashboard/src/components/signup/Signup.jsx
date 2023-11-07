@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
 import "./signup.css"
+import { setOwnerId } from '../../features/restaurantSlice';
 
 
 function Signup() {
@@ -48,7 +49,6 @@ function Signup() {
                 console.log("user added successfully", data)
                 toast.success("Successfully Signed Up")
                 dispatch(setOwnerId(data.owner));
-
                 navigate("/add-restaurant")
             } catch (error) {
                 if (error.response && error.response.status === 400 && error.response.data.error === "Email already exists") {
