@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { useSelector } from 'react-redux';
 import { Carousel } from "react-responsive-carousel";
 import './restaurantDetails.css'
 
 const RestaurantDetails = () => {
+    const { ownerId } = useSelector((state) => state.restaurant);
     const [restaurant, setRestaurant] = useState({})
     const [currentIndex, setCurrentIndex] = useState();
     const menuImages = restaurant.menu_images;
     console.log(restaurant)
     const fetchRestaurant = async () => {
         try {
-            const { data } = await axios.get("http://localhost:3000/api/restaurants/13")
+            const { data } = await axios.get(`http://localhost:3000/api/restaurants/${ownerId}`)
             setRestaurant(data)
         }
         catch (error) {

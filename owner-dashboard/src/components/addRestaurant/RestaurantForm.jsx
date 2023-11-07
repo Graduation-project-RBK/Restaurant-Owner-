@@ -16,7 +16,7 @@ const RestaurantForm = () => {
     const navigate = useNavigate()
     const [currentView, setCurrentView] = useState(1);
     const [loading, setLoading] = useState(false);
-    const { name, description, phoneNumber, categories, city, mainImage, menuImages, extraImages, openingTime, closingTime, reservationQuota, isNextDisabled } = useSelector(state => state.restaurant);
+    const { name, description, phoneNumber, categories, city, mainImage, menuImages, extraImages, openingTime, closingTime, reservationQuota, isNextDisabled, ownerId } = useSelector(state => state.restaurant);
 
     useEffect(() => {
         const storedView = localStorage.getItem('currentView');
@@ -59,6 +59,7 @@ const RestaurantForm = () => {
             formData.append("openingTime", formattedOpeningTime);
             formData.append("closingTime", formattedClosingTime);
             formData.append("reservationQuota", reservationQuota);
+            formData.append("ownerId", ownerId);
 
             await axios.post("http://localhost:3000/api/restaurants/", formData, {
                 headers: {
