@@ -30,7 +30,7 @@ function Login() {
         try {
             const { data } = await axios.post("http://localhost:3000/api/owners/signin", inputs);
             toast.success("Successfully Logged In")
-            console.log(data.message === "owner successfully logged in")
+            console.log(data.message)
             if (data.message === "User hasn't created a restaurant") {
                 dispatch(setOwnerId(data.owner));
                 navigate("/add-restaurant")
@@ -86,7 +86,7 @@ function Login() {
                         <input type="submit" value="LOGIN" />
                     </div>
                     <div className="signup">
-                        Don't have an account? <span onClick={() => navigate("/Signup")}>Register here</span>
+                        Don't have an account? <span onClick={() => navigate("/signup")}>Register here</span>
                     </div>
                 </form>
             </div >
