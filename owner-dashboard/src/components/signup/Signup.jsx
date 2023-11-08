@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from 'react-toastify';
@@ -19,23 +19,28 @@ function Signup() {
     };
 
     const handleChange = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         const name = e.target.name;
         const value = e.target.value;
-        setInputs(values => ({ ...values, [name]: value }));
+        setInputs((values) => ({ ...values, [name]: value }));
         if (name === "firstName" || name === "lastName") {
-            setInputs(values => ({ ...values, fullname: `${values.firstName} ${values.lastName}` }));
+            setInputs((values) => ({
+                ...values,
+                fullname: `${values.firstName} ${values.lastName}`,
+            }));
         }
     };
     const validator = () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
         if (!emailRegex.test(inputs.email)) {
-            toast.error('Invalid email format');
+            toast.error("Invalid email format");
             return false;
         }
         if (!passwordRegex.test(inputs.password)) {
-            toast.error("Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number and at least 8 characters long.");
+            toast.error(
+                "Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number and at least 8 characters long."
+            );
             return false;
         }
         return true;
@@ -49,17 +54,21 @@ function Signup() {
                 console.log("user added successfully", data)
                 toast.success("Successfully Signed Up")
                 dispatch(setOwnerId(data.owner));
-                navigate("/add-restaurant")
             } catch (error) {
-                if (error.response && error.response.status === 400 && error.response.data.error === "Email already exists") {
-                    toast.error("Email already exists. Please use a different email address.");
+                if (
+                    error.response &&
+                    error.response.status === 400 &&
+                    error.response.data.error === "Email already exists"
+                ) {
+                    toast.error(
+                        "Email already exists. Please use a different email address."
+                    );
                 } else {
                     console.log(error);
                 }
             }
         }
-
-    }
+    };
     return (
         <div className="bg-img">
             <div className="content">

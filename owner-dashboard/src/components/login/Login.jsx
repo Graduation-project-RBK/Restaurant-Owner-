@@ -55,7 +55,7 @@ function Login() {
         <div className="bg-img">
             <div className="content">
                 <header>Login Form</header>
-                <form onSubmit={handleSubmit}>
+                <form style={{ width: "100%" }} onSubmit={handleSubmit}>
                     <div className="field">
                         <span className="fa fa-user"></span>
                         <label htmlFor="email"></label>
