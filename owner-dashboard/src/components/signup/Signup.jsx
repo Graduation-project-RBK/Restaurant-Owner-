@@ -4,8 +4,8 @@ import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
-import "./signup.css"
 import { setOwnerId } from '../../features/restaurantSlice';
+import "./signup.css"
 
 
 function Signup() {
@@ -52,7 +52,7 @@ function Signup() {
             try {
                 const { data } = await axios.post("http://localhost:3000/api/owners/", inputs);
                 console.log("user added successfully", data)
-                toast.success("Successfully Signed Up")
+                toast.success("Account created successfully. Please check your email for verification instructions.")
                 dispatch(setOwnerId(data.owner));
             } catch (error) {
                 if (
