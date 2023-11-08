@@ -13,6 +13,7 @@ const initialState = {
   closingTime: "",
   reservationQuota: "",
   isNextDisabled: true,
+  ownerId: null
 };
 const restaurantSlice = createSlice({
   name: "restaurant",
@@ -54,6 +55,9 @@ const restaurantSlice = createSlice({
     setIsNextDisabled: (state, action) => {
       state.isNextDisabled = action.payload;
     },
+    setOwnerId: (state, action) => {
+      state.ownerId = action.payload;
+    },
   },
 });
 
@@ -70,6 +74,7 @@ export const {
   setClosingTime,
   setReservationQuota,
   setIsNextDisabled,
+  setOwnerId
 } = restaurantSlice.actions;
 
 export default restaurantSlice.reducer;
