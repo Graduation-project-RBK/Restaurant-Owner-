@@ -9,6 +9,7 @@ import moment from 'moment'
 function PendingReservationTableList({ reservation, fetch }) {
 
     const [name, setName] = useState('')
+    const [expoToken, setExpoToken] = useState('')
 
 
     const findCustomerName = async () => {
@@ -16,6 +17,7 @@ function PendingReservationTableList({ reservation, fetch }) {
 
             const { data } = await axios.get(`http://localhost:3000/api/customers/${reservation.customerId}`)
             setName(data.fullname)
+            setExpoToken(data.expoToken)
             console.log(data)
 
         } catch (error) {
@@ -26,7 +28,7 @@ function PendingReservationTableList({ reservation, fetch }) {
     const acceptReservation = async () => {
         try {
 
-            await axios.put(`http://localhost:3000/api/reservations/approve/${reservation.id}`)
+            await axios.put(`http://localhost:3000/api/reservations/approve/${reservation.id}/${expoToken}`)
 
             fetch()
         }
@@ -39,7 +41,7 @@ function PendingReservationTableList({ reservation, fetch }) {
     const declineReservation = async () => {
         try {
 
-            await axios.put(`http://localhost:3000/api/reservations/reject/${reservation.id}`)
+            await axios.put(`http://localhost:3000/api/reservations/reject/${reservation.id}/${expoToken}`)
             fetch()
 
         }
