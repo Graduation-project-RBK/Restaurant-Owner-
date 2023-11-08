@@ -7,13 +7,6 @@ import ExpiredReservationTableList from "./ExpiredReservationTableList.jsx";
 import NavBar from "./Navbar.jsx";
 
 
-
-
-
-
-
-
-
 function ReservationHistory() {
 
     const { ownerId } = useSelector((state) => state.restaurant);
