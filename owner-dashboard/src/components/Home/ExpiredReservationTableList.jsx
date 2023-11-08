@@ -54,4 +54,3 @@ function PendingReservationTableList({ reservation }) {
 }
 
 export default PendingReservationTableList
-

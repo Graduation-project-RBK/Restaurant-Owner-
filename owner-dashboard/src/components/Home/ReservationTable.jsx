@@ -71,16 +71,3 @@ function ReservationTable() {
 }
 
 export default ReservationTable
-
-
-
-
-
-
-
-
-
-
-
-
-
