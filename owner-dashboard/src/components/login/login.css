@@ -5,6 +5,7 @@
   box-sizing: border-box;
   user-select: none;
 }
+
 .bg-img {
   background: url("../../assets/images/background.jpg");
   height: 100vh;
@@ -12,6 +13,7 @@
   background-position: center;
   width: 100vw;
 }
+
 .bg-img:after {
   position: absolute;
   content: "";
@@ -20,6 +22,7 @@
   height: 100%;
   width: 100%;
 }
+
 .content {
   position: absolute;
   top: 50%;
@@ -36,6 +39,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .content header {
   color: rgba(194, 187, 187, 0.796);
   font-size: 50px;
@@ -43,6 +47,7 @@
   margin: 0 0 35px 0;
   font-family: "Montserrat", sans-serif;
 }
+
 .field {
   position: relative;
   height: 45px;
@@ -50,11 +55,13 @@
   display: flex;
   background: rgba(255, 255, 255, 0.94);
 }
+
 .field span {
   color: #222;
   width: 40px;
   line-height: 45px;
 }
+
 .field input {
   height: 100%;
   width: 100%;
@@ -65,9 +72,11 @@
   font-size: 16px;
   font-family: "Poppins", sans-serif;
 }
+
 .space {
   margin-top: 16px;
 }
+
 .show {
   position: absolute;
   right: 13px;
@@ -78,21 +87,26 @@
   cursor: pointer;
   font-family: "Montserrat", sans-serif;
 }
-.pass-key:valid ~ .show {
+
+.pass-key:valid~.show {
   display: block;
 }
+
 .pass {
   text-align: left;
   margin: 10px 0;
 }
+
 .pass a {
   color: white;
   text-decoration: none;
   font-family: "Poppins", sans-serif;
 }
+
 .pass:hover a {
   text-decoration: underline;
 }
+
 .field input[type="submit"] {
   background: #3498db;
   border: 1px solid #2691d9;
@@ -103,18 +117,22 @@
   cursor: pointer;
   font-family: "Montserrat", sans-serif;
 }
+
 .field input[type="submit"]:hover {
   background: #2691d9;
 }
+
 .signup {
   font-size: 15px;
   color: rgb(27, 26, 26);
   font-family: "Poppins", sans-serif;
 }
+
 .signup span {
   color: #3498db;
   text-decoration: none;
 }
+
 .signup span:hover {
   text-decoration: underline;
   cursor: pointer;

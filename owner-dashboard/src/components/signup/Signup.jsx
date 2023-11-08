@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
+import "./signup.css"
+import { setOwnerId } from '../../features/restaurantSlice';
 
-import "./signup.css";
+
 function Signup() {
     const [inputs, setInputs] = useState({});
     const [passwordVisible, setPasswordVisible] = useState(false);
-    const navigate = useNavigate();
 
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
     };
@@ -46,12 +50,10 @@ function Signup() {
         e.preventDefault();
         if (validator()) {
             try {
-                const { data } = await axios.post(
-                    "http://localhost:3000/api/owners/",
-                    inputs
-                );
-                console.log("user added successfully", data);
-                toast.success("registered successfully. Please check your email for verification instructions.");
+                const { data } = await axios.post("http://localhost:3000/api/owners/", inputs);
+                console.log("user added successfully", data)
+                toast.success("Successfully Signed Up")
+                dispatch(setOwnerId(data.owner));
             } catch (error) {
                 if (
                     error.response &&
@@ -78,8 +80,7 @@ function Signup() {
                             type="text"
                             name="firstName"
                             onChange={handleChange}
-                            placeholder="Enter your first name"
-                        />
+                            placeholder="Enter your first name" />
                     </div>
                     <div className="field space">
                         <label htmlFor="lastName"></label>
@@ -87,8 +88,7 @@ function Signup() {
                             type="text"
                             name="lastName"
                             onChange={handleChange}
-                            placeholder="Enter your last name"
-                        />
+                            placeholder="Enter your last name" />
                     </div>
                     <div className="field space">
                         <span className="fa fa-user"></span>
@@ -97,34 +97,32 @@ function Signup() {
                             type="email"
                             name="email"
                             onChange={handleChange}
-                            placeholder="Enter your email"
-                        />
+                            placeholder="Enter your email" />
                     </div>
                     <div className="field space">
                         <span className="fa fa-lock"></span>
                         <label htmlFor="password"></label>
                         <input
                             className="pass-key"
-                            type={passwordVisible ? "text" : "password"}
+                            type={passwordVisible ? 'text' : 'password'}
                             name="password"
                             onChange={handleChange}
                             placeholder="Enter your password"
                         />
                         <span className="show" onClick={togglePasswordVisibility}>
-                            {passwordVisible ? "HIDE" : "SHOW"}
+                            {passwordVisible ? 'HIDE' : 'SHOW'}
                         </span>
                     </div>
                     <div className="field space">
                         <input type="submit" value="Signup" />
                     </div>
                     <div className="login">
-                        Already have a account?
-                        <span onClick={() => navigate("/")}>Login here</span>
+                        Already have a account? <span onClick={() => navigate("/")}>Login here</span>
                     </div>
                 </form>
             </div>
         </div>
-    );
+    )
 }
 
-export default Signup;
+export default Signup

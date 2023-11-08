@@ -7,9 +7,11 @@
   align-items: center;
   width: 50%;
 }
+
 h2 {
   padding-bottom: 30px;
 }
+
 .category-card,
 .city-card {
   box-sizing: border-box;
@@ -30,10 +32,12 @@ h2 {
   font-weight: bolder;
   color: black;
 }
+
 .category-card:hover {
   border: 1px solid black;
   transform: scale(1.05);
 }
+
 .city-card:hover {
   border: 1px solid black;
   transform: scale(1.05);
@@ -42,13 +46,16 @@ h2 {
 .category-card:active {
   transform: scale(0.95) rotateZ(1.7deg);
 }
+
 .city-card:active {
   transform: scale(0.95) rotateZ(1.7deg);
 }
+
 .category-card.selected {
   background-color: #979b97;
   color: #fff;
 }
+
 .city-card.selected {
   background-color: #979b97;
   color: #fff;
@@ -72,6 +79,7 @@ button:hover {
 button:active {
   box-shadow: 4px 4px 12px #c5c5c5, -4px -4px 12px #ffffff;
 }
+
 .container {
   height: 100vh;
   display: flex;
@@ -94,11 +102,20 @@ button:active {
   justify-content: space-between;
   width: 100%;
 }
+
 .input-wrapper {
   position: relative;
   width: 80%;
   margin: 50px auto;
 }
+.categories-view,
+.city-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .categories-view,
 .city-view {
   display: flex;
@@ -134,9 +151,10 @@ button:active {
   outline: none;
 }
 
-.input-box:focus + .underline {
+.input-box:focus+.underline {
   transform: scaleX(1);
 }
+
 button:disabled {
   background-color: #cccccc;
   color: #666666;
@@ -180,6 +198,7 @@ input[type="number"] {
   border-radius: 15px;
   object-fit: contain;
 }
+
 .Icon {
   width: 25px;
   height: 25px;
