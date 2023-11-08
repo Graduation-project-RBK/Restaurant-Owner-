@@ -3,11 +3,15 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import success from "../../images/success.png"
 import "./emailVerification.css"
+import { setOwnerId } from '../../features/restaurantSlice';
+import { useDispatch } from 'react-redux';
 
 function EmailVerification() {
 
     const [validUrl, setValidUrl] = useState(false);
     const param = useParams();
+    const dispatch = useDispatch();
+
 
     useEffect(() => {
         const verifyEmail = async () => {
@@ -16,6 +20,7 @@ function EmailVerification() {
                 const { data } = await axios.post(`http://localhost:3000/api/owners/verify/${param.token}`);
                 console.log(data)
                 setValidUrl(true);
+                dispatch(setOwnerId(data.ownerId));
             } catch (error) {
                 console.log(error);
                 setValidUrl(false);
