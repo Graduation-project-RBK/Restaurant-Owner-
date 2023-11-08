@@ -7,6 +7,10 @@ import ReservationTable from './components/Home/ReservationTable.jsx';
 import './App.css'
 import RestaurantForm from './components/addRestaurant/RestaurantForm';
 import ReservationHistory from "./components/Home/ReservationHistory.jsx";
+import Settings from "./components/Home/Settings.jsx";
+import Images from "./components/Home/Images.jsx";
+import Messages from "./components/Home/Messages.jsx";
+import Reviews from "./components/Home/Reviews.jsx";
 
 function App() {
   return (
@@ -35,6 +39,22 @@ function App() {
         <Route
           path="/reservation-history"
           element={<ReservationHistory />}
+        />
+         <Route
+          path="/Settings"
+          element={<Settings />}
+        />
+           <Route
+          path="/Images"
+          element={<Images/>}
+        />
+             <Route
+          path="/Messages"
+          element={<Messages/>}
+        />
+              <Route
+          path="/Reviews"
+          element={<Reviews/>}
         />
       </Routes>
     </Router>

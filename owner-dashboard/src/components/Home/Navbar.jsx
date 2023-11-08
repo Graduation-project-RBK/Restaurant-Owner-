@@ -1,49 +1,25 @@
 import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { NavLink } from 'react-router-dom'
-
-import './Nav.css'
-
-
-
-
-
-
-
+import './Nav.css';
 
 
 function NavBar() {
-
-
-
-
     return (
-
-        <nav className="navbar">
-            <div className="container">
-                <div className="logo">
-                </div>
-                <div className="nav-elements">
-                    <ul>
-                        <li>
-                            <NavLink to="/home">Dashboard</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/reservation-list">Pending Reservation Table</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/reservation-history">Reservation History</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/">Log out</NavLink>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-
+      <div class="navbar">
+      <a class="navbar-brand" href="/home">Reservi</a>
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="/Images">Images</a></li>
+        <li class="nav-item"><a href="/reservation-list" class="nav-link"><i class="fa fa-bell"></i> </a></li>
+        <li class="nav-item"><a href="/Messages" class="nav-link"><i class="fa fa-envelope"></i> </a></li>
+        <li class="nav-item"><a href="/Reviews" class="nav-link">Reviews</a></li>
+        <li class="nav-item"><a href="/Settings" class="nav-link"><i class="fa fa-cog"></i> </a></li>
+      </ul>
+    </div>
+    
+    
+      
+      
     );
 }
 
-export default NavBar
+export default NavBar;

@@ -1,25 +1,35 @@
 .App {
   display: flex;
+  flex:1;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 63.5vh;
-  margin-right: 1100px;
+  
 }
 
 .carousel-container {
-  max-width: 700px;
+  margin-top:1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  
+}
+.image-container img {
+  object-fit: none;
+  height: 300px;
+  
 }
 
 
 
-.save {
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-}
 
-.save:hover {
-  background-color: #45a049;
-}
+
+
+
+
+
+
+
+
+
