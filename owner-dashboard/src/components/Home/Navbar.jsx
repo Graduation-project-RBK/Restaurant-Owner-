@@ -4,21 +4,9 @@ import { NavLink } from 'react-router-dom'
 
 import './Nav.css'
 
-
-
-
-
-
-
-
-
 function NavBar() {
 
-
-
-
     return (
-
         <nav className="navbar">
             <div className="navContainer">
                 <div className="logo">

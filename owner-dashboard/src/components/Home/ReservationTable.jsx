@@ -3,25 +3,32 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import './Table.css'
 import { useSelector } from 'react-redux';
 import axios from "axios";
-import ExpiredReservationTableList from "./ExpiredReservationTableList.jsx";
+import PendingReservationTableList from "./PendingReservationTableList.jsx";
 import NavBar from "./Navbar.jsx";
 
 
-function ReservationHistory() {
+
+
+
+
+
+
+
+function ReservationTable() {
 
     const { ownerId } = useSelector((state) => state.restaurant);
 
-    const [history, setHistory] = useState([])
+    const [pending, setPending] = useState([])
 
-    const getExpiredReservations = async () => {
+    const getPendingReservations = async () => {
 
         try {
 
 
             const response = await axios.get(`http://localhost:3000/api/restaurants/${ownerId}`)
 
-            const { data } = await axios.get(`http://localhost:3000/api/reservations/resolved/${response.data.id}`)
-            setHistory(data)
+            const { data } = await axios.get(`http://localhost:3000/api/reservations/pending/${response.data.id}`)
+            setPending(data)
 
         } catch (error) {
             console.log(error)
@@ -30,8 +37,7 @@ function ReservationHistory() {
 
 
     useEffect(() => {
-        getExpiredReservations()
-        console.log(ownerId)
+        getPendingReservations()
     }, [])
 
 
@@ -48,12 +54,12 @@ function ReservationHistory() {
                             <th>Date</th>
                             <th>Time</th>
                             <th>Number of Guests</th>
-                            <th>Status</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
-                    {history.map((reservation) => (
+                    {pending.map((reservation) => (
 
-                        <ExpiredReservationTableList key={reservation.id} reservation={reservation} />
+                        <PendingReservationTableList key={reservation.id} reservation={reservation} fetch={getPendingReservations} />
 
                     ))}
 
@@ -64,4 +70,4 @@ function ReservationHistory() {
     );
 }
 
-export default ReservationHistory
+export default ReservationTable

@@ -6,13 +6,15 @@ import "./emailVerification.css"
 
 function EmailVerification() {
 
-    const [validUrl, setValidUrl] = useState(true);
-    const { token } = useParams();
+    const [validUrl, setValidUrl] = useState(false);
+    const param = useParams();
 
     useEffect(() => {
         const verifyEmail = async () => {
             try {
-                await axios.get(`http://localhost:3000/api/owners/verify/${token}`);
+                console.log(param.token)
+                const { data } = await axios.post(`http://localhost:3000/api/owners/verify/${param.token}`);
+                console.log(data)
                 setValidUrl(true);
             } catch (error) {
                 console.log(error);
@@ -20,7 +22,7 @@ function EmailVerification() {
             }
         };
         verifyEmail();
-    }, [token]);
+    }, []);
     return (
         <>
             {validUrl ? (
