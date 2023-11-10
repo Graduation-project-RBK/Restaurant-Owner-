@@ -3,6 +3,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import authenticationReducer from "./authenticationSlice.js";
 import restaurantReducer from "./restaurantSlice.js";
+import notificationReducer from "./notificationSlice.js";
 
 const authPersistConfig = {
   key: "token",
@@ -27,6 +28,7 @@ const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
     restaurant: persistedRestaurantReducer,
+    notification: notificationReducer,
   },
   middleware: getDefaultMiddleware({
     serializableCheck: false,

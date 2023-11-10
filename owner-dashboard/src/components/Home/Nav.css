@@ -58,3 +58,34 @@ body {
     height: 2px;
     background-color: #574c4c;
 }
+
+#circle {
+    height: 12px;
+    width: 12px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 50%;
+    /* may require vendor prefixes */
+    background: red;
+    margin-left: 2px;
+    font-size: 10px;
+    font-weight: 100;
+
+}
+
+
+
+
+#noCircle {
+    height: 12px;
+    width: 12px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 50%;
+    /* may require vendor prefixes */
+    background: red;
+    margin-left: 2px;
+    font-size: 10px;
+    font-weight: 100;
+    visibility: hidden;
+}

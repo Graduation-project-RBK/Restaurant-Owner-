@@ -14,7 +14,7 @@ const authenticationSlice = createSlice({
       state.token = null;
     },
     setRole: (state, action) => {
-      state.token = action.payload;
+      state.role = action.payload;
     },
     clearRole: (state) => {
       state.role = null;

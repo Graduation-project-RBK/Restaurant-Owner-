@@ -5,8 +5,6 @@ import { useDispatch } from 'react-redux';
 import { setOwnerId } from '../../features/restaurantSlice';
 import success from "../../images/success.png"
 import "./emailVerification.css"
-import { setOwnerId } from '../../features/restaurantSlice';
-import { useDispatch } from 'react-redux';
 
 function EmailVerification() {
 
@@ -21,8 +19,8 @@ function EmailVerification() {
                 console.log(param.token)
                 const { data } = await axios.post(`http://localhost:3000/api/owners/verify/${param.token}`);
                 console.log(data)
-                dispatch(setOwnerId(data.ownerId));
                 setValidUrl(true);
+                dispatch(setOwnerId(data.ownerId));
             } catch (error) {
                 console.log(error);
                 setValidUrl(false);
