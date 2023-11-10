@@ -3,6 +3,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import restaurantReducer from "./restaurantSlice.js";
+import notificationReducer from "./notificationSlice.js";
 
 const persistConfig = {
   key: "root",
@@ -14,6 +15,8 @@ const persistedReducer = persistReducer(persistConfig, restaurantReducer);
 const store = configureStore({
   reducer: {
     restaurant: persistedReducer,
+    notification: notificationReducer,
+
   },
   middleware: getDefaultMiddleware({
     serializableCheck: false,
