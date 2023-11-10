@@ -15,7 +15,7 @@ function PendingReservationTableList({ reservation, fetch }) {
     const findCustomerName = async () => {
         try {
 
-            const { data } = await axios.get(`http://localhost:3000/api/customers/${reservation.customerId}`)
+            const { data } = await axios.get(`http://localhost:3000/api/owners/customers/${reservation.customerId}`)
             setName(data.fullname)
             setExpoToken(data.expoToken)
             console.log(data)
