@@ -4,10 +4,12 @@ import './Table.css'
 import axios from "../../../services/axios-interceptor.js";
 import ExpiredReservationTableList from "./ExpiredReservationTableList.jsx";
 import NavBar from "./Navbar.jsx";
+import { useNavigate } from "react-router-dom";
 
 
 function ReservationHistory() {
 
+    const navigate = useNavigate()
 
     const [history, setHistory] = useState([])
 
