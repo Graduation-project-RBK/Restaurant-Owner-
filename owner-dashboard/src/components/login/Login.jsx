@@ -32,11 +32,11 @@ function Login() {
             toast.success("Successfully Logged In")
             console.log(data.message)
             if (data.message === "User hasn't created a restaurant") {
-                dispatch(setOwnerId(data.owner));
+                localStorage.setItem('token', data.token)
                 navigate("/add-restaurant")
             }
             else if (data.message === "owner successfully logged in") {
-                dispatch(setOwnerId(data.owner));
+                localStorage.setItem('token', data.token)
                 navigate('/home')
 
             }
@@ -46,6 +46,8 @@ function Login() {
                 toast.error("Please provide a correct email");
             } else if (error.response && error.response.status === 411 && error.response.data.error === "unvalid password") {
                 toast.error("Please provide a correct password");
+            } else if (error.response && error.response.status === 403) {
+                toast.error("This account is invalid");
             } else {
                 console.log(error);
             }
