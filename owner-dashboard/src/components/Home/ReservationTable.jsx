@@ -4,6 +4,7 @@ import './Table.css'
 import axios from "../../../services/axios-interceptor.js";
 import PendingReservationTableList from "./PendingReservationTableList.jsx";
 import NavBar from "./Navbar.jsx";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -15,6 +16,7 @@ import NavBar from "./Navbar.jsx";
 
 function ReservationTable() {
 
+    const navigate = useNavigate()
 
     const [pending, setPending] = useState([])
 
