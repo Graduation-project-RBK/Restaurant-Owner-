@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import './Table.css'
-import { useSelector } from 'react-redux';
-import axios from "axios";
+import axios from "../../../services/axios-interceptor.js";
 import ExpiredReservationTableList from "./ExpiredReservationTableList.jsx";
 import NavBar from "./Navbar.jsx";
 
 
 function ReservationHistory() {
 
-    const { ownerId } = useSelector((state) => state.restaurant);
 
     const [history, setHistory] = useState([])
 
@@ -18,7 +16,7 @@ function ReservationHistory() {
         try {
 
 
-            const response = await axios.get(`http://localhost:3000/api/restaurants/${ownerId}`)
+            const response = await axios.get(`http://localhost:3000/api/restaurants/myRestaurant`)
 
             const { data } = await axios.get(`http://localhost:3000/api/reservations/resolved/${response.data.id}`)
             setHistory(data)
@@ -31,7 +29,6 @@ function ReservationHistory() {
 
     useEffect(() => {
         getExpiredReservations()
-        console.log(ownerId)
     }, [])
 
 

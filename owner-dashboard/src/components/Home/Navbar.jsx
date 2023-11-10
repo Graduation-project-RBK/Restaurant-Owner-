@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
-import axios from "axios";
+import axios from "../../../services/axios-interceptor.js";
 import { setNotificationBadge } from "../../features/notificationSlice";
 
 import './Nav.css'
@@ -16,7 +16,7 @@ function NavBar() {
     const { notificationBadge } = useSelector(state => state.notification);
     const checkNotification = async () => {
         try {
-            const { data } = await axios.get(`http://localhost:3000/api/owners/notification/${ownerId}`)
+            const { data } = await axios.get(`http://localhost:3000/api/owners/notification`)
             dispatch(setNotificationBadge(data))
 
             console.log(notificationBadge)
@@ -27,7 +27,7 @@ function NavBar() {
         if (notificationBadge) {
 
             try {
-                const response = await axios.get(`http://localhost:3000/api/restaurants/${ownerId}`)
+                const response = await axios.get(`http://localhost:3000/api/restaurants/myRestaurant`)
 
                 const { data } = await axios.get(`http://localhost:3000/api/reservations/pending/${response.data.id}`)
                 setNotificationNumber(data.length)
@@ -40,12 +40,17 @@ function NavBar() {
 
     const removeNotificationBadge = async () => {
         try {
-            const { data } = await axios.put(`http://localhost:3000/api/owners/notification/${ownerId}`)
+            const { data } = await axios.put(`http://localhost:3000/api/owners/notification`)
             dispatch(setNotificationBadge(data))
 
         } catch (error) {
             console.log(error)
         }
+    }
+
+    const logout = () => {
+
+        localStorage.clear()
 
 
     }
@@ -72,7 +77,7 @@ function NavBar() {
                             <NavLink to="/reservation-history">Reservation History</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/">Log out</NavLink>
+                            <NavLink to="/" onClick={logout}>Log out</NavLink>
                         </li>
                     </ul>
                 </div>

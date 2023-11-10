@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import './Table.css'
-import { useSelector } from 'react-redux';
-import axios from "axios";
+import axios from "../../../services/axios-interceptor.js";
 import PendingReservationTableList from "./PendingReservationTableList.jsx";
 import NavBar from "./Navbar.jsx";
 
@@ -16,7 +15,6 @@ import NavBar from "./Navbar.jsx";
 
 function ReservationTable() {
 
-    const { ownerId } = useSelector((state) => state.restaurant);
 
     const [pending, setPending] = useState([])
 
@@ -25,7 +23,7 @@ function ReservationTable() {
         try {
 
 
-            const response = await axios.get(`http://localhost:3000/api/restaurants/${ownerId}`)
+            const response = await axios.get(`http://localhost:3000/api/restaurants/myRestaurant`)
 
             const { data } = await axios.get(`http://localhost:3000/api/reservations/pending/${response.data.id}`)
             setPending(data)
