@@ -53,7 +53,6 @@ function Signup() {
                 const { data } = await axios.post("http://localhost:3000/api/owners/", inputs);
                 console.log("user added successfully", data)
                 toast.success("Successfully Signed Up")
-                dispatch(setOwnerId(data.owner));
             } catch (error) {
                 if (
                     error.response &&
