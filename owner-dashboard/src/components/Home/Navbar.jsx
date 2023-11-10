@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import axios from "../../../services/axios-interceptor.js";
 import { setNotificationBadge } from "../../features/notificationSlice";
+import { useNavigate } from "react-router-dom";
 
 import './Nav.css'
 
@@ -11,6 +12,7 @@ function NavBar() {
     const [notificationNumber, setNotificationNumber] = useState(1)
 
     const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     const { ownerId } = useSelector(state => state.restaurant);
     const { notificationBadge } = useSelector(state => state.notification);
@@ -22,6 +24,10 @@ function NavBar() {
             console.log(notificationBadge)
         } catch (error) {
             console.log(error)
+            if (error.response.status === 403 || error.response.status === 401) {
+                localStorage.clear()
+                navigate('/')
+            }
         }
 
         if (notificationBadge) {
@@ -33,6 +39,10 @@ function NavBar() {
                 setNotificationNumber(data.length)
             } catch (error) {
                 console.log(error)
+                if (error.response.status === 403 || error.response.status === 401) {
+                    localStorage.clear()
+                    navigate('/')
+                }
 
             }
         }
@@ -45,6 +55,10 @@ function NavBar() {
 
         } catch (error) {
             console.log(error)
+            if (error.response.status === 403 || error.response.status === 401) {
+                localStorage.clear()
+                navigate('/')
+            }
         }
     }
 

@@ -23,6 +23,10 @@ function ReservationHistory() {
 
         } catch (error) {
             console.log(error)
+            if (error.response.status === 403 || error.response.status === 401) {
+                localStorage.clear()
+                navigate('/')
+            }
         }
     }
 

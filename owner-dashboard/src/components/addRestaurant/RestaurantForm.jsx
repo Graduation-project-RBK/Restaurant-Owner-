@@ -22,7 +22,6 @@ const RestaurantForm = () => {
         if (storedView) {
             setCurrentView(parseInt(storedView));
         }
-        console.log(ownerId)
     }, []);
 
     const handleNextClick = () => {
@@ -67,9 +66,13 @@ const RestaurantForm = () => {
             });
             setLoading(false);
             localStorage.clear();
-            navigate("/");
+            navigate("/home");
         } catch (error) {
             console.error(error);
+            if (error.response.status === 403 || error.response.status === 401) {
+                localStorage.clear()
+                navigate('/')
+            }
         }
     }
 

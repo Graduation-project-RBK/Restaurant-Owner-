@@ -46,6 +46,8 @@ function Login() {
                 toast.error("Please provide a correct email");
             } else if (error.response && error.response.status === 411 && error.response.data.error === "unvalid password") {
                 toast.error("Please provide a correct password");
+            } else if (error.response && error.response.status === 403) {
+                toast.error("This account is invalid");
             } else {
                 console.log(error);
             }
