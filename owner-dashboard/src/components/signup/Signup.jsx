@@ -76,9 +76,9 @@ function Signup() {
                         'Content-Type': 'multipart/form-data',
                     },
                 });
-                dispatch(setOwnerId(data.owner));
                 setLoading(false);
                 toast.success("Account created successfully. Please check your email for verification instructions.");
+
             } catch (error) {
                 if (
                     error.response &&
