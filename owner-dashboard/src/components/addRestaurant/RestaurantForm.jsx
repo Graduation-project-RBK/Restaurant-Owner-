@@ -69,9 +69,11 @@ const RestaurantForm = () => {
             navigate("/home");
         } catch (error) {
             console.error(error);
-            if (error.response.status === 403 || error.response.status === 401) {
-                localStorage.clear()
-                navigate('/')
+            if (error.response) {
+                if (error.response.status === 403 || error.response.status === 401) {
+                    localStorage.clear()
+                    navigate('/')
+                }
             }
         }
     }
