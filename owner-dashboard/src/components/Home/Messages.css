@@ -1,8 +1,4 @@
-/* Global Styles */
-body {
-    background-color: #f4f7f6;
-    margin-top: 20px;
-  }
+
   
   .card {
     background: #fff;
@@ -262,6 +258,11 @@ body {
     .chat-app .chat-history {
       height: calc(100vh - 350px);
       overflow-x: auto;
+    }
+    .form-control{
+      height: calc(100vh - 350px);
+      overflow-x: auto;
+
     }
   }
   

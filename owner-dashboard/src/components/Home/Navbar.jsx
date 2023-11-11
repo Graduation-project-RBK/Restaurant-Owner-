@@ -13,6 +13,7 @@ function NavBar() {
         <li class="nav-item"><a href="/Messages" class="nav-link"><i class="fa fa-envelope"></i> </a></li>
         <li class="nav-item"><a href="/Reviews" class="nav-link">Reviews</a></li>
         <li class="nav-item"><a href="/Settings" class="nav-link"><i class="fa fa-cog"></i> </a></li>
+        <li class="nav-item"><a href="/" class="nav-link">Log In</a></li>
       </ul>
     </div>
     
