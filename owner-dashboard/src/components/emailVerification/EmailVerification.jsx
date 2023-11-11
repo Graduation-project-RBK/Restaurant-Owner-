@@ -3,7 +3,6 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import success from "../../images/success.png"
 import "./emailVerification.css"
-import { setOwnerId } from '../../features/restaurantSlice';
 import { useDispatch } from 'react-redux';
 
 function EmailVerification() {

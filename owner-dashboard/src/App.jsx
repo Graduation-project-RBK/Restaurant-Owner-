@@ -14,6 +14,9 @@ import ReservationHistory from "./components/Home/ReservationHistory.jsx";
 import EmailVerification from "./components/emailVerification/EmailVerification.jsx";
 
 function App() {
+
+
+
   return (
     <Router>
       <Routes>
