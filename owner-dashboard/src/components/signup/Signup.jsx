@@ -64,6 +64,7 @@ function Signup() {
         if (validator()) {
             setLoading(true);
             try {
+
                 const formData = new FormData();
                 formData.append("fullname", `${inputs.firstName} ${inputs.lastName}`);
                 formData.append("email", inputs.email);
@@ -76,9 +77,9 @@ function Signup() {
                         'Content-Type': 'multipart/form-data',
                     },
                 });
-                dispatch(setOwnerId(data.owner));
                 setLoading(false);
                 toast.success("Account created successfully. Please check your email for verification instructions.");
+
             } catch (error) {
                 if (
                     error.response &&

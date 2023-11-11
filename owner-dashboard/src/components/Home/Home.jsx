@@ -3,12 +3,15 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import './Home.css'
 import { useSelector } from 'react-redux';
-import axios from "axios";
+import axios from "../../../services/axios-interceptor.js";
 import NavBar from "./Navbar.jsx";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
 
-    const { ownerId } = useSelector((state) => state.restaurant);
+    const navigate = useNavigate()
+
+
     const [currentIndex, setCurrentIndex] = useState();
     const [restaurant, setRestaurant] = useState({});
     function handleChange(index) {
@@ -48,11 +51,15 @@ function Home() {
     const getRestaurant = async () => {
         try {
 
-            const { data } = await axios.get(`http://localhost:3000/api/restaurants/${ownerId}`)
+            const { data } = await axios.get(`http://localhost:3000/api/restaurants/myRestaurant`)
             setRestaurant(data)
 
         } catch (error) {
             console.log(error)
+            if (error.response.status === 403 || error.response.status === 401) {
+                localStorage.clear()
+                navigate('/')
+            }
         }
 
 

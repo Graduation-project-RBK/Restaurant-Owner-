@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import axios from "axios";
+import axios from "../../../services/axios-interceptor.js";
 import moment from 'moment';
 import NameDescriptionPhoneView from './NameDescriptionPhoneView';
 import CategoriesView from './CategoriesView';
@@ -16,14 +16,12 @@ const RestaurantForm = () => {
     const navigate = useNavigate()
     const [currentView, setCurrentView] = useState(1);
     const [loading, setLoading] = useState(false);
-    const { name, description, phoneNumber, categories, city, mainImage, menuImages, extraImages, openingTime, closingTime, reservationQuota, isNextDisabled, ownerId } = useSelector(state => state.restaurant);
-
+    const { name, description, phoneNumber, categories, city, mainImage, menuImages, extraImages, openingTime, closingTime, reservationQuota, isNextDisabled } = useSelector(state => state.restaurant);
     useEffect(() => {
         const storedView = localStorage.getItem('currentView');
         if (storedView) {
             setCurrentView(parseInt(storedView));
         }
-        console.log(ownerId)
     }, []);
 
     const handleNextClick = () => {
@@ -60,7 +58,6 @@ const RestaurantForm = () => {
             formData.append("openingTime", formattedOpeningTime);
             formData.append("closingTime", formattedClosingTime);
             formData.append("reservationQuota", reservationQuota);
-            formData.append("ownerId", ownerId);
 
             await axios.post("http://localhost:3000/api/restaurants/", formData, {
                 headers: {
@@ -69,9 +66,15 @@ const RestaurantForm = () => {
             });
             setLoading(false);
             localStorage.clear();
-            navigate("/");
+            navigate("/home");
         } catch (error) {
             console.error(error);
+            if (error.response) {
+                if (error.response.status === 403 || error.response.status === 401) {
+                    localStorage.clear()
+                    navigate('/')
+                }
+            }
         }
     }
 
