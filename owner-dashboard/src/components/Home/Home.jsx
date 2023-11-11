@@ -6,18 +6,9 @@ import { useSelector } from 'react-redux';
 import axios from "axios";
 import NavBar from "./Navbar.jsx";
 
-
-
-
-
-
-
 function Home() {
 
     const { ownerId } = useSelector((state) => state.restaurant);
-
-
-
     const [currentIndex, setCurrentIndex] = useState();
     const [restaurant, setRestaurant] = useState({});
     function handleChange(index) {

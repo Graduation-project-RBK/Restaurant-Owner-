@@ -30,7 +30,7 @@ function Login() {
         try {
             const { data } = await axios.post("http://localhost:3000/api/owners/signin", inputs);
             toast.success("Successfully Logged In")
-            console.log(data.message)
+            console.log(data.payload)
             if (data.message === "User hasn't created a restaurant") {
                 dispatch(setOwnerId(data.owner));
                 navigate("/add-restaurant")
@@ -46,7 +46,11 @@ function Login() {
                 toast.error("Please provide a correct email");
             } else if (error.response && error.response.status === 411 && error.response.data.error === "unvalid password") {
                 toast.error("Please provide a correct password");
-            } else {
+            }
+            else if (error.response && error.response.status === 401 && error.response.data.error === "Account not verified. Another verification email has been sent. Please check your email for instructions.") {
+                toast.error("Account not verified. Please check your email for verification instructions.")
+            }
+            else {
                 console.log(error);
             }
         }
