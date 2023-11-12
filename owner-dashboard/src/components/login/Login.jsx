@@ -47,17 +47,11 @@ function Login() {
                 toast.error("Please provide a correct email");
             } else if (error.response && error.response.status === 411 && error.response.data.error === "unvalid password") {
                 toast.error("Please provide a correct password");
-
             }
             else if (error.response && error.response.status === 401 && error.response.data.error === "Account not verified. Another verification email has been sent. Please check your email for instructions.") {
                 toast.error("Account not verified. Please check your email for verification instructions.")
             }
             else {
-
-            } else if (error.response && error.response.status === 403) {
-                toast.error("This account is invalid");
-            } else {
-
                 console.log(error);
             }
         }

@@ -9,6 +9,7 @@ import "./signup.css"
 
 function Signup() {
     const [inputs, setInputs] = useState({});
+
     const [personalId, setPersonalID] = useState(null)
     const [taxDeclaration, setTaxDeclaration] = useState(null)
     const [passwordVisible, setPasswordVisible] = useState(false);
@@ -92,7 +93,6 @@ function Signup() {
             }
         }
     };
-
     return (
         <div className="bg-img">
             <div className="content">
