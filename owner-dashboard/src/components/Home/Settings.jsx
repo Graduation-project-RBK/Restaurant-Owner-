@@ -1,9 +1,23 @@
-import React from "react";
+import React , {useState} from "react";
 import NavBar from "./Navbar";
 import "./Settings.css"
 
 
 const settings=()=>{
+  const [setting, setSetting] = useState({
+    description: "",
+    category:"",
+    ReservationQuota:"",
+    opensAt:Number,
+    closingTime:Number,
+    phoneNumber:Number,
+  });
+  const handleInputChange = (e) => {
+    const name = e.target.name
+    const value = e.target.value
+    setSetting({ ...setting, [name]: value });
+    console.log(setting)
+  };
     return(
         <div>
              <NavBar />
@@ -20,6 +34,7 @@ const settings=()=>{
           <input
               type="tel"
               id="phoneNumber"
+              onChange={handleInputChange}
 
 
             />
@@ -29,6 +44,7 @@ const settings=()=>{
           <input
               type="tel"
               id="phoneNumber"
+              onChange={handleInputChange}
 
 
             />
@@ -56,6 +72,7 @@ const settings=()=>{
             <input
               type="time"
               id="openTime"
+              onChange={handleInputChange}
             />
           </div>
 
@@ -64,6 +81,7 @@ const settings=()=>{
             <input
               type="time"
               id="closeTime"
+              onChange={handleInputChange}
 
             />
             
@@ -74,6 +92,7 @@ const settings=()=>{
             <input
               type="tel"
               id="phoneNumber"
+              onChange={handleInputChange}
 
 
             />

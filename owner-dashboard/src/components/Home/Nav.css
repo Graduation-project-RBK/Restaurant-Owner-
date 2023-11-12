@@ -23,6 +23,14 @@ html, body {
     list-style: none;
     margin: 0;
     padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #fcfcfc;
+}
+
+.navContainer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 15px;
     display: flex;
     align-items: center;
     margin-left: auto; /* Move the navbar-nav to the right */
@@ -35,6 +43,32 @@ html, body {
   }
   
   .nav-link {
+    height: 100%;
+}
+
+.navbar {
+    height: 90px;
+    background-color: #dd6f6f;
+    position: relative;
+}
+
+
+
+
+.nav-elements ul {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+}
+
+.nav-elements ul li:not(:last-child) {
+    margin-right: 180px;
+}
+
+.nav-elements ul a {
+    font-size: 16px;
+    font-weight: 400;
+    color: #2f234f;
     text-decoration: none;
     color: white;
     justify-content: center;
@@ -48,3 +82,49 @@ color:white,
 }
 
   
+.nav-elements ul a.active {
+    color: #574c4c;
+    font-weight: 500;
+    position: relative;
+}
+
+.nav-elements ul a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #574c4c;
+}
+
+#circle {
+    height: 12px;
+    width: 12px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 50%;
+    /* may require vendor prefixes */
+    background: red;
+    margin-left: 2px;
+    font-size: 10px;
+    font-weight: 100;
+
+}
+
+
+
+
+#noCircle {
+    height: 12px;
+    width: 12px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 50%;
+    /* may require vendor prefixes */
+    background: red;
+    margin-left: 2px;
+    font-size: 10px;
+    font-weight: 100;
+    visibility: hidden;
+}

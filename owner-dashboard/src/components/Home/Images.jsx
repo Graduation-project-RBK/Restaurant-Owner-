@@ -72,7 +72,7 @@ const Images = () => {
       extraImages.forEach((image, index) => {
         formData.append(`extraImages[${index}]`, image);
       });
-      const restaurantId = 29;
+      const restaurantId = 12;
       const response = await fetch(
         `http://localhost:3000/api/restaurants/upload/${restaurantId}`,
         {
@@ -97,6 +97,13 @@ const Images = () => {
     }
   };
   console.log(resultImageURLs);
+
+
+
+
+
+
+
   const updateImage = async (restaurantId, property, oldImageUrl, file) => {
     try {
       const formData = new FormData();
@@ -105,6 +112,24 @@ const Images = () => {
       formData.append("newImageFile", file);
       formData.append("oldImageUrl", oldImageUrl);
       formData.append("restaurantId", restaurantId);
+
+  
+      // Specific field for each property
+      switch (property) {
+        case "main_image":
+          formData.append("mainImage", file);
+          break;
+        case "menu_images":
+          formData.append("menuImages", file);
+          break;
+        case "extra_images":
+          formData.append("extraImages", file);
+          break;
+        default:
+          console.error("Invalid property:", property);
+          return;
+      }
+  
 
       const response = await axios.post(
         `http://localhost:3000/api/restaurants/${restaurantId}/images`,
@@ -134,6 +159,13 @@ const Images = () => {
       console.error("An error occurred:", error.message);
     }
   };
+
+
+
+
+
+
+
   const handleEdit = async (property, imageUrl) => {
     try {
       const fileInput = document.createElement("input");
@@ -306,7 +338,24 @@ const Images = () => {
                       display: "block",
                     }}
                   />
+                        <div>
+                    <button
+                      onClick={() =>
+                        handleEdit("menu_images", image)
+                      }
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() =>
+                        handleDelete("menu_images", image)
+                      }
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </td>
+          
                 <td>Menu</td>
               </tr>
             ))}
@@ -324,7 +373,24 @@ const Images = () => {
                       display: "block",
                     }}
                   />
+                     <div>
+                    <button
+                      onClick={() =>
+                        handleEdit("extra_images", image)
+                      }
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() =>
+                        handleDelete("extra_images", image)
+                      }
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </td>
+                
                 <td>Extra</td>
               </tr>
             ))}

@@ -32,11 +32,11 @@ function Login() {
             toast.success("Successfully Logged In")
             console.log(data.payload)
             if (data.message === "User hasn't created a restaurant") {
-                dispatch(setOwnerId(data.owner));
+                localStorage.setItem('token', data.token)
                 navigate("/add-restaurant")
             }
             else if (data.message === "owner successfully logged in") {
-                dispatch(setOwnerId(data.owner));
+                localStorage.setItem('token', data.token)
                 navigate('/home')
 
             }
