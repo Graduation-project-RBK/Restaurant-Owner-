@@ -18,6 +18,9 @@ import Reviews from "./components/Home/Reviews.jsx";
 import EmailVerification from "./components/emailVerification/EmailVerification.jsx";
 
 function App() {
+
+
+
   return (
     <Router>
       <Routes>
