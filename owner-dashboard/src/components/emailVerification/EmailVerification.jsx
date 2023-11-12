@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from 'react-redux';
-import { setOwnerId } from '../../features/restaurantSlice';
 import success from "../../images/success.png"
 import "./emailVerification.css"
 
@@ -21,6 +20,7 @@ function EmailVerification() {
                 console.log(data)
                 dispatch(setOwnerId(data.ownerId));
                 setValidUrl(true);
+                dispatch(setOwnerId(data.ownerId));
             } catch (error) {
                 console.log(error);
                 setValidUrl(false);
@@ -34,7 +34,7 @@ function EmailVerification() {
                 <div className="emailVerficationContainer">
                     <img src={success} alt="success_img" className="success_img" />
                     <h1>Email verified successfully</h1>
-                    <Link to="/add-restaurant">
+                    <Link to="/">
                         <button className="green_btn">Login</button>
                     </Link>
                 </div>

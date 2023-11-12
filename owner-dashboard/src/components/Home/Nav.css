@@ -1,6 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+html, body {
+  margin: 0;
+  padding: 0;
+}
+.navbar {
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.966);
+  color: white;
+  padding: 2%;
+  justify-content: center;
+  text-align: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
 
-body {
+  
+  .navbar-brand {
+    text-decoration: none;
+    color: white;
+  }
+  
+  .navbar-nav {
+    list-style: none;
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
@@ -12,8 +32,17 @@ body {
     margin: 0 auto;
     padding: 0 15px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    margin-left: auto; /* Move the navbar-nav to the right */
+  }
+  
+  .nav-item {
+    margin-right: 20px;
+    text-align: center;
+    justify-content: center;
+  }
+  
+  .nav-link {
     height: 100%;
 }
 
@@ -33,7 +62,7 @@ body {
 }
 
 .nav-elements ul li:not(:last-child) {
-    margin-right: 180px;
+    margin-right: 50px;
 }
 
 .nav-elements ul a {
@@ -41,8 +70,18 @@ body {
     font-weight: 400;
     color: #2f234f;
     text-decoration: none;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  /* Style for the icon with class "fa fa-bell" */
+.fa.fa-bell {
+color:white,
+
 }
 
+  
 .nav-elements ul a.active {
     color: #574c4c;
     font-weight: 500;
@@ -57,4 +96,35 @@ body {
     width: 100%;
     height: 2px;
     background-color: #574c4c;
+}
+
+#circle {
+    height: 12px;
+    width: 12px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 50%;
+    /* may require vendor prefixes */
+    background: red;
+    margin-left: 2px;
+    font-size: 10px;
+    font-weight: 100;
+
+}
+
+
+
+
+#noCircle {
+    height: 12px;
+    width: 12px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 50%;
+    /* may require vendor prefixes */
+    background: red;
+    margin-left: 2px;
+    font-size: 10px;
+    font-weight: 100;
+    visibility: hidden;
 }
