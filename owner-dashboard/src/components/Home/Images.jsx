@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "./Navbar";
 import "./Images.css";
 import axios from "../../../services/axios-interceptor";
@@ -7,6 +7,7 @@ const Images = () => {
   const [mainImage, setMainImage] = useState(null);
   const [menuImages, setMenuImages] = useState([]);
   const [extraImages, setExtraImage] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [resultImageURLs, setResultImageURLs] = useState({
     main_image: null,
     menu_images: [],
@@ -16,7 +17,30 @@ const Images = () => {
     index: null,
     imageUrl: null,
   });
-
+  const getMyRestaurant = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/api/restaurants/myRestaurant`
+      );
+      console.log(response);
+      if (response.status === 200) {
+        console.log("Images fetched  successfully");
+        const responseJson = response.data;
+        setResultImageURLs({
+          main_image: responseJson.main_image,
+          menu_images: responseJson.menu_images,
+          extra_images: responseJson.extra_images,
+        });
+      } else {
+        console.error("Failed to fetch images");
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+  useEffect(() => {
+    getMyRestaurant();
+  }, []);
   const handleMainImage = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -61,6 +85,7 @@ const Images = () => {
 
   const handleSave = async () => {
     try {
+      setLoading(true);
       const formData = new FormData();
 
       formData.append("mainImage", mainImage);
@@ -72,14 +97,14 @@ const Images = () => {
       extraImages.forEach((image, index) => {
         formData.append(`extraImages[${index}]`, image);
       });
-    
+
       const response = await axios.post(
         `http://localhost:3000/api/restaurants/upload/`,
 
         formData
       );
-        console.log(response)
-      if (response.status===201) {
+      console.log(response);
+      if (response.status === 201) {
         console.log("Images uploaded successfully");
         const responseJson = response.data;
         setResultImageURLs({
@@ -90,20 +115,21 @@ const Images = () => {
       } else {
         console.error("Failed to upload images");
       }
+      setLoading(false);
     } catch (error) {
       console.error("An error occurred:", error);
+      setLoading(false);
     }
   };
-  console.log(resultImageURLs);
 
   const updateImage = async (property, oldImageUrl, file) => {
     try {
+      setLoading(true);
       const formData = new FormData();
 
       formData.append("property", property);
       formData.append("newImageFile", file);
       formData.append("oldImageUrl", oldImageUrl);
-    
 
       const response = await axios.post(
         `http://localhost:3000/api/restaurants/images`,
@@ -129,13 +155,16 @@ const Images = () => {
           response.status
         );
       }
+      setLoading(false);
     } catch (error) {
       console.error("An error occurred:", error.message);
+      setLoading(false);
     }
   };
 
   const handleEdit = async (property, imageUrl) => {
     try {
+      setLoading(true);
       const fileInput = document.createElement("input");
       fileInput.type = "file";
       fileInput.accept = "image/*";
@@ -146,7 +175,6 @@ const Images = () => {
         const file = e.target.files[0];
 
         if (file) {
-        
           const reader = new FileReader();
 
           reader.readAsDataURL(file);
@@ -156,12 +184,15 @@ const Images = () => {
           };
         }
       });
+      setLoading(false);
     } catch (error) {
       console.error("An error occurred:", error.message);
+      setLoading(false);
     }
   };
-  const deleteImage = async ( property, imageUrl) => {
+  const deleteImage = async (property, imageUrl) => {
     try {
+      setLoading(true);
       const response = await axios.delete(
         `http://localhost:3000/api/restaurants/images`,
         {
@@ -183,11 +214,13 @@ const Images = () => {
       } else {
         console.error("Failed to delete image property:", response.data.error);
       }
+      setLoading(false);
     } catch (error) {
       console.error(
         "An error occurred while deleting image property:",
         error.message
       );
+      setLoading(false);
     }
   };
   const handleDelete = async (property, imageUrl) => {
@@ -197,8 +230,7 @@ const Images = () => {
       );
 
       if (confirmDelete) {
-
-        await deleteImage( property, imageUrl);
+        await deleteImage(property, imageUrl);
       }
     } catch (error) {
       console.error("An error occurred:", error.message);
@@ -347,6 +379,11 @@ const Images = () => {
           </tbody>
         </table>
       </div>
+      {loading && (
+        <div className="loading">
+          <div className="spinner"></div>
+        </div>
+      )}
     </div>
   );
 };
