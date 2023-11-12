@@ -1,21 +1,34 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-
+import authenticationReducer from "./authenticationSlice.js";
 import restaurantReducer from "./restaurantSlice.js";
 import notificationReducer from "./notificationSlice.js";
 import ownerReducer from "./ownerSlice.js";
 
-const persistConfig = {
-  key: "root",
+const authPersistConfig = {
+  key: "token",
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, restaurantReducer);
+const restaurantPersistConfig = {
+  key: "restaurant",
+  storage,
+};
+
+const persistedAuthReducer = persistReducer(
+  authPersistConfig,
+  authenticationReducer
+);
+const persistedRestaurantReducer = persistReducer(
+  restaurantPersistConfig,
+  restaurantReducer
+);
 
 const store = configureStore({
   reducer: {
-    restaurant: persistedReducer,
+    auth: persistedAuthReducer,
+    restaurant: persistedRestaurantReducer,
     notification: notificationReducer,
     owner: ownerReducer,
 

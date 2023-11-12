@@ -9,7 +9,10 @@ import "./signup.css"
 
 function Signup() {
     const [inputs, setInputs] = useState({});
+    const [personalId, setPersonalID] = useState(null)
+    const [taxDeclaration, setTaxDeclaration] = useState(null)
     const [passwordVisible, setPasswordVisible] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -22,13 +25,23 @@ function Signup() {
         const name = e.target.name;
         const value = e.target.value;
         setInputs((values) => ({ ...values, [name]: value }));
-        if (name === "firstName" || name === "lastName") {
-            setInputs((values) => ({
-                ...values,
-                fullname: `${values.firstName} ${values.lastName}`,
-            }));
-        }
     };
+    const handlePersonalIdChange = (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setPersonalID(reader.result);
+        };
+        reader.readAsDataURL(file);
+    }
+    const handleTaxDeclarationChange = (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setTaxDeclaration(reader.result);
+        };
+        reader.readAsDataURL(file);
+    }
     const validator = () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
@@ -48,25 +61,38 @@ function Signup() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (validator()) {
+            setLoading(true);
             try {
-                const { data } = await axios.post("http://localhost:3000/api/owners/", inputs);
-                console.log("user added successfully", data)
-                toast.success("Successfully Signed Up")
+
+                const formData = new FormData();
+                formData.append("fullname", `${inputs.firstName} ${inputs.lastName}`);
+                formData.append("email", inputs.email);
+                formData.append("password", inputs.password);
+                formData.append("personalId", personalId);
+                formData.append("taxDeclaration", taxDeclaration);
+
+                const { data } = await axios.post("http://localhost:3000/api/owners/", formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+                setLoading(false);
+                toast.success("Account created successfully. Please check your email for verification instructions.");
+
             } catch (error) {
                 if (
                     error.response &&
                     error.response.status === 400 &&
                     error.response.data.error === "Email already exists"
                 ) {
-                    toast.error(
-                        "Email already exists. Please use a different email address."
-                    );
+                    toast.error("Email already exists. Please use a different email address.");
                 } else {
                     console.log(error);
                 }
             }
         }
     };
+
     return (
         <div className="bg-img">
             <div className="content">
@@ -112,6 +138,14 @@ function Signup() {
                         </span>
                     </div>
                     <div className="field space">
+                        <label htmlFor="fileInput" > </label>
+                        <input id="fileInput" type="file" accept="image/*" onChange={handlePersonalIdChange} />
+                    </div>
+                    <div className="field space">
+                        <label htmlFor="fileInput"> </label>
+                        <input id="fileInput" type="file" accept="image/*" onChange={handleTaxDeclarationChange} />
+                    </div>
+                    <div className="field space">
                         <input type="submit" value="Signup" />
                     </div>
                     <div className="login">
@@ -119,6 +153,11 @@ function Signup() {
                     </div>
                 </form>
             </div>
+            {loading && (
+                <div className='loading'>
+                    <div className='spinner'></div>
+                </div>
+            )}
         </div>
     )
 }
