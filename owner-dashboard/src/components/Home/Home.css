@@ -1,4 +1,24 @@
 .App {
+  display: flex;
+  flex:1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.carousel-container {
+  margin-top:1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  
+}
+.image-container img {
+  object-fit: none;
+  height: 300px;
+  
     display: flex;
     justify-content: center;
     align-items: center;
