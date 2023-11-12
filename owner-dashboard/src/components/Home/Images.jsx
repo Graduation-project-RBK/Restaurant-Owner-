@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import NavBar from "./Navbar";
 import "./Images.css";
-import axios from "axios";
+import axios from "../../../services/axios-interceptor";
 
 const Images = () => {
   const [mainImage, setMainImage] = useState(null);
@@ -72,18 +72,16 @@ const Images = () => {
       extraImages.forEach((image, index) => {
         formData.append(`extraImages[${index}]`, image);
       });
-      const restaurantId = 12;
-      const response = await fetch(
-        `http://localhost:3000/api/restaurants/upload/${restaurantId}`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+    
+      const response = await axios.post(
+        `http://localhost:3000/api/restaurants/upload/`,
 
-      if (response.ok) {
+        formData
+      );
+        console.log(response)
+      if (response.status===201) {
         console.log("Images uploaded successfully");
-        const responseJson = await response.json();
+        const responseJson = response.data;
         setResultImageURLs({
           main_image: responseJson.main_image,
           menu_images: responseJson.menu_images,
@@ -98,41 +96,17 @@ const Images = () => {
   };
   console.log(resultImageURLs);
 
-
-
-
-
-
-
-  const updateImage = async (restaurantId, property, oldImageUrl, file) => {
+  const updateImage = async (property, oldImageUrl, file) => {
     try {
       const formData = new FormData();
 
       formData.append("property", property);
       formData.append("newImageFile", file);
       formData.append("oldImageUrl", oldImageUrl);
-      formData.append("restaurantId", restaurantId);
-
-  
-      // Specific field for each property
-      switch (property) {
-        case "main_image":
-          formData.append("mainImage", file);
-          break;
-        case "menu_images":
-          formData.append("menuImages", file);
-          break;
-        case "extra_images":
-          formData.append("extraImages", file);
-          break;
-        default:
-          console.error("Invalid property:", property);
-          return;
-      }
-  
+    
 
       const response = await axios.post(
-        `http://localhost:3000/api/restaurants/${restaurantId}/images`,
+        `http://localhost:3000/api/restaurants/images`,
         formData,
         {
           headers: {
@@ -160,12 +134,6 @@ const Images = () => {
     }
   };
 
-
-
-
-
-
-
   const handleEdit = async (property, imageUrl) => {
     try {
       const fileInput = document.createElement("input");
@@ -178,13 +146,13 @@ const Images = () => {
         const file = e.target.files[0];
 
         if (file) {
-          const restaurantId = 29;
+        
           const reader = new FileReader();
 
           reader.readAsDataURL(file);
 
           reader.onloadend = async () => {
-            await updateImage(restaurantId, property, imageUrl, reader.result);
+            await updateImage(property, imageUrl, reader.result);
           };
         }
       });
@@ -192,13 +160,12 @@ const Images = () => {
       console.error("An error occurred:", error.message);
     }
   };
-  const deleteImage = async (restaurantId, property, imageUrl) => {
+  const deleteImage = async ( property, imageUrl) => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/api/restaurants/${restaurantId}/images`,
+        `http://localhost:3000/api/restaurants/images`,
         {
           data: {
-            id: restaurantId,
             property: property,
             imageUrl: imageUrl,
           },
@@ -230,9 +197,8 @@ const Images = () => {
       );
 
       if (confirmDelete) {
-        const restaurantId = 29;
 
-        await deleteImage(restaurantId, property, imageUrl);
+        await deleteImage( property, imageUrl);
       }
     } catch (error) {
       console.error("An error occurred:", error.message);
@@ -338,24 +304,16 @@ const Images = () => {
                       display: "block",
                     }}
                   />
-                        <div>
-                    <button
-                      onClick={() =>
-                        handleEdit("menu_images", image)
-                      }
-                    >
+                  <div>
+                    <button onClick={() => handleEdit("menu_images", image)}>
                       Edit
                     </button>
-                    <button
-                      onClick={() =>
-                        handleDelete("menu_images", image)
-                      }
-                    >
+                    <button onClick={() => handleDelete("menu_images", image)}>
                       Delete
                     </button>
                   </div>
                 </td>
-          
+
                 <td>Menu</td>
               </tr>
             ))}
@@ -373,24 +331,16 @@ const Images = () => {
                       display: "block",
                     }}
                   />
-                     <div>
-                    <button
-                      onClick={() =>
-                        handleEdit("extra_images", image)
-                      }
-                    >
+                  <div>
+                    <button onClick={() => handleEdit("extra_images", image)}>
                       Edit
                     </button>
-                    <button
-                      onClick={() =>
-                        handleDelete("extra_images", image)
-                      }
-                    >
+                    <button onClick={() => handleDelete("extra_images", image)}>
                       Delete
                     </button>
                   </div>
                 </td>
-                
+
                 <td>Extra</td>
               </tr>
             ))}
