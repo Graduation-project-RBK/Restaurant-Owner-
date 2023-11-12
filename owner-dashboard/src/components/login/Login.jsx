@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./login.css"
 import { useDispatch } from 'react-redux';
-import { setOwnerId } from '../../features/restaurantSlice';
+
 
 
 function Login() {
@@ -30,9 +30,10 @@ function Login() {
         try {
             const { data } = await axios.post("http://localhost:3000/api/owners/signin", inputs);
             toast.success("Successfully Logged In")
-            console.log(data.message)
+            console.log(data.payload)
             if (data.message === "User hasn't created a restaurant") {
                 localStorage.setItem('token', data.token)
+
                 navigate("/add-restaurant")
             }
             else if (data.message === "owner successfully logged in") {
@@ -46,9 +47,17 @@ function Login() {
                 toast.error("Please provide a correct email");
             } else if (error.response && error.response.status === 411 && error.response.data.error === "unvalid password") {
                 toast.error("Please provide a correct password");
+
+            }
+            else if (error.response && error.response.status === 401 && error.response.data.error === "Account not verified. Another verification email has been sent. Please check your email for instructions.") {
+                toast.error("Account not verified. Please check your email for verification instructions.")
+            }
+            else {
+
             } else if (error.response && error.response.status === 403) {
                 toast.error("This account is invalid");
             } else {
+
                 console.log(error);
             }
         }
