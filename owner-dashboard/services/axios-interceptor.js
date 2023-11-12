@@ -1,20 +1,14 @@
-import axios from 'axios';
-import store from "../src/features/store.js"
+import axios from "axios";
 
 const customAxios = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: "http://localhost:3000/",
   timeout: 5000,
 });
 
 customAxios.interceptors.request.use(
   async (config) => {
-    const { auth } = store.getState();
-    const token = auth.token;
-
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
-    }
-
+    config.headers["Authorization"] =
+      "Bearer" + " " + localStorage.getItem("token");
     return config;
   },
   (error) => {

@@ -4,15 +4,12 @@ import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./login.css"
-import { useDispatch } from 'react-redux';
-import { setOwnerId } from '../../features/restaurantSlice';
 
 
 function Login() {
     const [inputs, setInputs] = useState({});
     const [passwordVisible, setPasswordVisible] = useState(false);
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
@@ -49,10 +46,10 @@ function Login() {
             }
             else if (error.response && error.response.status === 401 && error.response.data.error === "Account not verified. Another verification email has been sent. Please check your email for instructions.") {
                 toast.error("Account not verified. Please check your email for verification instructions.")
-            }
-            else if (error.response && error.response.status === 403) {
+            } else if (error.response && error.response.status === 403) {
                 toast.error("This account is invalid");
             } else {
+
                 console.log(error);
             }
         }
