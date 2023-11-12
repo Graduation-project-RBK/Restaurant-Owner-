@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import NavBar from "./Navbar";
 import "./Settings.css";
 import CategoryCard from "../addRestaurant/CategoryCard";
 import customAxios from "../../../services/axios-interceptor";
-import moment from 'moment';
+import moment from "moment";
+import { toast } from 'react-toastify';
 
 const categories = [
   "Italian",
@@ -21,10 +22,11 @@ const settings = () => {
     description: "",
     category: [],
     ReservationQuota: "",
-    opensAt: Number,
-    closingTime: Number,
-    phoneNumber: Number,
+    opensAt: "",
+    closingTime: "",
+    phoneNumber: "",
   });
+  const [loading, setLoading] = useState(false);
   const handleInputChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -32,25 +34,26 @@ const settings = () => {
   };
   const handleCategorySelect = (category) => {
     const updatedCategories = setting.category.find((elem) => elem === category)
-      ? selectedCategories.filter((c) => c !== category)
+      ? setting.category.filter((c) => c !== category)
       : [...setting.category, category];
     setSetting({ ...setting, category: updatedCategories });
   };
   const handleSave = async (event) => {
     try {
-      event.preventDefault()
-     // setLoading(true);
- 
+      setLoading(true);
+
+      event.preventDefault();
+
       const {
         description,
         category: categories,
         ReservationQuota: reservationQuota,
         opensAt,
-        closingTime:closesAt,
+        closingTime: closesAt,
         phoneNumber,
       } = setting;
-      const openingTime = moment(opensAt, 'HH:mm:ss').toISOString();
-      const closingTime  = moment(closesAt, 'HH:mm:ss').toISOString();
+      const openingTime = moment(opensAt, "HH:mm:ss").toISOString();
+      const closingTime = moment(closesAt, "HH:mm:ss").toISOString();
       const response = await customAxios.post(
         `http://localhost:3000/api/restaurants/myRestaurant`,
 
@@ -63,18 +66,59 @@ const settings = () => {
           phoneNumber,
         }
       );
+      setLoading(false);
       console.log(response);
       if (response.status === 201) {
-        console.log("Restaurant uploaded successfully");
+     
+        console.log("Restaurant info upadted successfully");
         const responseJson = response.data;
-        console.log(responseJson)
+        console.log(responseJson);
+        toast.success(
+          "Information saved"
+        );
       } else {
-        console.error("Failed to upload images");
+        console.error("Failed to save changes");
+        toast.error("Failed to save changes");
       }
+      
+      
+      
     } catch (error) {
       console.error("An error occurred:", error);
+      setLoading(false);
     }
   };
+  const getRestaurant = async () => {
+    try {
+            setLoading(true)
+          
+        const { data } = await customAxios.get(`http://localhost:3000/api/restaurants/myRestaurant`)
+        setSetting({
+          description: data.description,
+          category: data.category,
+          ReservationQuota: data.reservation_quota,
+          opensAt: moment(data.opening_time).format('HH:mm'),
+          closingTime: moment(data.closing_time).format('HH:mm'),
+          phoneNumber: data.phone_number,
+
+        })
+        setLoading(false)
+     
+    } catch (error) {
+        console.log(error)
+        setLoading(false)
+        if (error.response.status === 403 || error.response.status === 401) {
+            localStorage.clear()
+            navigate('/')
+        }
+    }
+
+
+}
+
+useEffect(() => {
+    getRestaurant()
+}, [])
   return (
     <div>
       <NavBar />
@@ -84,11 +128,22 @@ const settings = () => {
         <form onSubmit={handleSave}>
           <div className="form-group">
             <label htmlFor="description">Description:</label>
-            <input name={"description"} id="description" onChange={handleInputChange} />
+            <input
+              name={"description"}
+              value={setting.description}
+              id="description"
+              onChange={handleInputChange}
+            />
           </div>
           <div className="form-group">
             <label htmlFor="reserv-quota">Reservation Quota:</label>
-            <input  name={"ReservationQuota"}   type="number" id="reserv-quota" onChange={handleInputChange} />
+            <input
+              name={"ReservationQuota"}
+              type="number"
+              id="reserv-quota"
+              value={setting.ReservationQuota}
+              onChange={handleInputChange}
+            />
           </div>
 
           <div className="form-group">
@@ -107,17 +162,35 @@ const settings = () => {
 
           <div className="form-group">
             <label htmlFor="openTime">Opens at:</label>
-            <input   name={"opensAt"}  type="time" id="openTime" onChange={handleInputChange} />
+            <input
+              name={"opensAt"}
+              value={setting.opensAt}
+              type="time"
+              id="openTime"
+              onChange={handleInputChange}
+            />
           </div>
 
           <div className="form-group">
             <label htmlFor="closeTime">Closes at:</label>
-            <input  name={"closingTime"} type="time" id="closeTime" onChange={handleInputChange} />
+            <input
+              name={"closingTime"}
+              value={setting.closingTime}
+              type="time"
+              id="closeTime"
+              onChange={handleInputChange}
+            />
           </div>
 
           <div className="form-group">
             <label htmlFor="phoneNumber">Phone Number:</label>
-            <input name={"phoneNumber"} type="tel" id="phoneNumber" onChange={handleInputChange} />
+            <input
+              name={"phoneNumber"}
+              value={setting.phoneNumber}
+              type="tel"
+              id="phoneNumber"
+              onChange={handleInputChange}
+            />
           </div>
 
           <button className="save" type="submit">
@@ -125,6 +198,11 @@ const settings = () => {
           </button>
         </form>
       </div>
+      {loading && (
+        <div className="loading">
+          <div className="spinner"></div>
+        </div>
+      )}
     </div>
   );
 };
