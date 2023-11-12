@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from 'react-redux';
-import { setOwnerId } from '../../features/restaurantSlice';
 import success from "../../images/success.png"
 import "./emailVerification.css"
-import { useDispatch } from 'react-redux';
 
 function EmailVerification() {
 
