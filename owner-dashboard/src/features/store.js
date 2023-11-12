@@ -4,7 +4,7 @@ import storage from "redux-persist/lib/storage";
 
 import restaurantReducer from "./restaurantSlice.js";
 import notificationReducer from "./notificationSlice.js";
-// import ownerReducer from "./ownerSlice.js";
+import ownerReducer from "./ownerSlice.js";
 
 const persistConfig = {
   key: "root",
@@ -17,7 +17,9 @@ const store = configureStore({
   reducer: {
     restaurant: persistedReducer,
     notification: notificationReducer,
-    // owner: ownerReducer,
+    owner: ownerReducer,
+
+
   },
   middleware: getDefaultMiddleware({
     serializableCheck: false,
@@ -26,4 +28,4 @@ const store = configureStore({
 
 const persistor = persistStore(store);
 
-export { store, persistor };
+export default { store, persistor };

@@ -36,7 +36,7 @@ const MenuImagesView = () => {
   return (
     <div>
       <div>
-        <h2>Menu Images</h2>
+        <h2 className="head2">Menu Images</h2>
       </div>
       <br></br>
       <label htmlFor="fileInput">
@@ -44,9 +44,11 @@ const MenuImagesView = () => {
       </label>
       <input id="fileInput" type="file" style={{ display: "none" }} accept="image/*" onChange={handleImageChange} multiple />
       <br></br>
-      {menuImages.map((image, index) => (
-        <img key={index} className="Img" src={image} alt={`Menu ${index + 1}`} />
-      ))}
+      <div className="images">
+        {menuImages.map((image, index) => (
+          <img key={index} className="Img" src={image} alt={`Menu ${index + 1}`} />
+        ))}
+      </div>
     </div>
   );
 };
