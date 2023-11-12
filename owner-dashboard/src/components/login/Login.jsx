@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./login.css"
 import { useDispatch } from 'react-redux';
-import { setOwnerId } from '../../features/restaurantSlice';
+
 
 
 function Login() {
@@ -33,6 +33,7 @@ function Login() {
             console.log(data.payload)
             if (data.message === "User hasn't created a restaurant") {
                 localStorage.setItem('token', data.token)
+
                 navigate("/add-restaurant")
             }
             else if (data.message === "owner successfully logged in") {

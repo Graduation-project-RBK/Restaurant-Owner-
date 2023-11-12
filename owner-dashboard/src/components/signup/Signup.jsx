@@ -4,7 +4,6 @@ import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
-import { setOwnerId } from '../../features/restaurantSlice';
 import "./signup.css"
 
 
