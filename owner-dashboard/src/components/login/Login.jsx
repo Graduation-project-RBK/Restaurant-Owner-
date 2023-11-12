@@ -128,7 +128,7 @@ function Login() {
                   placeholder="Password"
                 />
                 <span className="absolute inset-y-0 right-0 pr-4 flex items-center">
-                  <span className="show" onClick={togglePasswordVisibility}>
+                  <span className="show cursor-pointer" onClick={togglePasswordVisibility}>
                     {passwordVisible ? "HIDE" : "SHOW"}
                   </span>
                 </span>
@@ -144,13 +144,12 @@ function Login() {
               </div>
               <div className="text-center text-gray-400  hover:text-gray-100">
                 Don't have an account?{" "}
-                <a
-                  href="#"
-                  className="text-red-500 hover:text-red-600 hover:underline"
+                <span
+                  className="text-red-500 hover:text-red-600 hover:underline cursor-pointer"
                   onClick={() => navigate("/signup")}
                 >
                   Register here
-                </a>
+                </span>
               </div>
             </form>
           </div>
