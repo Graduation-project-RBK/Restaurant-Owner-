@@ -56,7 +56,7 @@ function Login() {
         error.response &&
         error.response.status === 401 &&
         error.response.data.error ===
-          "Account not verified. Another verification email has been sent. Please check your email for instructions."
+        "Account not verified. Another verification email has been sent. Please check your email for instructions."
       ) {
         toast.error(
           "Account not verified. Please check your email for verification instructions."
@@ -79,7 +79,7 @@ function Login() {
           <div className="absolute bg-black opacity-60 inset-0 z-0" />
           <div className="w-full px-24 z-10">
             <h1 className="text-5xl font-bold text-left tracking-wide">
-              Culinary Empowerment: Restaurant Owners' Login.{" "}
+              Culinary Empowerment: Owner Hub{" "}
             </h1>
             <p className="text-3xl my-4">
               "Savor success, where flavors meet entrepreneurial excellence."
@@ -129,17 +129,17 @@ function Login() {
                   placeholder="Password"
                 />
                 <span className="absolute inset-y-0 right-0 pr-4 flex items-center">
-                <span className="show" onClick={togglePasswordVisibility}>
-                  {passwordVisible ? "HIDE" : "SHOW"}
+                  <span className="show" onClick={togglePasswordVisibility}>
+                    {passwordVisible ? "HIDE" : "SHOW"}
+                  </span>
                 </span>
-                </span>
-         
+
               </div>
               <div className="text-right text-gray-400 hover:underline hover:text-gray-100">
                 <a href="#">Forgot your password?</a>
               </div>
               <div className="px-4 pb-2 pt-4">
-                <button className="uppercase block w-full p-4 text-lg rounded-full bg-red-500 hover:bg-red-600 " value="LOGIN"  type="submit">
+                <button className="uppercase block w-full p-4 text-lg rounded-full bg-red-500 hover:bg-red-600 " value="LOGIN" type="submit">
                   sign in
                 </button>
               </div>

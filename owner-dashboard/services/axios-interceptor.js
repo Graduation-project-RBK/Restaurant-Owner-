@@ -8,7 +8,6 @@ customAxios.interceptors.request.use(
   async (config) => {
     config.headers["Authorization"] =
       "Bearer" + " " + localStorage.getItem("token");
-
     return config;
   },
   (error) => {
