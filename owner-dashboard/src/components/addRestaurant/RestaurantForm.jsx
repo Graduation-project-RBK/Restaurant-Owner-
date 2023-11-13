@@ -109,14 +109,14 @@ const RestaurantForm = () => {
             <div className='footer' >
                 <div className='leftBtn'>
                     {currentView > 1 && (
-                        <button onClick={handlePreviousClick}>Back</button>
+                        <button className="btn" onClick={handlePreviousClick}>Back</button>
                     )}
                 </div>
                 <div className='righttBtn'>
                     {currentView < 8 ? (
-                        <button onClick={handleNextClick} disabled={currentView === 1 ? false : isNextDisabled}>Next</button>
+                        <button className="btn" onClick={handleNextClick} disabled={currentView === 1 ? false : isNextDisabled}>Next</button>
                     ) : (
-                        <button onClick={handleSubmit}>Submit</button>
+                        <button className="btn" onClick={handleSubmit}>Submit</button>
                     )}
                 </div>
             </div>

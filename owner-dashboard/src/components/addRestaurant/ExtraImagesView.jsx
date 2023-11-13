@@ -25,7 +25,7 @@ const ExtraImagesView = () => {
   return (
     <div>
       <div>
-        <h2>Extra Images</h2>
+        <h2 className="head2">Extra Images</h2>
         <br></br>
         <p>This step is optional you can skip it and add your extra images later</p>
       </div>
@@ -35,9 +35,11 @@ const ExtraImagesView = () => {
       </label>
       <input id="fileInput" type="file" accept="image/*" style={{ display: "none" }} onChange={handleImageChange} multiple />
       <br></br>
-      {extraImages.map((image, index) => (
-        <img key={index} className="Img" src={image} alt={`Extra ${index + 1}`} />
-      ))}
+      <div className="images">
+        {extraImages.map((image, index) => (
+          <img key={index} className="Img" src={image} alt={`Extra ${index + 1}`} />
+        ))}
+      </div>
     </div>
   );
 };

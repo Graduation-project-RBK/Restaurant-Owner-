@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./login.css";
 import { useDispatch } from "react-redux";
 
 function Login() {
@@ -56,7 +55,7 @@ function Login() {
         error.response &&
         error.response.status === 401 &&
         error.response.data.error ===
-          "Account not verified. Another verification email has been sent. Please check your email for instructions."
+        "Account not verified. Another verification email has been sent. Please check your email for instructions."
       ) {
         toast.error(
           "Account not verified. Please check your email for verification instructions."
@@ -129,29 +128,28 @@ function Login() {
                   placeholder="Password"
                 />
                 <span className="absolute inset-y-0 right-0 pr-4 flex items-center">
-                <span className="show" onClick={togglePasswordVisibility}>
-                  {passwordVisible ? "HIDE" : "SHOW"}
+                  <span className="show cursor-pointer" onClick={togglePasswordVisibility}>
+                    {passwordVisible ? "HIDE" : "SHOW"}
+                  </span>
                 </span>
-                </span>
-         
+
               </div>
               <div className="text-right text-gray-400 hover:underline hover:text-gray-100">
                 <a href="#">Forgot your password?</a>
               </div>
               <div className="px-4 pb-2 pt-4">
-                <button className="uppercase block w-full p-4 text-lg rounded-full bg-red-500 hover:bg-red-600 " value="LOGIN"  type="submit">
+                <button className="uppercase block w-full p-4 text-lg rounded-full bg-red-500 hover:bg-red-600 " value="LOGIN" type="submit">
                   sign in
                 </button>
               </div>
               <div className="text-center text-gray-400  hover:text-gray-100">
                 Don't have an account?{" "}
-                <a
-                  href="#"
-                  className="text-red-500 hover:text-red-600 hover:underline"
+                <span
+                  className="text-red-500 hover:text-red-600 hover:underline cursor-pointer"
                   onClick={() => navigate("/signup")}
                 >
                   Register here
-                </a>
+                </span>
               </div>
             </form>
           </div>
