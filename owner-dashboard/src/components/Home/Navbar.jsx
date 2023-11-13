@@ -14,7 +14,6 @@ function NavBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { ownerId } = useSelector((state) => state.restaurant);
   const { notificationBadge } = useSelector((state) => state.notification);
   const checkNotification = async () => {
     try {
