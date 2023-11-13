@@ -20,7 +20,6 @@ function EmailVerification() {
                 console.log(data)
                 dispatch(setOwnerId(data.ownerId));
                 setValidUrl(true);
-                dispatch(setOwnerId(data.ownerId));
             } catch (error) {
                 console.log(error);
                 setValidUrl(false);

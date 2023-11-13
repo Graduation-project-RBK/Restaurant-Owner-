@@ -95,14 +95,15 @@ function NavBar() {
               </NavLink>
             </li>
             <li>
+              <NavLink to="/reservation-history">Reservation History</NavLink>
+            </li>
+            <li>
               <NavLink to="/Images">Images</NavLink>
             </li>
             <li>
               <NavLink to="/Messages">Messages</NavLink>
             </li>
-            <li>
-              <NavLink to="/reservation-history">Reservation History</NavLink>
-            </li>
+
             <li>
               <NavLink to="/Reviews">Reviews</NavLink>
             </li>

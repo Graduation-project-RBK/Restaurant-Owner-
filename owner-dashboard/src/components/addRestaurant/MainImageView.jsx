@@ -31,7 +31,7 @@ const MainImageView = () => {
 
   return (
     <div>
-      <h2>Main Image</h2>
+      <h2 className="head2">Main Image</h2>
       <br></br>
       <label htmlFor="fileInput">
         <i className="Icon fas fa-plus"></i>
