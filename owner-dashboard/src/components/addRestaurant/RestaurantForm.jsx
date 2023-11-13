@@ -11,6 +11,8 @@ import MenuImagesView from './MenuImagesView';
 import ExtraImagesView from './ExtraImagesView'
 import TimeQuotasView from './TimeQuotesView';
 import IntroductionView from './IntroductionView';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RestaurantForm = () => {
     const navigate = useNavigate()
@@ -65,6 +67,8 @@ const RestaurantForm = () => {
                 },
             });
             setLoading(false);
+            toast.success("Your application is successfully submitted. You'll hear from us soon!");
+
             localStorage.clear();
             navigate("/home");
         } catch (error) {

@@ -25,44 +25,20 @@ function App() {
     <Router>
       <Routes>
         <Route
-          path="/"
-          element={<Login />}
-        />
-        <Route
-          path="/signup"
-          element={<Signup />}
-        />
-        <Route
-          path="/home"
-          element={<Home />}
-        />
-        <Route
-          path="/add-restaurant"
-          element={<RestaurantForm />}
-        />
-        <Route
-          path="/reservation-list"
-          element={<ReservationTable />}
-        />
-        <Route
-          path="/reservation-history"
-          element={<ReservationHistory />}
-        />
-         <Route
           path="/Settings"
           element={<Settings />}
         />
-           <Route
+        <Route
           path="/Images"
-          element={<Images/>}
+          element={<Images />}
         />
-             <Route
+        <Route
           path="/Messages"
-          element={<Messages/>}
+          element={<Messages />}
         />
-              <Route
+        <Route
           path="/Reviews"
-          element={<Reviews/>}
+          element={<Reviews />}
         />
         <Route path="/" element={<Navigate replace to="/login" />} />
         <Route path="/login" element={<Login />} />
