@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./login.css";
 import { useDispatch } from "react-redux";
 
 function Login() {
@@ -78,7 +79,7 @@ function Login() {
           <div className="absolute bg-black opacity-60 inset-0 z-0" />
           <div className="w-full px-24 z-10">
             <h1 className="text-5xl font-bold text-left tracking-wide">
-              Culinary Empowerment: Restaurant Owners' Login.{" "}
+              Culinary Empowerment: Owner Hub{" "}
             </h1>
             <p className="text-3xl my-4">
               "Savor success, where flavors meet entrepreneurial excellence."
@@ -128,7 +129,7 @@ function Login() {
                   placeholder="Password"
                 />
                 <span className="absolute inset-y-0 right-0 pr-4 flex items-center">
-                  <span className="show cursor-pointer" onClick={togglePasswordVisibility}>
+                  <span className="show" onClick={togglePasswordVisibility}>
                     {passwordVisible ? "HIDE" : "SHOW"}
                   </span>
                 </span>
@@ -144,12 +145,13 @@ function Login() {
               </div>
               <div className="text-center text-gray-400  hover:text-gray-100">
                 Don't have an account?{" "}
-                <span
-                  className="text-red-500 hover:text-red-600 hover:underline cursor-pointer"
+                <a
+                  href="#"
+                  className="text-red-500 hover:text-red-600 hover:underline"
                   onClick={() => navigate("/signup")}
                 >
                   Register here
-                </span>
+                </a>
               </div>
             </form>
           </div>
