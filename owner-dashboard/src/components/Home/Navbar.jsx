@@ -14,7 +14,6 @@ function NavBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { ownerId } = useSelector((state) => state.restaurant);
   const { notificationBadge } = useSelector((state) => state.notification);
   const checkNotification = async () => {
     try {
@@ -78,7 +77,8 @@ function NavBar() {
   return (
     <nav className="navbar">
       <div className="navContainer">
-        <div className="logo"></div>
+        <div className="logo">
+        Reservi</div>
         <div className="nav-elements">
           <ul>
             <li>
