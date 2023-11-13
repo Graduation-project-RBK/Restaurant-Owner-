@@ -18,6 +18,7 @@ function EmailVerification() {
                 console.log(param.token)
                 const { data } = await axios.post(`http://localhost:3000/api/owners/verify/${param.token}`);
                 console.log(data)
+                dispatch(setOwnerId(data.ownerId));
                 setValidUrl(true);
             } catch (error) {
                 console.log(error);
