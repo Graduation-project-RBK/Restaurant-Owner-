@@ -8,7 +8,7 @@
   width: 50%;
 }
 
-h2 {
+.head2 {
   padding-bottom: 30px;
 }
 
@@ -61,7 +61,7 @@ h2 {
   color: #fff;
 }
 
-button {
+.btn {
   color: #090909;
   padding: 0.7em 1.7em;
   font-size: 18px;
@@ -72,11 +72,11 @@ button {
   box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
 }
 
-button:hover {
+.btn:hover {
   border: 1px solid white;
 }
 
-button:active {
+.btn:active {
   box-shadow: 4px 4px 12px #c5c5c5, -4px -4px 12px #ffffff;
 }
 
@@ -151,11 +151,11 @@ button:active {
   outline: none;
 }
 
-.input-box:focus+.underline {
+.input-box:focus + .underline {
   transform: scaleX(1);
 }
 
-button:disabled {
+.btn:disabled {
   background-color: #cccccc;
   color: #666666;
   cursor: not-allowed;
@@ -190,12 +190,14 @@ button:disabled {
 input[type="number"] {
   width: 50%;
 }
-
+.images {
+  display: flex;
+  justify-content: flex-start;
+}
 .Img {
   margin-left: 150px;
-  width: 15vw;
-  height: 350px;
-  border-radius: 15px;
+  width: 25vw;
+  height: 20vw;
   object-fit: contain;
 }
 
