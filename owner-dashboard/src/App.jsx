@@ -16,40 +16,58 @@ import Images from "./components/Home/Images.jsx";
 import Messages from "./components/Home/Messages.jsx";
 import Reviews from "./components/Home/Reviews.jsx";
 import EmailVerification from "./components/emailVerification/EmailVerification.jsx";
+import UpsellPage from "./components/Upseller/UpsellPage.jsx";
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+
+
+const stripePromise = loadStripe('pk_test_51OCN44BGteCXMy5xDSAP4nHTDgJAXUZNOYjgKGL4YjnXZOjK3nc0iJSo0UR3WJsWgm0Idoi6e3EdQHMrd8moTSLr00YtCJUPx2')
 
 function App() {
 
-
+  const options = {
+    // passing the client secret obtained from the server
+    clientSecret: 'pk_test_51OCN44BGteCXMy5xDSAP4nHTDgJAXUZNOYjgKGL4YjnXZOjK3nc0iJSo0UR3WJsWgm0Idoi6e3EdQHMrd8moTSLr00YtCJUPx2'
+  };
 
   return (
-    <Router>
-      <Routes>
-        <Route
-          path="/Settings"
-          element={<Settings />}
-        />
-        <Route
-          path="/Images"
-          element={<Images />}
-        />
-        <Route
-          path="/Messages"
-          element={<Messages />}
-        />
-        <Route
-          path="/Reviews"
-          element={<Reviews />}
-        />
-        <Route path="/" element={<Navigate replace to="/login" />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/owners/verify/:token" element={<EmailVerification />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/add-restaurant" element={<RestaurantForm />} />
-        <Route path="/reservation-list" element={<ReservationTable />} />
-        <Route path="/reservation-history" element={<ReservationHistory />} />
-      </Routes>
-    </Router>
+    <Elements stripe={stripePromise} options={options}>
+
+      <Router>
+
+        <Routes>
+          <Route
+            path="/Settings"
+            element={<Settings />}
+          />
+          <Route
+            path="/Images"
+            element={<Images />}
+          />
+          <Route
+            path="/Messages"
+            element={<Messages />}
+          />
+          <Route
+            path="/Reviews"
+            element={<Reviews />}
+          />
+          <Route path="/" element={<Navigate replace to="/login" />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/owners/verify/:token" element={<EmailVerification />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/add-restaurant" element={<RestaurantForm />} />
+          <Route path="/reservation-list" element={<ReservationTable />} />
+          <Route path="/reservation-history" element={<ReservationHistory />} />
+
+          <Route path="/options" element={<UpsellPage />} />
+
+        </Routes>
+
+      </Router>
+    </Elements>
+
   );
 }
 
