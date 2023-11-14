@@ -1,0 +1,131 @@
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+    background-color: rgba(22, 22, 22, 0.941);
+    height: 100vh;
+    margin-top: 30px;
+}
+
+
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-upsell {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.966);
+    color: white;
+    justify-content: center;
+    text-align: center;
+
+
+}
+
+
+
+.navbar-brand-upsell {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar-nav-upsell {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #fcfcfc;
+}
+
+.navContainer-upsell {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    /* Move the navbar-nav to the right */
+}
+
+.nav-item-upsell {
+    margin-right: 20px;
+    text-align: center;
+    justify-content: center;
+}
+
+.nav-link-upsell {
+    height: 100%;
+}
+
+.navbar-upsell {
+    height: 70px;
+    width: 100%;
+    background-color: #000000;
+    position: fixed;
+    top: 0;
+    z-index: 1030
+}
+
+
+.logo {
+    justify-content: space-between;
+
+}
+
+.nav-elements-upsell ul {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+}
+
+.nav-elements-upsell ul li:not(:last-child) {
+    margin-right: 50px;
+}
+
+.nav-elements-upsell ul a {
+    font-size: 16px;
+    font-weight: 400;
+    color: #ff0000;
+    text-decoration: none;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.fa.fa-bell {
+    color: rgb(255, 255, 255),
+
+
+}
+
+
+.nav-elements-upsell ul a.active {
+
+    color: #ff0000;
+    font-weight: 500;
+    position: relative;
+}
+
+.nav-elements-upsell ul a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #ff0000;
+
+}
+
+.log {
+    margin-left: 1220px;
+    margin-top: 2px;
+
+}
