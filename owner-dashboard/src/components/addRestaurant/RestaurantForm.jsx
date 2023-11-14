@@ -11,6 +11,7 @@ import MenuImagesView from './MenuImagesView';
 import ExtraImagesView from './ExtraImagesView'
 import TimeQuotasView from './TimeQuotesView';
 import IntroductionView from './IntroductionView';
+import LocationPickerView from './addLocation/LocationPickerView.jsx';
 
 const RestaurantForm = () => {
     const navigate = useNavigate()
@@ -91,10 +92,12 @@ const RestaurantForm = () => {
             case 5:
                 return <TimeQuotasView />;
             case 6:
-                return <MainImageView />;
+                return <LocationPickerView />;
             case 7:
-                return <MenuImagesView />
+                return <MainImageView />;
             case 8:
+                return <MenuImagesView />
+            case 9:
                 return <ExtraImagesView />
             default:
                 return null;

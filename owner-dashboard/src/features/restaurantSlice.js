@@ -12,8 +12,10 @@ const initialState = {
   openingTime: "",
   closingTime: "",
   reservationQuota: "",
+  lat: 0,
+  lng: 0,
   isNextDisabled: true,
-  token: '',
+  token: "",
 };
 const restaurantSlice = createSlice({
   name: "restaurant",
@@ -52,14 +54,18 @@ const restaurantSlice = createSlice({
     setReservationQuota: (state, action) => {
       state.reservationQuota = action.payload;
     },
+    setLatitude: (state, action) => {
+      state.lat = action.payload;
+    },
+    setLongitude: (state, action) => {
+      state.lng = action.payload;
+    },
     setIsNextDisabled: (state, action) => {
       state.isNextDisabled = action.payload;
     },
     setToken: (state, action) => {
       state.token = action.payload;
     },
-
-
   },
 });
 
@@ -75,6 +81,8 @@ export const {
   setOpeningTime,
   setClosingTime,
   setReservationQuota,
+  setLatitude,
+  setLongitude,
   setIsNextDisabled,
   setToken,
 } = restaurantSlice.actions;
