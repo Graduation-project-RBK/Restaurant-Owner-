@@ -17,13 +17,11 @@ import Messages from "./components/Home/Messages.jsx";
 import Reviews from "./components/Home/Reviews.jsx";
 import EmailVerification from "./components/emailVerification/EmailVerification.jsx";
 import UpsellPage from "./components/Upseller/UpsellPage.jsx";
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
+
 
 
 
 function App() {
-
 
 
   return (
@@ -55,7 +53,6 @@ function App() {
         <Route path="/add-restaurant" element={<RestaurantForm />} />
         <Route path="/reservation-list" element={<ReservationTable />} />
         <Route path="/reservation-history" element={<ReservationHistory />} />
-
         <Route path="/options" element={<UpsellPage />} />
 
       </Routes>
