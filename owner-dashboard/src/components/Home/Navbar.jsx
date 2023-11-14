@@ -77,10 +77,12 @@ function NavBar() {
   return (
     <nav className="navbar">
       <div className="navContainer">
-        <div className="logo">
-        Reservi</div>
+
         <div className="nav-elements">
+
           <ul>
+            <li className="logo">
+              Reservi</li>
             <li>
               <NavLink to="/home">Dashboard</NavLink>
             </li>
