@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from 'react-toastify';
@@ -6,12 +6,41 @@ import 'react-toastify/dist/ReactToastify.css';
 import PremiumCard from "./PremiumCard.jsx";
 import BasicCard from "./BasicCard.jsx";
 import "./UpsellPage.css";
-import { NavLink } from "react-router-dom";
+import CheckoutForm from "./Checkout.jsx";
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+
 
 const UpsellPage = () => {
 
-    const vite = import.meta.env.VITE_SECRET
+    const [showCheckout, setShowCheckout] = useState(false)
+    const [clientSecret, setClientSecret] = useState('')
 
+    const stripePromise = loadStripe(import.meta.env.VITE_CLIENT_SECRET);
+
+    const toggleCheckout = () => {
+        setShowCheckout(!showCheckout)
+        console.log('here')
+    }
+
+
+    const getClientSecret = async () => {
+
+        try {
+
+            const { data } = await axios.post('http://localhost:3000/api/payments/intents')
+            console.log(data)
+
+        } catch (error) {
+            console.log(error.response.data.message)
+
+        }
+
+    }
+
+    useEffect(() => {
+        getClientSecret()
+    })
 
 
     return (
@@ -43,12 +72,19 @@ const UpsellPage = () => {
                 </div>
             </nav>
             <div className="card-container">
+                {showCheckout && clientSecret && (<div>
+                    <Elements stripe={stripePromise} options={{ clientSecret }}>
+                        <CheckoutForm showCheckout={toggleCheckout} />
+                    </Elements>
+                </div>)}
 
                 <div>
                     <BasicCard />
                 </div>
                 <div>
-                    <PremiumCard />
+
+
+                    <PremiumCard showCheckout={toggleCheckout} />
 
                 </div>
             </div>

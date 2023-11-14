@@ -5,11 +5,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './PremiumCard.css';
 
-const PremiumCard = () => {
-
-
-
-
+const PremiumCard = ({ showCheckout }) => {
 
 
 
@@ -72,7 +68,7 @@ const PremiumCard = () => {
                 </ul>
             </div>
             <div className="button-container-premium">
-                <button type="button-premium">
+                <button type="button-premium" onClick={showCheckout}>
                     Buy Now
                 </button>
             </div>
