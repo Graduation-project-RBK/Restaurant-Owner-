@@ -126,3 +126,14 @@ img {
 .svg {
     fill: #f4ec10
 }
+
+.noReview {
+    font-size: large;
+    justify-self: center;
+
+}
+
+.rating {
+    display: flex;
+    flex-wrap: wrap;
+}
