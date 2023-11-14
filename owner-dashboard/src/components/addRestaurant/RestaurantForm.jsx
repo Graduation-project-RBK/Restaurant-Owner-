@@ -17,7 +17,7 @@ const RestaurantForm = () => {
     const navigate = useNavigate()
     const [currentView, setCurrentView] = useState(1);
     const [loading, setLoading] = useState(false);
-    const { name, description, phoneNumber, categories, city, mainImage, menuImages, extraImages, openingTime, closingTime, reservationQuota, isNextDisabled } = useSelector(state => state.restaurant);
+    const { name, description, phoneNumber, categories, city, mainImage, menuImages, extraImages, openingTime, closingTime, reservationQuota, isNextDisabled, lat, lng } = useSelector(state => state.restaurant);
     useEffect(() => {
         const storedView = localStorage.getItem('currentView');
         if (storedView) {

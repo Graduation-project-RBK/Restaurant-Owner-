@@ -13,17 +13,24 @@ const LocationPickerView = () => {
 
     useEffect(() => {
         if (!lng && !lat) {
-            fetch('https://ipapi.co/json')
-                .then((response) => {
-                    return response.json();
-                })
-                .then((data) => {
-                    mapRef.current.flyTo({
-                        center: [data.longitude, data.latitude],
-                    });
-                    dispatch(setLatitude(data.latitude));
-                    dispatch(setLongitude(data.longitude));
-                });
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        console.log(position)
+                        const { latitude, longitude } = position.coords;
+                        mapRef.current.flyTo({
+                            center: [longitude, latitude],
+                        });
+                        dispatch(setLatitude(latitude));
+                        dispatch(setLongitude(longitude));
+                    },
+                    (error) => {
+                        console.error('Error getting user location:', error);
+                    }
+                );
+            } else {
+                console.error('Geolocation is not supported by your browser');
+            }
         }
     }, []);
 
@@ -38,6 +45,10 @@ const LocationPickerView = () => {
                     zoom: 8,
                 }}
                 mapStyle="mapbox://styles/mapbox/streets-v11"
+                onClick={(event) => {
+                    dispatch(setLatitude(lat));
+                    dispatch(setLongitude(lng));
+                }}
             >
                 <Marker
                     latitude={lat}
