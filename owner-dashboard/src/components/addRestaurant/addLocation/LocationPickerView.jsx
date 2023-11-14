@@ -6,9 +6,6 @@ import { useDispatch } from 'react-redux';
 import { setLatitude, setLongitude } from "../../../features/restaurantSlice.js"
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-
-const MAPBOX_TOKEN = 'pk.eyJ1Ijoid29ya3NwYWNlODU0IiwiYSI6ImNsbDlnZHgxbzFmNmQzY2w3cnlteDF6cmQifQ.0mKeOtdHiEMHDyGzUef0fw';
-
 const LocationPickerView = () => {
     const dispatch = useDispatch();
     const { lng, lat } = useSelector(state => state.restaurant);
@@ -34,7 +31,7 @@ const LocationPickerView = () => {
         <div className="mapContainer">
             <ReactMapGL
                 ref={mapRef}
-                mapboxAccessToken={MAPBOX_TOKEN}
+                mapboxAccessToken={import.meta.env.VITE_MAP_TOKEN}
                 initialViewState={{
                     longitude: lng,
                     latitude: lat,

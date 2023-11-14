@@ -66,6 +66,8 @@ const RestaurantForm = () => {
                 },
             });
             setLoading(false);
+            toast.success("Your application is successfully submitted. You'll hear from us soon!");
+
             localStorage.clear();
             navigate("/home");
         } catch (error) {
@@ -116,7 +118,7 @@ const RestaurantForm = () => {
                     )}
                 </div>
                 <div className='righttBtn'>
-                    {currentView < 8 ? (
+                    {currentView < 9 ? (
                         <button className="btn" onClick={handleNextClick} disabled={currentView === 1 ? false : isNextDisabled}>Next</button>
                     ) : (
                         <button className="btn" onClick={handleSubmit}>Submit</button>
