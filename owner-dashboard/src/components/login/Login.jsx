@@ -35,7 +35,15 @@ function Login() {
         localStorage.setItem("token", data.token);
 
         navigate("/add-restaurant");
-      } else if (data.message === "owner successfully logged in") {
+      } else if (data.message === "User hasn't chosen account type") {
+
+        localStorage.setItem("token", data.token);
+
+        navigate("/options");
+      }
+
+
+      else if (data.message === "owner successfully logged in") {
         localStorage.setItem("token", data.token);
         navigate("/home");
       }
@@ -58,6 +66,12 @@ function Login() {
         error.response.data.message === "This account was banned by the admin."
       ) {
         toast.error("This account was banned by the admin.");
+      } else if (
+        error.response &&
+        error.response.status === 403 &&
+        error.response.data.message === "This account was declined by the admin."
+      ) {
+        toast.error("This account was declined by the admin.");
       } else if (
         error.response &&
         error.response.status === 401 &&

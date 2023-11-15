@@ -110,7 +110,7 @@ function NavBar() {
             </li>
             <li>
               <NavLink to="/Settings" >
-                <i class="fa fa-cog"></i>
+                <i className="fa fa-cog"></i>
               </NavLink>
             </li>
             <li>

@@ -1,13 +1,29 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../../../services/axios-interceptor.js";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './BasicCard.css';
 
 const BasicCard = () => {
 
+    const navigate = useNavigate()
 
+    const basic = async () => {
+        try {
+            const { data } = await axios.put(`http://localhost:3000/api/payments/basic`)
+            console.log(data)
+            toast.success("Your Basic membership is successfully activated!");
+            navigate('/home')
+        } catch (error) {
+            console.log(error)
+            if (error.response.status === 403 || error.response.status === 401) {
+                localStorage.clear()
+                toast.error("You need to be logged in.")
+                navigate('/')
+            }
+        }
+    }
 
     return (
 
@@ -77,7 +93,7 @@ const BasicCard = () => {
                 </ul>
             </div>
             <div className="button-container">
-                <button type="button">
+                <button type="button" onClick={basic}>
                     Get Free
                 </button>
             </div>

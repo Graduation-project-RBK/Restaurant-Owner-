@@ -11,6 +11,7 @@ function Home() {
   const [currentIndex, setCurrentIndex] = useState();
   const [restaurant, setRestaurant] = useState({});
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
   function handleChange(index) {
     setCurrentIndex(index);
   }
@@ -32,8 +33,13 @@ function Home() {
     try {
       setLoading(true)
       const { data } = await axios.get(`http://localhost:3000/api/restaurants/myRestaurant`)
-      setRestaurant(data)
-      setLoading(false)
+      if (data.accountType === 'NONE') {
+        navigate('/options')
+      }
+      else {
+        setRestaurant(data)
+        setLoading(false)
+      }
     } catch (error) {
       console.log(error)
       setLoading(false)
