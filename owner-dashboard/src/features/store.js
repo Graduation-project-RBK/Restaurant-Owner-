@@ -5,6 +5,8 @@ import storage from "redux-persist/lib/storage";
 import restaurantReducer from "./restaurantSlice.js";
 import notificationReducer from "./notificationSlice.js";
 import ownerReducer from "./ownerSlice.js";
+import declineReducer from "./declineSlice.js";
+
 
 const persistConfig = {
   key: "root",
@@ -18,6 +20,7 @@ const store = configureStore({
     restaurant: persistedReducer,
     notification: notificationReducer,
     owner: ownerReducer,
+    decline: declineReducer,
 
 
   },
