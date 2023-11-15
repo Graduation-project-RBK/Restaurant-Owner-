@@ -1,12 +1,12 @@
-  import React, { useEffect, useState } from "react";
-  import "react-responsive-carousel/lib/styles/carousel.min.css";
-  import { Carousel } from "react-responsive-carousel";
-  import './Home.css'
-  import axios from "../../../services/axios-interceptor.js";
-  import NavBar from "./Navbar.jsx";
-  import { useNavigate } from "react-router-dom";
-  import Settings from "./Settings.jsx";
-  import OwnerMap from "./OwnerMap.jsx";
+import React, { useEffect, useState } from "react";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+import './Home.css'
+import axios from "../../../services/axios-interceptor.js";
+import NavBar from "./Navbar.jsx";
+import { useNavigate } from "react-router-dom";
+import Settings from "./Settings.jsx";
+import OwnerMap from "./OwnerMap.jsx";
 
 
 function Home() {
@@ -52,11 +52,11 @@ function Home() {
     console.log(restaurant.main_image)
   }, [])
 
-    return (
-      <div >
-        <NavBar />
+  return (
+    <div >
+      <NavBar />
 
-        <div className="App">
+      <div className="App">
         <div className="flex flex-wrap justify-between items-baseline flex-row">
           <Carousel
             showArrows={true}
@@ -68,25 +68,16 @@ function Home() {
             showThumbs={false}
             showIndicators={true}
             showStatus={false}
-          
-            
+
+
           >
             {renderSlides}
-        </Carousel>
-     
-          <OwnerMap lng={restaurant.longtitude  } lat={restaurant.latitude}/>
-          </div>
-          <Settings/>
-          
+          </Carousel>
 
+          <OwnerMap lng={restaurant.longtitude} lat={restaurant.latitude} />
         </div>
-        
-        {loading && (
-          <div className='loading'>
-            <div className='spinner'></div>
-          </div>
-        )}
-        
+        <Settings />
+
 
       </div>
 
@@ -96,7 +87,9 @@ function Home() {
         </div>
       )}
 
+
     </div>
+
 
 
   );

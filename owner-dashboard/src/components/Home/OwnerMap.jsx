@@ -11,7 +11,7 @@ const OwnerMap = ({ lng, lat }) => {
   });
 
   useEffect(() => {
-    
+
     setViewport((prevViewport) => ({
       ...prevViewport,
       longitude: lng,
@@ -28,16 +28,16 @@ const OwnerMap = ({ lng, lat }) => {
         onViewportChange={(newViewport) => setViewport(newViewport)}
         mapStyle="mapbox://styles/mapbox/streets-v11"
       >
-                <Marker
-                    latitude={lat}
-                    longitude={lng}
-              
-                />
-               
-           
-            </ReactMapGL>
-        </div>
-    );
+        <Marker
+          latitude={lat}
+          longitude={lng}
+
+        />
+
+
+      </ReactMapGL>
+    </div>
+  );
 };
 
 export default OwnerMap;
