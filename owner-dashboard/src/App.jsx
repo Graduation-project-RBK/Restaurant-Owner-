@@ -53,7 +53,6 @@ function App() {
         <Route path="/add-restaurant" element={<RestaurantForm />} />
         <Route path="/reservation-list" element={<ReservationTable />} />
         <Route path="/reservation-history" element={<ReservationHistory />} />
-
         <Route path="/options" element={<UpsellPage />} />
 
       </Routes>
