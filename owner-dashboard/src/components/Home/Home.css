@@ -2,8 +2,9 @@
   display: flex;
   flex:1;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: left;
+  align-items: left;
+  
   
 }
 
@@ -13,21 +14,21 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
   
 }
 .image-container img {
-  object-fit: none;
-  height: 300px;
-  
+  object-fit:cover;
+  height: 400px;
+
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 63.5vh;
+
+ 
     margin-right: 1100px;
 }
 
 .carousel-container {
-    max-width: 700px;
+    max-width: 800px;
 }
 
 
