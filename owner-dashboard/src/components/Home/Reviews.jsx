@@ -20,7 +20,6 @@ const Reviews = () => {
         try {
             const { data } = await axios.get(`http://localhost:3000/api/reviews/owner/${response.data.id}`)
             setReviews(data)
-            console.log(data)
         } catch (error) {
             console.log(error)
             if (error.response.status === 403 || error.response.status === 401) {
