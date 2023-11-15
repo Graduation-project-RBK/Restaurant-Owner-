@@ -6,6 +6,7 @@
   import NavBar from "./Navbar.jsx";
   import { useNavigate } from "react-router-dom";
   import Settings from "./Settings.jsx";
+  import OwnerMap from "./OwnerMap.jsx";
 
   function Home() {
 
@@ -51,10 +52,11 @@
     }, [])
 
     return (
-      <div>
+      <div >
         <NavBar />
 
         <div className="App">
+        <div className="flex flex-wrap justify-between items-baseline flex-row">
           <Carousel
             showArrows={true}
             autoPlay={true}
@@ -69,8 +71,13 @@
             
           >
             {renderSlides}
-          </Carousel>
+        </Carousel>
+     
+          <OwnerMap lng={restaurant.longtitude  } lat={restaurant.latitude}/>
+          </div>
           <Settings/>
+          
+
         </div>
         
         {loading && (
