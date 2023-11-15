@@ -11,12 +11,15 @@ import MenuImagesView from './MenuImagesView';
 import ExtraImagesView from './ExtraImagesView'
 import TimeQuotasView from './TimeQuotesView';
 import IntroductionView from './IntroductionView';
+import LocationPickerView from './addLocation/LocationPickerView.jsx';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const RestaurantForm = () => {
     const navigate = useNavigate()
     const [currentView, setCurrentView] = useState(1);
     const [loading, setLoading] = useState(false);
-    const { name, description, phoneNumber, categories, city, mainImage, menuImages, extraImages, openingTime, closingTime, reservationQuota, isNextDisabled } = useSelector(state => state.restaurant);
+    const { name, description, phoneNumber, categories, city, mainImage, menuImages, extraImages, openingTime, closingTime, reservationQuota, isNextDisabled, lat, lng } = useSelector(state => state.restaurant);
     useEffect(() => {
         const storedView = localStorage.getItem('currentView');
         if (storedView) {
@@ -58,6 +61,8 @@ const RestaurantForm = () => {
             formData.append("openingTime", formattedOpeningTime);
             formData.append("closingTime", formattedClosingTime);
             formData.append("reservationQuota", reservationQuota);
+            formData.append("lat", lat);
+            formData.append("lng", lng);
 
             await axios.post("http://localhost:3000/api/restaurants/", formData, {
                 headers: {
@@ -65,6 +70,8 @@ const RestaurantForm = () => {
                 },
             });
             setLoading(false);
+            toast.success("Your application is successfully submitted. You'll hear from us soon!");
+
             localStorage.clear();
             navigate("/home");
         } catch (error) {
@@ -91,10 +98,12 @@ const RestaurantForm = () => {
             case 5:
                 return <TimeQuotasView />;
             case 6:
-                return <MainImageView />;
+                return <LocationPickerView />;
             case 7:
-                return <MenuImagesView />
+                return <MainImageView />;
             case 8:
+                return <MenuImagesView />
+            case 9:
                 return <ExtraImagesView />
             default:
                 return null;
@@ -113,7 +122,7 @@ const RestaurantForm = () => {
                     )}
                 </div>
                 <div className='righttBtn'>
-                    {currentView < 8 ? (
+                    {currentView < 9 ? (
                         <button className="btn" onClick={handleNextClick} disabled={currentView === 1 ? false : isNextDisabled}>Next</button>
                     ) : (
                         <button className="btn" onClick={handleSubmit}>Submit</button>

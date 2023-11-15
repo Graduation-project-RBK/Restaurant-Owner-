@@ -7,7 +7,7 @@ import NavBar from "./Navbar.jsx";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
-
+  const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState();
   const [restaurant, setRestaurant] = useState({});
   const [loading, setLoading] = useState(false);
