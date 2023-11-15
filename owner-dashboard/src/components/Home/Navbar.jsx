@@ -11,6 +11,8 @@ import { TbLogout } from 'react-icons/tb'
 import { IoSettingsSharp } from 'react-icons/io5'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { setIsPremium } from "../../features/ownerSlice.js";
+
 
 
 function classNames(...classes) {
@@ -38,6 +40,7 @@ function NavBar() {
   const navigate = useNavigate();
 
   const { notificationBadge } = useSelector((state) => state.notification);
+  const { isPremium } = useSelector((state) => state.owner);
   const checkNotification = async () => {
     try {
       const { data } = await axios.get(
@@ -45,7 +48,6 @@ function NavBar() {
       );
       dispatch(setNotificationBadge(data));
 
-      console.log(notificationBadge);
     } catch (error) {
       console.log(error);
       if (error.response.status === 403 || error.response.status === 401) {
@@ -71,12 +73,26 @@ function NavBar() {
     }
   };
 
+  const checkPremium = async () => {
+    try {
+      const { data } = await axios.get('http://localhost:3000/api/restaurants/myRestaurant')
+      if (data.accountType === 'PREMIUM') {
+        dispatch(setIsPremium(true))
+      }
+
+    } catch (error) {
+      console.log(error)
+
+    }
+  }
+
   const logout = () => {
     localStorage.clear();
   };
 
   useEffect(() => {
     checkNotification();
+    checkPremium()
   }, []);
 
   return (
@@ -102,6 +118,7 @@ function NavBar() {
                 fill="currentColor"
                 className="h-7 w-7"
               >
+                {console.log(isPremium)}
                 <path
                   fillRule="evenodd"
                   d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
@@ -162,11 +179,14 @@ function NavBar() {
 
                 <NavLink className="transition duration-200 hover:text-red-700 hover:ease-in-out focus:text-red-700 disabled:text-white motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-red dark:focus:text-red lg:px-2 [&.active]:text-red-600 dark:[&.active]:text-red-600" to="/Images">Images</NavLink>
               </li>
-              <li className={`mb-6 lg:mb-0 lg:pr-8 ${isImagesPage ? 'text-red-700' : 'text-black'}`}>
-                {/* Dashboard link */}
+              {!isPremium && (
+                <li className={`mb-6 lg:mb-0 lg:pr-8 ${isImagesPage ? 'text-red-700' : 'text-black'}`}>
+                  {/* Dashboard link */}
 
-                <NavLink className="transition duration-200 hover:text-red-700 hover:ease-in-out focus:text-red-700 disabled:text-white motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-red dark:focus:text-red lg:px-2 [&.active]:text-red-600 dark:[&.active]:text-red-600" to="/options">Go Premium</NavLink>
-              </li>
+                  <NavLink className="transition duration-200 hover:text-red-700 hover:ease-in-out focus:text-red-700 disabled:text-white motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-red dark:focus:text-red lg:px-2 [&.active]:text-red-600 dark:[&.active]:text-red-600" to="/options">Go Premium</NavLink>
+                </li>
+              )}
+
             </ul>
 
           </div>
