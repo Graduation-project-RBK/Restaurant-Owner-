@@ -11,7 +11,6 @@ function Home() {
   const [currentIndex, setCurrentIndex] = useState();
   const [restaurant, setRestaurant] = useState({});
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate()
   function handleChange(index) {
     setCurrentIndex(index);
   }
