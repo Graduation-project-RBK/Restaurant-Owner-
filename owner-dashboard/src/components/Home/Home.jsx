@@ -5,6 +5,7 @@ import './Home.css'
 import axios from "../../../services/axios-interceptor.js";
 import NavBar from "./Navbar.jsx";
 import { useNavigate } from "react-router-dom";
+import Settings from "./Settings.jsx";
 
 function Home() {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ function Home() {
       return []
     }
     const { main_image, menu_images, extra_images } = restaurant
-    return [main_image, ...menu_images, ...extra_images]
+    return [main_image, ...extra_images]
   }
   const renderSlides = getImages().map((image, index) => (
     <div className="image-container" key={index}>
@@ -32,13 +33,8 @@ function Home() {
     try {
       setLoading(true)
       const { data } = await axios.get(`http://localhost:3000/api/restaurants/myRestaurant`)
-      if (data.accountType === 'NONE') {
-        navigate('/options')
-      }
-      else {
-        setRestaurant(data)
-        setLoading(false)
-      }
+      setRestaurant(data)
+      setLoading(false)
     } catch (error) {
       console.log(error)
       setLoading(false)
@@ -66,17 +62,25 @@ function Home() {
           selectedItem={getImages()[currentIndex]}
           onChange={handleChange}
           className="carousel-container"
+          showThumbs={false}
+          showIndicators={true}
+          showStatus={false}
+
+
         >
           {renderSlides}
         </Carousel>
-
+        <Settings />
       </div>
+
       {loading && (
         <div className='loading'>
           <div className='spinner'></div>
         </div>
       )}
+
     </div>
+
 
   );
 }
