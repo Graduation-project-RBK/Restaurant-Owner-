@@ -125,7 +125,8 @@ const Settings = () => {
     getRestaurant()
   }, [])
   return (
-    <div className="top-15 right-40 mt-4 mr-4 sm:max-w-80 bg-gray-100 rounded-lg p-4 shadow-sm">
+
+    <div className="ml-1 mt-7 max-w-[600%] mx-auto bg-gray-100 rounded-lg p-5 shadow-sm">
       <h2 className="text-black font-bold text-lg">Your restaurant details</h2>
 
       <div className="mt-4">

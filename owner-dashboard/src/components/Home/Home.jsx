@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from "react-responsive-carousel";
-import './Home.css'
-import axios from "../../../services/axios-interceptor.js";
-import NavBar from "./Navbar.jsx";
-import { useNavigate } from "react-router-dom";
-import Settings from "./Settings.jsx";
+  import React, { useEffect, useState } from "react";
+  import "react-responsive-carousel/lib/styles/carousel.min.css";
+  import { Carousel } from "react-responsive-carousel";
+  import './Home.css'
+  import axios from "../../../services/axios-interceptor.js";
+  import NavBar from "./Navbar.jsx";
+  import { useNavigate } from "react-router-dom";
+  import Settings from "./Settings.jsx";
+  import OwnerMap from "./OwnerMap.jsx";
+
 
 function Home() {
   const navigate = useNavigate();
@@ -50,27 +52,42 @@ function Home() {
     console.log(restaurant.main_image)
   }, [])
 
-  return (
-    <div>
-      <NavBar />
+    return (
+      <div >
+        <NavBar />
 
-      <div className="App">
-        <Carousel
-          showArrows={true}
-          autoPlay={true}
-          infiniteLoop={true}
-          selectedItem={getImages()[currentIndex]}
-          onChange={handleChange}
-          className="carousel-container"
-          showThumbs={false}
-          showIndicators={true}
-          showStatus={false}
-
-
-        >
-          {renderSlides}
+        <div className="App">
+        <div className="flex flex-wrap justify-between items-baseline flex-row">
+          <Carousel
+            showArrows={true}
+            autoPlay={true}
+            infiniteLoop={true}
+            selectedItem={getImages()[currentIndex]}
+            onChange={handleChange}
+            className="carousel-container"
+            showThumbs={false}
+            showIndicators={true}
+            showStatus={false}
+          
+            
+          >
+            {renderSlides}
         </Carousel>
-        <Settings />
+     
+          <OwnerMap lng={restaurant.longtitude  } lat={restaurant.latitude}/>
+          </div>
+          <Settings/>
+          
+
+        </div>
+        
+        {loading && (
+          <div className='loading'>
+            <div className='spinner'></div>
+          </div>
+        )}
+        
+
       </div>
 
       {loading && (
