@@ -16,10 +16,18 @@ import Images from "./components/Home/Images.jsx";
 import Messages from "./components/Home/Messages.jsx";
 import Reviews from "./components/Home/Reviews.jsx";
 import EmailVerification from "./components/emailVerification/EmailVerification.jsx";
+import UpsellPage from "./components/Upseller/UpsellPage.jsx";
+
+
+
 
 function App() {
+
+
   return (
+
     <Router>
+
       <Routes>
         <Route path="/" element={<Navigate replace to="/login" />} />
         <Route path="/login" element={<Login />} />
@@ -29,12 +37,12 @@ function App() {
         <Route path="/add-restaurant" element={<RestaurantForm />} />
         <Route path="/reservation-list" element={<ReservationTable />} />
         <Route path="/reservation-history" element={<ReservationHistory />} />
-        <Route path="/Settings" element={<Settings />} />
-        <Route path="/Images" element={<Images />} />
-        <Route path="/Messages" element={<Messages />} />
-        <Route path="/Reviews" element={<Reviews />} />
+        <Route path="/options" element={<UpsellPage />} />
+
       </Routes>
+
     </Router>
+
   );
 }
 
