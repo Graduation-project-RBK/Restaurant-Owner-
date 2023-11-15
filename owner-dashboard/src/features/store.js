@@ -7,6 +7,7 @@ import notificationReducer from "./notificationSlice.js";
 import ownerReducer from "./ownerSlice.js";
 import declineReducer from "./declineSlice.js";
 
+import paymentReducer from "./paymentSlice.js";
 
 const persistConfig = {
   key: "root",
@@ -21,6 +22,7 @@ const store = configureStore({
     notification: notificationReducer,
     owner: ownerReducer,
     decline: declineReducer,
+    payment: paymentReducer,
 
 
   },
