@@ -37,6 +37,10 @@ function App() {
         <Route path="/add-restaurant" element={<RestaurantForm />} />
         <Route path="/reservation-list" element={<ReservationTable />} />
         <Route path="/reservation-history" element={<ReservationHistory />} />
+        <Route path="/Settings" element={<Settings />} />
+        <Route path="/Images" element={<Images />} />
+        <Route path="/Messages" element={<Messages />} />
+        <Route path="/Reviews" element={<Reviews />} />
         <Route path="/options" element={<UpsellPage />} />
 
       </Routes>
