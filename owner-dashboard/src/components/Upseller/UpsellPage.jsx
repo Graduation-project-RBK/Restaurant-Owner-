@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import customAxios from "../../../services/axios-interceptor.js";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PremiumCard from "./PremiumCard.jsx";
@@ -18,6 +19,7 @@ const UpsellPage = () => {
     const [showCheckout, setShowCheckout] = useState(false)
 
     const dispatch = useDispatch();
+    const navigate = useNavigate()
     const { clientSecret } = useSelector((state) => state.payment);
 
     const stripePromise = loadStripe(import.meta.env.VITE_CLIENT_SECRET);
@@ -42,7 +44,39 @@ const UpsellPage = () => {
 
     }
 
+    const checkType = async () => {
 
+        try {
+
+            const { data } = await customAxios.get('http://localhost:3000/api/restaurants/myRestaurant')
+            if (data.accountType === 'PREMIUM') {
+                console.log('already premium')
+                navigate('/home')
+            }
+
+        } catch (error) {
+            console.log(error.response.data.message)
+            if (error.response.status === 403 || error.response.status === 401) {
+                localStorage.clear()
+                toast.error("You need to be logged in.")
+                navigate('/')
+            }
+        }
+    }
+
+
+
+
+
+    const logout = () => {
+        localStorage.clear();
+        navigate('/')
+    };
+
+
+    useEffect(() => {
+        checkType()
+    })
 
 
     return (
@@ -54,7 +88,7 @@ const UpsellPage = () => {
                     <div className="nav-elements-upsell">
 
                         <button className="log relative p-2 text-white hover:bg-gray-100 hover:text-gray-600 focus:bg-gray-100 focus:text-gray-600 rounded-full"
-                        >
+                            onClick={logout}>
                             <span className="sr-only">Log out</span>
                             <svg
                                 aria-hidden="true"
@@ -74,21 +108,39 @@ const UpsellPage = () => {
                 </div>
             </nav>
             <div className="card-container">
-                {showCheckout && clientSecret && (<div>
-                    <Elements stripe={stripePromise} options={{ clientSecret }}>
+                {showCheckout && clientSecret && (<div style={{ backgroundColor: 'white', width: '500px', borderRadius: '10px' }}>
+                    <Elements stripe={stripePromise} options={{
+                        clientSecret, appearance: {
+                            theme: 'stripe', variables: {
+                                colorPrimary: 'white',
+                                colorBackground: 'black',
+                                colorText: 'white',
+                                colorDanger: '#df1b41',
+                                fontFamily: 'Ideal Sans, system-ui, sans-serif',
+                                spacingUnit: '5px',
+                                borderRadius: '4px',
+                                // See all possible variables below
+                            }
+                        }
+                    }}>
                         <CheckoutForm showCheckout={toggleCheckout} />
                     </Elements>
                 </div>)}
 
-                <div>
-                    <BasicCard />
-                </div>
-                <div>
+                {!showCheckout && (
+                    <>
+                        <div>
+                            <BasicCard />
+                        </div>
+                        <div>
 
 
-                    <PremiumCard showCheckout={toggleCheckout} />
+                            <PremiumCard showCheckout={toggleCheckout} />
 
-                </div>
+                        </div>
+                    </>
+                )}
+
             </div>
         </div>
     )

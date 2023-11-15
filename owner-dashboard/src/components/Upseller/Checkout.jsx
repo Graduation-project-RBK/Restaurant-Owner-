@@ -1,8 +1,11 @@
-import axios from 'axios';
+import axios from '../../../services/axios-interceptor.js';
 import { useEffect, useState } from 'react';
 import { useStripe, useElements } from '@stripe/react-stripe-js';
 import { PaymentElement } from '@stripe/react-stripe-js';
 import { useNavigate } from "react-router-dom";
+import './Checkout.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CheckoutForm = ({ showCheckout }) => {
 
@@ -22,32 +25,67 @@ const CheckoutForm = ({ showCheckout }) => {
 
         setIsProcessing(true)
 
-        const { error } = await stripe.confirmPayment({
+        try {
 
-            elements,
-            confirmParams: {
-                return_url: `http://localhost:5173/home`
-            },
-            redirect: 'if_required'
-        })
+            const { error } = await stripe.confirmPayment({
 
-        if (error) {
-            setMessage(error.message)
+                elements,
+                confirmParams: {
+                    return_url: `http://localhost:5173/home`
+                },
+                redirect: 'if_required'
+            })
+
+
+
+            if (error) {
+                setMessage(error.message)
+                console.log(error.message)
+                setIsProcessing(false)
+                toast.error("Couldn't complete payment.")
+            }
+
+            else {
+                const { data } = await axios.put(`http://localhost:3000/api/payments/premium`)
+                console.log(data.payment)
+                toast.success("Your Premium membership is successfully activated!");
+                navigate('/home')
+            }
+
+
+            setIsProcessing(false)
+
+        } catch (error) {
+            if (error.response.status === 403 || error.response.status === 401) {
+                localStorage.clear()
+                toast.error("You need to be logged in.")
+                navigate('/')
+                return
+            }
+
+
+
+
         }
-
-        setIsProcessing(false)
-        showCheckout(false)
-
     }
 
     return (
         <form id='payment-form' onSubmit={handleSubmit}>
             <PaymentElement />
-            <button style={{ color: 'white' }} disabled={isProcessing} id='submit'>
-                <span>
-                    {isProcessing ? 'Processing...' : 'Pay now'}
-                </span>
-            </button>
+            <div className="button-container-payment">
+
+                <button className='paymentButton' disabled={isProcessing} id='submit'>
+                    <span>
+                        {isProcessing ? 'Processing...' : 'Pay now'}
+                    </span>
+                </button>
+                <button className='backButton' onClick={showCheckout} >
+                    <span>
+                        Back
+                    </span>
+                </button>
+            </div>
+
         </form >
     );
 };
