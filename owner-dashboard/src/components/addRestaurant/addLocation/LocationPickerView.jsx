@@ -3,7 +3,7 @@ import Geocoder from './Geocoder.jsx';
 import { useSelector } from 'react-redux';
 import ReactMapGL, { GeolocateControl, Marker, NavigationControl } from 'react-map-gl';
 import { useDispatch } from 'react-redux';
-import { setLatitude, setLongitude } from "../../../features/restaurantSlice.js"
+import { setLatitude, setLongitude, setIsNextDisabled } from "../../../features/restaurantSlice.js"
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 const LocationPickerView = () => {
@@ -34,6 +34,18 @@ const LocationPickerView = () => {
         }
     }, []);
 
+    useEffect(() => {
+        checkIsNextDisabled(lng, lat);
+    }, [lng, lat]);
+
+    const checkIsNextDisabled = (lng, lat) => {
+        if (!lng || !lat) {
+            dispatch(setIsNextDisabled(true));
+        } else {
+            dispatch(setIsNextDisabled(false));
+        }
+    };
+
     return (
         <div className="mapContainer">
             <ReactMapGL
@@ -46,6 +58,7 @@ const LocationPickerView = () => {
                 }}
                 mapStyle="mapbox://styles/mapbox/streets-v11"
                 onClick={(event) => {
+                    const { lng, lat } = event.lngLat;
                     dispatch(setLatitude(lat));
                     dispatch(setLongitude(lng));
                 }}

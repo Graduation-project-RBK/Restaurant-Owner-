@@ -12,6 +12,8 @@ import ExtraImagesView from './ExtraImagesView'
 import TimeQuotasView from './TimeQuotesView';
 import IntroductionView from './IntroductionView';
 import LocationPickerView from './addLocation/LocationPickerView.jsx';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const RestaurantForm = () => {
     const navigate = useNavigate()
@@ -59,6 +61,8 @@ const RestaurantForm = () => {
             formData.append("openingTime", formattedOpeningTime);
             formData.append("closingTime", formattedClosingTime);
             formData.append("reservationQuota", reservationQuota);
+            formData.append("lat", lat);
+            formData.append("lng", lng);
 
             await axios.post("http://localhost:3000/api/restaurants/", formData, {
                 headers: {
