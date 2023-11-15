@@ -9,18 +9,22 @@ import "./UpsellPage.css";
 import CheckoutForm from "./Checkout.jsx";
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import { useSelector, useDispatch } from "react-redux";
+import { setClientSecret } from "../../features/paymentSlice.js";
 
 
 const UpsellPage = () => {
 
     const [showCheckout, setShowCheckout] = useState(false)
-    const [clientSecret, setClientSecret] = useState('')
+
+    const dispatch = useDispatch();
+    const { clientSecret } = useSelector((state) => state.payment);
 
     const stripePromise = loadStripe(import.meta.env.VITE_CLIENT_SECRET);
 
     const toggleCheckout = () => {
+        getClientSecret()
         setShowCheckout(!showCheckout)
-        console.log('here')
     }
 
 
@@ -29,7 +33,7 @@ const UpsellPage = () => {
         try {
 
             const { data } = await axios.post('http://localhost:3000/api/payments/intents')
-            console.log(data)
+            dispatch(setClientSecret(data.paymentIntent))
 
         } catch (error) {
             console.log(error.response.data.message)
@@ -38,9 +42,7 @@ const UpsellPage = () => {
 
     }
 
-    useEffect(() => {
-        getClientSecret()
-    })
+
 
 
     return (
