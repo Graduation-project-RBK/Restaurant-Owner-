@@ -1,46 +1,49 @@
 .App {
   display: flex;
-  flex:1;
+  flex: 1;
   flex-direction: column;
   justify-content: left;
   align-items: left;
-  
-  
+
+
 }
 
 .carousel-container {
-  margin-top:1rem;
+  margin-top: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 
-  
+
 }
+
 .image-container img {
-  object-fit:cover;
+  object-fit: cover;
   height: 400px;
 
-    display: flex;
+  display: flex;
 
- 
-    margin-right: 1100px;
+
+  margin-right: 1100px;
 }
 
 .carousel-container {
+
     max-width: 700px;
+
 }
 
 
 
 .save {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 
 .save:hover {
-    background-color: #45a049;
+  background-color: #45a049;
 }

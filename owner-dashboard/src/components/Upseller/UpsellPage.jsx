@@ -82,12 +82,19 @@ const UpsellPage = () => {
     return (
 
         <div className="page">
-            <nav className="navbar-upsell bg-red-600">
+            <nav className="flex-no-wrap relative flex w-full items-center justify-between bg-[#ffffff] py-2 shadow-md border-black dark:bg-white dark:shadow-gray-900 lg:flex-wrap lg:justify-start lg:py-3" >
                 <div className="navContainer-upsell">
 
                     <div className="nav-elements-upsell">
+                        <div
+                            className="pr-2 text-red-600  focus:text-neutral-100 dark:text-red-500 dark:hover:text-neutral-400 dark:focus:text-neutral-400  "
 
-                        <button className="log relative p-2 text-white hover:bg-gray-100 hover:text-gray-600 focus:bg-gray-100 focus:text-gray-600 rounded-full"
+                            style={{ fontSize: '25px' }}
+                        >
+                            Reservi.<a className="text-black text-sm" >    for owners</a>
+                        </div>
+
+                        <button className="log  text-black hover:bg-gray-100 hover:text-red-600 focus:bg-gray-100 focus:text-gray-600 rounded-full"
                             onClick={logout}>
                             <span className="sr-only">Log out</span>
                             <svg

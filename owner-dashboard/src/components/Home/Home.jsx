@@ -8,48 +8,49 @@
   import Settings from "./Settings.jsx";
   import OwnerMap from "./OwnerMap.jsx";
 
-  function Home() {
 
-    const [currentIndex, setCurrentIndex] = useState();
-    const [restaurant, setRestaurant] = useState({});
-    const [loading, setLoading] = useState(false);
-    function handleChange(index) {
-      setCurrentIndex(index);
+function Home() {
+  const navigate = useNavigate();
+  const [currentIndex, setCurrentIndex] = useState();
+  const [restaurant, setRestaurant] = useState({});
+  const [loading, setLoading] = useState(false);
+  function handleChange(index) {
+    setCurrentIndex(index);
+  }
+
+  const getImages = () => {
+    if (!restaurant.main_image) {
+      return []
     }
+    const { main_image, menu_images, extra_images } = restaurant
+    return [main_image, ...extra_images]
+  }
+  const renderSlides = getImages().map((image, index) => (
+    <div className="image-container" key={index}>
+      <img src={image} alt={`carouesel-image-${index}`} className="slide-img" />
+    </div>
+  ));
 
-    const getImages = () => {
-      if (!restaurant.main_image) {
-        return []
+  const getRestaurant = async () => {
+    try {
+      setLoading(true)
+      const { data } = await axios.get(`http://localhost:3000/api/restaurants/myRestaurant`)
+      setRestaurant(data)
+      setLoading(false)
+    } catch (error) {
+      console.log(error)
+      setLoading(false)
+      if (error.response.status === 403 || error.response.status === 401) {
+        localStorage.clear()
+        navigate('/')
       }
-      const { main_image, menu_images, extra_images } = restaurant
-      return [main_image,...extra_images]
     }
-    const renderSlides = getImages().map((image, index) => (
-      <div className="image-container" key={index}>
-        <img src={image} alt={`carouesel-image-${index}`} className="slide-img" />
-      </div>
-    ));
+  }
 
-    const getRestaurant = async () => {
-      try {
-        setLoading(true)
-        const { data } = await axios.get(`http://localhost:3000/api/restaurants/myRestaurant`)
-        setRestaurant(data)
-        setLoading(false)
-      } catch (error) {
-        console.log(error)
-        setLoading(false)
-        if (error.response.status === 403 || error.response.status === 401) {
-          localStorage.clear()
-          navigate('/')
-        }
-      }
-    }
-
-    useEffect(() => {
-      getRestaurant()
-      console.log(restaurant.main_image)
-    }, [])
+  useEffect(() => {
+    getRestaurant()
+    console.log(restaurant.main_image)
+  }, [])
 
     return (
       <div >
@@ -86,10 +87,19 @@
           </div>
         )}
         
+
       </div>
-      
 
-    );
-  }
+      {loading && (
+        <div className='loading'>
+          <div className='spinner'></div>
+        </div>
+      )}
 
-  export default Home
+    </div>
+
+
+  );
+}
+
+export default Home

@@ -1,7 +1,7 @@
 import { Outlet, Navigate } from "react-router-dom";
 
 
-const ProtectedRouteOwner = ({ isAllowed, redirectPath = '/login', children }) => {
+const ProtectedRouteOwner = ({ isAllowed, redirectPath = '/home', children }) => {
 
 
     console.log(isAllowed);
