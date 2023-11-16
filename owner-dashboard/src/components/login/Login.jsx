@@ -107,7 +107,7 @@ function Login() {
         </div>
         <div
           className="lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0"
-          style={{ backgroundImage:"repeating-radial-gradient(  #0c0a0a 80%,#2f312f 90%,#3f4549 90%)",backgroundSize: "65px 65px"}}
+          style={{ backgroundImage: "repeating-radial-gradient(  #0c0a0a 80%,#2f312f 90%,#3f4549 90%)", backgroundSize: "65px 65px" }}
         >
           <div
             className="absolute lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center"
@@ -119,7 +119,7 @@ function Login() {
             <div className="absolute bg-black opacity-60 inset-0 z-0" />
           </div>
           <div className="w-full py-6 z-20">
-            <h1 class="text-4xl font-bold tracking-wide text-white-800">
+            <h1 className="text-4xl font-bold tracking-wide text-white-800">
               Reservi login
             </h1>
             <form

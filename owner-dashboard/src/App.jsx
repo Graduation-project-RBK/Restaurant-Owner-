@@ -17,9 +17,9 @@ import Messages from "./components/Home/Messages.jsx";
 import Reviews from "./components/Home/Reviews.jsx";
 import EmailVerification from "./components/emailVerification/EmailVerification.jsx";
 import UpsellPage from "./components/Upseller/UpsellPage.jsx";
-import { Server } from "socket.io";
-const io = new Server(server);
-io.listen(3000);
+// import { Server } from "socket.io";
+// const io = new Server(server);
+// io.listen(3000);
 
 
 function App() {

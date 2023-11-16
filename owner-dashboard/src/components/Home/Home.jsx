@@ -32,8 +32,8 @@ function Home() {
   ));
 
   const getRestaurant = async () => {
+    setLoading(true);
     try {
-      setLoading(true)
       const { data } = await axios.get(`http://localhost:3000/api/restaurants/myRestaurant`)
       setRestaurant(data)
       setLoading(false)
@@ -50,7 +50,7 @@ function Home() {
   useEffect(() => {
     getRestaurant()
     console.log(restaurant.main_image)
-  }, [])
+  }, [navigate])
 
   return (
     <div >

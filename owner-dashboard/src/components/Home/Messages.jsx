@@ -1,7 +1,7 @@
 import React from "react";
 import './Messages.css'
 import NavBar from "./Navbar";
-import logo from './logo.svg';
+
 
 
 const Messages = () => {
