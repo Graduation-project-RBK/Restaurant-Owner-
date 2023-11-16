@@ -20,7 +20,7 @@ const PremiumCard = ({ showCheckout }) => {
                 </p>
                 <div className="price-container-premium">
                     <span>$</span>100
-                    <span>/mo</span>
+                    <span></span>
                 </div>
             </div>
             <div>
