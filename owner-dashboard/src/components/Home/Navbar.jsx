@@ -180,7 +180,7 @@ function NavBar() {
                 <NavLink className="transition duration-200 hover:text-red-700 hover:ease-in-out focus:text-red-700 disabled:text-white motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-red dark:focus:text-red lg:px-2 [&.active]:text-red-600 dark:[&.active]:text-red-600" to="/Images">Images</NavLink>
               </li>
               {!isPremium && (
-                <li className={`mb-6 lg:mb-0 lg:pr-8 ${isImagesPage ? 'text-red-700' : 'text-black'}`}>
+                <li className={`mb-6 lg:mb-0 lg:pr-8 text-red-700`}>
                   {/* Dashboard link */}
 
                   <NavLink className="transition duration-200 hover:text-red-700 hover:ease-in-out focus:text-red-700 disabled:text-white motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-red dark:focus:text-red lg:px-2 [&.active]:text-red-600 dark:[&.active]:text-red-600" to="/options">Go Premium</NavLink>

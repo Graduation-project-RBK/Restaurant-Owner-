@@ -35,7 +35,7 @@ const BasicCard = () => {
                 </p>
                 <div className="price-container">
                     <span>$</span>0
-                    <span>/mo</span>
+                    <span></span>
                 </div>
             </div>
             <div>
