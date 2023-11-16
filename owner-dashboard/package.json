@@ -50,7 +50,8 @@
     "redux": "^4.2.1",
     "redux-persist": "^6.0.0",
     "socket.io-client": "^4.7.2",
-    "stripe": "^14.4.0"
+    "stripe": "^14.4.0",
+    "timeago.js": "^4.0.0-beta.3"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
