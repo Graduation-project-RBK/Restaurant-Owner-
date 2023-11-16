@@ -5,7 +5,6 @@ import axios from "../../../services/axios-interceptor.js";
 import PendingReservationTableList from "./PendingReservationTableList.jsx";
 import NavBar from "./Navbar.jsx";
 import { useNavigate } from "react-router-dom";
-import DeclineModal from "./DeclineModal.jsx";
 import { useSelector, useDispatch } from 'react-redux';
 
 
@@ -13,8 +12,10 @@ function ReservationTable() {
     const navigate = useNavigate();
     const [pending, setPending] = useState([])
     const { show } = useSelector(state => state.decline);
+    const { shows } = useSelector(state => state.accept);
 
     const [showDeclineModal, setShowDeclineModal] = useState(false);
+    const [showAcceptModal, setShowAcceptModal] = useState(false);
   
 
 
@@ -34,8 +35,9 @@ function ReservationTable() {
 
     useEffect(() => {
         console.log("showDeclineModal:", showDeclineModal);
+        console.log("showAcceptModal:", showAcceptModal);
         getPendingReservations();
-    }, [showDeclineModal,show]);
+    }, [showDeclineModal,show,shows,showAcceptModal]);
 
     return (
         <div className=" "> {/* Add margin-top to create space */}
@@ -63,7 +65,7 @@ function ReservationTable() {
                 </thead>
                 <tbody>
                     {pending.map((reservation) => (
-                        <PendingReservationTableList key={reservation.id} reservation={reservation} fetchs={getPendingReservations} setShowDeclineModal={setShowDeclineModal}/>
+                        <PendingReservationTableList key={reservation.id} reservation={reservation} fetchs={getPendingReservations} setShowDeclineModal={setShowDeclineModal} setShowAcceptModal={setShowAcceptModal}/>
                     ))}
                 </tbody>
             </table>

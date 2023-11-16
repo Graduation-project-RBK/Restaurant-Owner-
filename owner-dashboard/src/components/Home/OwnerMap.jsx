@@ -5,19 +5,23 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 const OwnerMap = ({ lng, lat }) => {
   const mapRef = useRef();
   const [viewport, setViewport] = useState({
-    longitude: lng,
-    latitude: lat,
+    longitude: Number(lng) || 0, 
+    latitude: Number(lat) || 0,   
     zoom: 15,
   });
 
   useEffect(() => {
-    
-    setViewport((prevViewport) => ({
-      ...prevViewport,
-      longitude: lng,
-      latitude: lat,
-    }));
+    if (!isNaN(Number(lng)) && !isNaN(Number(lat))) {
+      setViewport((prevViewport) => ({
+        ...prevViewport,
+        longitude: Number(lng),
+        latitude: Number(lat),
+      }));
+    }
   }, [lng, lat]);
+
+
+  const isValidLatLng = !isNaN(Number(lat)) && !isNaN(Number(lng));
 
   return (
     <div className="mapOwnerContainer">
@@ -28,16 +32,13 @@ const OwnerMap = ({ lng, lat }) => {
         onViewportChange={(newViewport) => setViewport(newViewport)}
         mapStyle="mapbox://styles/mapbox/streets-v11"
       >
-                <Marker
-                    latitude={lat}
-                    longitude={lng}
-              
-                />
-               
-           
-            </ReactMapGL>
-        </div>
-    );
+        {isValidLatLng && (
+          <Marker latitude={Number(lat)} longitude={Number(lng)}>
+          </Marker>
+        )}
+      </ReactMapGL>
+    </div>
+  );
 };
 
 export default OwnerMap;

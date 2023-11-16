@@ -6,7 +6,7 @@ import restaurantReducer from "./restaurantSlice.js";
 import notificationReducer from "./notificationSlice.js";
 import ownerReducer from "./ownerSlice.js";
 import declineReducer from "./declineSlice.js";
-
+import acceptReducer from "./acceptSlice.js";
 import paymentReducer from "./paymentSlice.js";
 
 const persistConfig = {
@@ -22,6 +22,7 @@ const store = configureStore({
     notification: notificationReducer,
     owner: ownerReducer,
     decline: declineReducer,
+    accept: acceptReducer,
     payment: paymentReducer,
 
 
