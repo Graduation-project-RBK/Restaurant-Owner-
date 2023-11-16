@@ -32,10 +32,12 @@ const OwnerMap = ({ lng, lat }) => {
         onViewportChange={(newViewport) => setViewport(newViewport)}
         mapStyle="mapbox://styles/mapbox/streets-v11"
       >
+
         {isValidLatLng && (
           <Marker latitude={Number(lat)} longitude={Number(lng)}>
           </Marker>
         )}
+
       </ReactMapGL>
     </div>
   );

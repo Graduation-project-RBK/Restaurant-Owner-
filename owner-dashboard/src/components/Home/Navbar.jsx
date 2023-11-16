@@ -1,16 +1,19 @@
-import React, { useEffect, useState , Fragment } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { NavLink , useLocation} from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "../../../services/axios-interceptor.js";
 import { setNotificationBadge } from "../../features/notificationSlice";
 import { useNavigate } from "react-router-dom";
 import { FaComments, FaEdit } from 'react-icons/fa';
-import {MdRateReview} from 'react-icons/md';
-import {TbLogout} from 'react-icons/tb'
 import { FaList } from "react-icons/fa6";
+import { MdRateReview } from 'react-icons/md';
+import { TbLogout } from 'react-icons/tb'
+import { IoSettingsSharp } from 'react-icons/io5'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { setIsPremium } from "../../features/ownerSlice.js";
+
 
 
 function classNames(...classes) {
@@ -32,13 +35,13 @@ function NavBar() {
 
 
 
-  
-  const [notificationNumber, setNotificationNumber] = useState(false);
+
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { notificationBadge } = useSelector((state) => state.notification);
+  const { isPremium } = useSelector((state) => state.owner);
   const checkNotification = async () => {
     try {
       const { data } = await axios.get(
@@ -46,7 +49,6 @@ function NavBar() {
       );
       dispatch(setNotificationBadge(data));
 
-      console.log(notificationBadge);
     } catch (error) {
       console.log(error);
       if (error.response.status === 403 || error.response.status === 401) {
@@ -55,24 +57,6 @@ function NavBar() {
       }
     }
 
-    if (notificationBadge) {
-      try {
-        const response = await axios.get(
-          `http://localhost:3000/api/restaurants/myRestaurant`
-        );
-
-        const { data } = await axios.get(
-          `http://localhost:3000/api/reservations/pending/${response.data.id}`
-        );
-        setNotificationNumber(data.length);
-      } catch (error) {
-        console.log(error);
-        if (error.response.status === 403 || error.response.status === 401) {
-          localStorage.clear();
-          navigate("/");
-        }
-      }
-    }
   };
 
   const removeNotificationBadge = async () => {
@@ -90,36 +74,42 @@ function NavBar() {
     }
   };
 
+  const checkPremium = async () => {
+    try {
+      const { data } = await axios.get('http://localhost:3000/api/restaurants/myRestaurant')
+      if (data.accountType === 'PREMIUM') {
+        dispatch(setIsPremium(true))
+      }
+
+    } catch (error) {
+      console.log(error)
+
+    }
+  }
+
   const logout = () => {
     localStorage.clear();
   };
 
   useEffect(() => {
     checkNotification();
+    checkPremium()
   }, []);
 
   return (
-<>
-  {/* Main navigation container */}
-  <nav className="flex-no-wrap relative flex w-full items-center justify-between bg-[#ffffff] py-2 shadow-md border-black dark:bg-white dark:shadow-gray-900 lg:flex-wrap lg:justify-start lg:py-3">
-    <div className="flex w-full flex-wrap items-center justify-between px-3">
-      {/* Hamburger button for mobile view */}
-      <button
-        className="block border-0 bg-transparent px-2 text-neutral-900 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-100 lg:hidden"
-        type="button"
-        data-te-collapse-init=""
-        data-te-target="#navbarSupportedContent1"
-        aria-controls="navbarSupportedContent1"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        {/* Hamburger icon */}
-        <span className="[&>svg]:w-7">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="h-7 w-7"
+    <>
+      {/* Main navigation container */}
+      <nav className="flex-no-wrap relative flex w-full items-center justify-between bg-[#ffffff] py-2 shadow-md border-black dark:bg-white dark:shadow-gray-900 lg:flex-wrap lg:justify-start lg:py-3">
+        <div className="flex w-full flex-wrap items-center justify-between px-3">
+          {/* Hamburger button for mobile view */}
+          <button
+            className="block border-0 bg-transparent px-2 text-neutral-900 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-100 lg:hidden"
+            type="button"
+            data-te-collapse-init=""
+            data-te-target="#navbarSupportedContent1"
+            aria-controls="navbarSupportedContent1"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
           >
             <path
               fillRule="evenodd"
@@ -224,9 +214,22 @@ function NavBar() {
                     active ? 'bg-white text-red-600' : 'text-black',
                     'block px-4 py-2 text-sm'
                   )}
+
                 >
-                  <NavLink to="/Reviews"><MdRateReview style={{ fontSize: '20px' }}/>reviews</NavLink>
-                </a>
+                  Reservation History
+                </NavLink>
+              </li>
+              <li className={`mb-6 lg:mb-0 lg:pr-8 ${isImagesPage ? 'text-red-700' : 'text-black'}`}>
+                {/* Dashboard link */}
+
+                <NavLink className="transition duration-200 hover:text-red-700 hover:ease-in-out focus:text-red-700 disabled:text-white motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-red dark:focus:text-red lg:px-2 [&.active]:text-red-600 dark:[&.active]:text-red-600" to="/Images">Images</NavLink>
+              </li>
+              {!isPremium && (
+                <li className={`mb-6 lg:mb-0 lg:pr-8 text-red-700`}>
+                  {/* Dashboard link */}
+
+                  <NavLink className="transition duration-200 hover:text-red-700 hover:ease-in-out focus:text-red-700 disabled:text-white motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-red dark:focus:text-red lg:px-2 [&.active]:text-red-600 dark:[&.active]:text-red-600" to="/options">Go Premium</NavLink>
+                </li>
               )}
             </Menu.Item>
             <form method="POST" action="#">
@@ -244,15 +247,11 @@ function NavBar() {
                 )}
               </Menu.Item>
             </form>
-          </div>
-        </Menu.Items>
-      </Transition>
-    </Menu>
 
-      </div>
-    </div>
-  </nav>
-</>
+          </div>
+        </div>
+      </nav>
+    </>
 
   );
 }
