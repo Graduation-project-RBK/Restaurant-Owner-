@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { FaComments, FaEdit } from 'react-icons/fa';
 import {MdRateReview} from 'react-icons/md';
 import {TbLogout} from 'react-icons/tb'
-import {IoSettingsSharp} from 'react-icons/io5'
+import { FaList } from "react-icons/fa6";
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
@@ -137,7 +137,7 @@ function NavBar() {
       >
         {/* Logo */}
         <a
-          className="mb-4 ml-2 mr-5 mt-3 flex items-center text-red-600 hover:text-neutral-100 focus:text-neutral-100 dark:text-red-500 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:mb-0 lg:mt-0 "
+          className="mb-4 ml-2 mr-5 mt-3 flex items-center text-red-600 hover:text-neutral-900 focus:text-neutral-900 dark:text-red-500 dark:hover:text-neutral-900 dark:focus:text-neutral-900 lg:mb-0 lg:mt-0 "
           href="/home"
           style={{ fontSize: '25px' }}
         >
@@ -187,7 +187,7 @@ function NavBar() {
         <Menu as="div" className="relative inline-block text-left">
       <div>
         <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-black-100=x   shadow-sm ring-1 ring-inset ring-white hover:bg-white hover:text-red-600">
-        <IoSettingsSharp style={{ fontSize: '20px' }}/>
+        <FaList style={{ fontSize: '20px' }}/>
           <ChevronDownIcon className="-mr-1 h-5 w-5 hover:text-red-600" aria-hidden="true" />
         </Menu.Button>
       </div>
@@ -201,14 +201,14 @@ function NavBar() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 z-10 mt-2 w-50 origin-top-right rounded-md bg-black shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="absolute right-0 z-10 mt-2 w-50 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
             <Menu.Item>
               {({ active }) => (
                 <a
                   href="#"
                   className={classNames(
-                    active ? 'bg-black text-red-600' : 'text-gray-100',
+                    active ? 'bg-white text-red-600' : 'text-black',
                     'block px-4 py-2 text-sm'
                   )}
                 >
@@ -221,7 +221,7 @@ function NavBar() {
                 <a
                   href="#"
                   className={classNames(
-                    active ? 'bg-black text-red-600' : 'text-gray-100',
+                    active ? 'bg-white text-red-600' : 'text-black',
                     'block px-4 py-2 text-sm'
                   )}
                 >
@@ -235,7 +235,7 @@ function NavBar() {
                 <a
                   href="#"
                   className={classNames(
-                    active ? 'bg-black text-red-600' : 'text-gray-100',
+                    active ? 'bg-white text-red-600' : 'text-black',
                     'block px-4 py-2 text-sm'
                   )}
                 >

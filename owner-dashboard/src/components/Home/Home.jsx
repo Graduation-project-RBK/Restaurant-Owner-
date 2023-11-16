@@ -32,13 +32,13 @@
 
     const getRestaurant = async () => {
       try {
-        setLoading(true)
+      
         const { data } = await axios.get(`http://localhost:3000/api/restaurants/myRestaurant`)
         setRestaurant(data)
-        setLoading(false)
+       
       } catch (error) {
         console.log(error)
-        setLoading(false)
+      
         if (error.response.status === 403 || error.response.status === 401) {
           localStorage.clear()
           navigate('/')
@@ -75,7 +75,7 @@
      
           <OwnerMap lng={restaurant.longtitude  } lat={restaurant.latitude}/>
           </div>
-          <Settings/>
+        
           
 
         </div>
