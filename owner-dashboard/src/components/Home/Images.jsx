@@ -240,140 +240,148 @@ const Images = () => {
   return (
     <div>
       <NavBar />
-      <div className="menu-container">
-        <h2>Images</h2>
-        <div className="mb-3">
-          <label htmlFor="mainImage" className="form-label">
+      <div className="menu-container mt-10 max-w-[80%]">
+        <h2 className="text-2xl font-bold mb-4">Images</h2>
+        <div className="mb-6">
+          <label htmlFor="mainImage" className="form-label block mb-2">
             Choose Main Image
           </label>
           <input
-            id="fileInput"
+            id="mainImage"
             type="file"
             accept="image/*"
             onChange={handleMainImage}
+            className="border rounded p-2"
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="menuImages" className="form-label">
+        <div className="mb-6">
+          <label htmlFor="menuImages" className="form-label block mb-2">
             Choose Menu Images
           </label>
           <input
-            id="fileInput"
+            id="menuImages"
             type="file"
             accept="image/*"
             onChange={handleMenuImages}
             multiple
+            className="border rounded p-2"
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="extraImage" className="form-label">
-            Choose Extra Image
+        <div className="mb-6">
+          <label htmlFor="extraImage" className="form-label block mb-2">
+            Choose Extra Images
           </label>
           <input
-            id="fileInput"
+            id="extraImage"
             type="file"
             accept="image/*"
             onChange={handleExtraImage}
             multiple
+            className="border rounded p-2"
           />
         </div>
-        <button onClick={handleSave}>Save</button>
-
-        <table className="table">
+        <button
+          onClick={handleSave}
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Save
+        </button>
+  
+        <table className="table-auto mt-8">
           <thead>
             <tr>
-              <th>Index</th>
-              <th>Image</th>
-              <th>Type</th>
+              <th className="px-4 py-2">Index</th>
+              <th className="px-4 py-2">Image</th>
+              <th className="px-4 py-2">Type</th>
+              <th className="px-4 py-2">Actions</th>
             </tr>
           </thead>
           <tbody>
             {resultImageURLs.main_image && (
               <tr>
-                <td>1</td>
-                <td>
+                <td className="border px-4 py-2">1</td>
+                <td className="border px-4 py-2">
                   <img
                     src={resultImageURLs.main_image}
                     alt="Main"
-                    style={{
-                      width: "100px",
-                      height: "100px",
-                      margin: "auto",
-                      display: "block",
-                    }}
+                    className="w-20 h-20 object-cover mx-auto"
                   />
-                  <div>
-                    <button
-                      onClick={() =>
-                        handleEdit("main_image", resultImageURLs.main_image)
-                      }
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() =>
-                        handleDelete("main_image", resultImageURLs.main_image)
-                      }
-                    >
-                      Delete
-                    </button>
-                  </div>
                 </td>
-                <td>Main</td>
+                <td className="border px-4 py-2">Main</td>
+                <td className="border px-4 py-2">
+                  <button
+                    onClick={() =>
+                      handleEdit("main_image", resultImageURLs.main_image)
+                    }
+                    className="text-blue-500 hover:underline mr-2"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() =>
+                      handleDelete("main_image", resultImageURLs.main_image)
+                    }
+                    className="text-red-500 hover:underline"
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             )}
             {resultImageURLs.menu_images.map((image, index) => (
               <tr key={index}>
-                <td>{index + 2}</td>
-                <td>
+                <td className="border px-4 py-2">{index + 2}</td>
+                <td className="border px-4 py-2">
                   <img
                     src={image}
                     alt={`Menu ${index + 1}`}
-                    style={{
-                      width: "100px",
-                      height: "100px",
-                      margin: "auto",
-                      display: "block",
-                    }}
+                    className="w-20 h-20 object-cover mx-auto"
                   />
-                  <div>
-                    <button onClick={() => handleEdit("menu_images", image)}>
-                      Edit
-                    </button>
-                    <button onClick={() => handleDelete("menu_images", image)}>
-                      Delete
-                    </button>
-                  </div>
                 </td>
-
-                <td>Menu</td>
+                <td className="border px-4 py-2">Menu</td>
+                <td className="border px-4 py-2">
+                  <button
+                    onClick={() => handleEdit("menu_images", image)}
+                    className="text-blue-500 hover:underline mr-2"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete("menu_images", image)}
+                    className="text-red-500 hover:underline"
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             ))}
             {resultImageURLs.extra_images.map((image, index) => (
               <tr key={index}>
-                <td>{index + 2 + resultImageURLs.menu_images.length}</td>
-                <td>
+                <td className="border px-4 py-2">
+                  {index + 2 + resultImageURLs.menu_images.length}
+                </td>
+                <td className="border px-4 py-2">
                   <img
                     src={image}
                     alt={`Extra ${index + 1}`}
-                    style={{
-                      width: "100px",
-                      height: "100px",
-                      margin: "auto",
-                      display: "block",
-                    }}
+                    className="w-20 h-20 object-cover mx-auto"
                   />
-                  <div>
-                    <button onClick={() => handleEdit("extra_images", image)}>
-                      Edit
-                    </button>
-                    <button onClick={() => handleDelete("extra_images", image)}>
-                      Delete
-                    </button>
-                  </div>
                 </td>
-
-                <td>Extra</td>
+                <td className="border px-4 py-2">Extra</td>
+                <td className="border px-4 py-2">
+                  <button
+                    onClick={() => handleEdit("extra_images", image)}
+                    className="text-blue-500 hover:underline mr-2"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete("extra_images", image)}
+                    className="text-red-500 hover:underline"
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -386,6 +394,7 @@ const Images = () => {
       )}
     </div>
   );
+  
 };
 
 export default Images;

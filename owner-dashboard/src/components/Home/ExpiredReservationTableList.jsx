@@ -40,17 +40,17 @@ function PendingReservationTableList({ reservation }) {
 
 
 
-    return  (
+    return (
         <tr className="border-b border-gray-200">
-            <td className="py-2 text-center bg-white">{name}</td>
-            <td className="py-2 text-center bg-white">{moment(reservation.date).format("MMM Do YY")}</td>
-            <td className="py-2 text-center bg-white">{moment(reservation.time).utcOffset('-000').format('LT')}</td>
-            <td className="py-2 text-center bg-white">{reservation.guest_number}</td>
-            <td className="py-2 text-center bg-white">
-                    {reservation.status}
-                </td>
+          <td className="py-2 text-center bg-white">{name}</td>
+          <td className="py-2 text-center bg-white">{moment(reservation.date).format("MMM Do YY")}</td>
+          <td className="py-2 text-center bg-white">{moment(reservation.time).utcOffset('-000').format('LT')}</td>
+          <td className="py-2 text-center bg-white">{reservation.guest_number}</td>
+          <td className={`py-2 text-center bg-white ${reservation.status === 'Approved' ? 'text-green-500' : reservation.status === 'Declined' ? 'text-red-500' : ''}`}>
+            {reservation.status}
+          </td>
         </tr>
-    );
+      );
 }
 
 export default PendingReservationTableList

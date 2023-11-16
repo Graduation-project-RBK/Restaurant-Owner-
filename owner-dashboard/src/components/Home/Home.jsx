@@ -22,27 +22,29 @@ function Home() {
     if (!restaurant.main_image) {
       return []
     }
-    const { main_image, menu_images, extra_images } = restaurant
+   const { main_image, menu_images, extra_images } = restaurant
     return [main_image, ...extra_images]
   }
-  const renderSlides = getImages().map((image, index) => (
-    <div className="image-container" key={index}>
-      <img src={image} alt={`carouesel-image-${index}`} className="slide-img" />
-    </div>
-  ));
 
-  const getRestaurant = async () => {
-    try {
-      setLoading(true)
-      const { data } = await axios.get(`http://localhost:3000/api/restaurants/myRestaurant`)
-      setRestaurant(data)
-      setLoading(false)
-    } catch (error) {
-      console.log(error)
-      setLoading(false)
-      if (error.response.status === 403 || error.response.status === 401) {
-        localStorage.clear()
-        navigate('/')
+    const renderSlides = getImages().map((image, index) => (
+      <div className="image-container" key={index}>
+        <img src={image} alt={`carouesel-image-${index}`} className="slide-img" />
+      </div>
+    ));
+
+    const getRestaurant = async () => {
+      try {
+      
+        const { data } = await axios.get(`http://localhost:3000/api/restaurants/myRestaurant`)
+        setRestaurant(data)
+       
+      } catch (error) {
+        console.log(error)
+      
+        if (error.response.status === 403 || error.response.status === 401) {
+          localStorage.clear()
+          navigate('/')
+        }
       }
     }
   }
@@ -72,7 +74,13 @@ function Home() {
 
           >
             {renderSlides}
-          </Carousel>
+
+        </Carousel>
+     
+          <OwnerMap lng={restaurant.longtitude  } lat={restaurant.latitude}/>
+          </div>
+        
+
 
           <OwnerMap lng={restaurant.longtitude} lat={restaurant.latitude} />
         </div>
