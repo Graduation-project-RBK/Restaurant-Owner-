@@ -1,56 +1,54 @@
-  import React,{useState, useEffect} from 'react'
-  import axios from "../../../services/axios-interceptor.js";
-  import { useSelector, useDispatch } from 'react-redux'
-  import {setShow} from '../../features/declineSlice.js'
+import React,{useState, useEffect} from 'react'
+import axios from "../../../services/axios-interceptor.js";
+import { useSelector, useDispatch } from 'react-redux'
+import {setShows} from '../../features/acceptSlice.js'
 
-  function DeclineModal({reservation, setShowDeclineModal }) {
-    const [expoToken, setExpoToken] = useState('') 
-    const [name, setName] = useState('')
+function AcceptModal({reservation, setShowAcceptModal }) {
+  const [expoToken, setExpoToken] = useState('') 
+  const [name, setName] = useState('')
 
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const closeModal = () => {
-      setShowDeclineModal(false);
+  const closeModal = () => {
+    setShowAcceptModal(false);
+  }
+
+
+  const findCustomerName = async () => {
+    try {
+        const { data } = await axios.get(`http://localhost:3000/api/owners/customers/${reservation.customerId}`)
+        setName(data.fullname)
+        setExpoToken(data.expoToken)
+        console.log(data)
+    } catch (error) {
+        console.log(error)
+        if (error.response.status === 403 || error.response.status === 401) {
+            localStorage.clear()
+            navigate('/')
+        }
     }
+}
 
 
-    const findCustomerName = async () => {
-      try {
-          const { data } = await axios.get(`http://localhost:3000/api/owners/customers/${reservation.customerId}`)
-          setName(data.fullname)
-          setExpoToken(data.expoToken)
-          console.log(data)
-      } catch (error) {
-          console.log(error)
-          if (error.response.status === 403 || error.response.status === 401) {
-              localStorage.clear()
-              navigate('/')
-          }
-      }
-  }
-
-
-    const decline = async () => {
-      dispatch(setShow(true))
-      try {
-          await axios.put(`http://localhost:3000/api/reservations/reject/${reservation.id}/${expoToken}`)
-          closeModal()
-        } catch (error) {
-          console.log(error)
-          if (error && error.response && (error.response.status === 403 || error.response.status === 401)) {
-              localStorage.clear()
-              navigate('/')
-          }
-      }
-  }
+const acceptReservation = async () => {
+    dispatch(setShows(true))
+    try {
+        await axios.put(`http://localhost:3000/api/reservations/approve/${reservation.id}/${expoToken}`)
+        closeModal()
+    } catch (error) {
+        console.log(error)
+        if (error.response.status === 403 || error.response.status === 401) {
+            localStorage.clear()
+            navigate('/')
+        }
+    }
+}
 
 
 
-  
 
-
-  useEffect(() => {
+useEffect(() => {
     findCustomerName()
   }, [])
 
@@ -104,15 +102,15 @@
               />
             </svg>
             <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-              Are you sure you want to decline this reservation?
+              Are you sure you want to accept this reservation?
             </h3>
             <button
               data-modal-hide="popup-modal"
               type="button"
-              className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2"
+              className="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2"
               onClick={()=>{
               
-                decline()
+                acceptReservation()
               
               }} 
             >
@@ -136,4 +134,4 @@
     )
   }
 
-  export default DeclineModal
+  export default AcceptModal
