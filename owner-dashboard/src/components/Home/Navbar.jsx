@@ -196,8 +196,7 @@ function NavBar() {
             <Menu as="div" className="relative inline-block text-left">
               <div>
                 <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-black-100=x   shadow-sm ring-1 ring-inset ring-white hover:bg-white hover:text-red-600">
-                  <IoSettingsSharp style={{ fontSize: '20px' }} />
-                  <ChevronDownIcon className="-mr-1 h-5 w-5 hover:text-red-600" aria-hidden="true" />
+                  <FaList style={{ fontSize: '20px' }} />
                 </Menu.Button>
               </div>
 
