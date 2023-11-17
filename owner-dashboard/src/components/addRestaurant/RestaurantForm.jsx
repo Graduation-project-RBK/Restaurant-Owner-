@@ -7,8 +7,6 @@ import NameDescriptionPhoneView from './NameDescriptionPhoneView';
 import CategoriesView from './CategoriesView';
 import CityView from "./CityView"
 import MainImageView from './MainImageView';
-import MenuImagesView from './MenuImagesView';
-import ExtraImagesView from './ExtraImagesView'
 import TimeQuotasView from './TimeQuotesView';
 import IntroductionView from './IntroductionView';
 import LocationPickerView from './addLocation/LocationPickerView.jsx';
@@ -101,31 +99,27 @@ const RestaurantForm = () => {
                 return <LocationPickerView />;
             case 7:
                 return <MainImageView />;
-            case 8:
-                return <MenuImagesView />
-            case 9:
-                return <ExtraImagesView />
             default:
                 return null;
         }
     };
 
     return (
-        <div className='container'>
-            <div className='view'>
+        <div className='addRestaurantContainer bg-white w-screen h-screen'>
+            <div className='view bg-white w-screen'>
                 {renderView()}
             </div>
-            <div className='footer' >
-                <div className='leftBtn'>
+            <div className='footer bg-white w-screen' >
+                <div className='leftBtn pl-6'>
                     {currentView > 1 && (
                         <button className="btn" onClick={handlePreviousClick}>Back</button>
                     )}
                 </div>
-                <div className='righttBtn'>
-                    {currentView < 9 ? (
+                <div className='righttBtn pr-6'>
+                    {currentView < 7 ? (
                         <button className="btn" onClick={handleNextClick} disabled={currentView === 1 ? false : isNextDisabled}>Next</button>
                     ) : (
-                        <button className="btn" onClick={handleSubmit}>Submit</button>
+                        <button className="btn" onClick={handleSubmit} disabled={isNextDisabled}>Submit</button>
                     )}
                 </div>
             </div>
