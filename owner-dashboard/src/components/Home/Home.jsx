@@ -25,6 +25,7 @@ function Home() {
     const { main_image, menu_images, extra_images } = restaurant
     return [main_image, ...extra_images]
   }
+
   const renderSlides = getImages().map((image, index) => (
     <div className="image-container" key={index}>
       <img src={image} alt={`carouesel-image-${index}`} className="slide-img" />
@@ -33,13 +34,13 @@ function Home() {
 
   const getRestaurant = async () => {
     try {
-      setLoading(true)
+
       const { data } = await axios.get(`http://localhost:3000/api/restaurants/myRestaurant`)
       setRestaurant(data)
-      setLoading(false)
+
     } catch (error) {
       console.log(error)
-      setLoading(false)
+
       if (error.response.status === 403 || error.response.status === 401) {
         localStorage.clear()
         navigate('/')
@@ -47,10 +48,13 @@ function Home() {
     }
   }
 
+
   useEffect(() => {
     getRestaurant()
     console.log(restaurant.main_image)
   }, [])
+
+
 
   return (
     <div >
@@ -79,6 +83,7 @@ function Home() {
         <Settings />
 
 
+
       </div>
 
       {loading && (
@@ -87,9 +92,7 @@ function Home() {
         </div>
       )}
 
-
     </div>
-
 
 
   );

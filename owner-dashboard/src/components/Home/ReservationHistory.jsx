@@ -40,8 +40,8 @@ function ReservationHistory() {
 
 
     return (
-       
-<div className="relative overflow-x-auto "> {/* Add margin-top to create space */}
+
+        <div className=""> {/* Add margin-top to create space */}
             <NavBar />
             <table className="mt-5 mx-auto text-xs text-center rtl:text-center text-gray-500 dark:text-gray-400 !bg-white" style={{ width: '70%' }}>
                 <thead className="text-xs text-gray-900 uppercase dark:text-gray-400 text-center" >
@@ -59,16 +59,16 @@ function ReservationHistory() {
                             Number of Guests
                         </th>
                         <th scope="col" className="px-6 py-3 text-center !bg-white">
-                          Status
+                            Status
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                {history.map((reservation) => (
+                    {history.map((reservation) => (
 
-<ExpiredReservationTableList key={reservation.id} reservation={reservation} />
+                        <ExpiredReservationTableList key={reservation.id} reservation={reservation} />
 
-))}
+                    ))}
                 </tbody>
             </table>
         </div>

@@ -35,8 +35,9 @@
 
 .chatMessageInput {
   width: 80%;
-  height: 90px;
+  height: 130px;
   padding: 10px;
+  color: black
 }
 
 .chatSubmitButton {
@@ -60,4 +61,12 @@
   height: 1600%;
   overflow-y: scroll;
   padding-right: 10px;
+}
+
+.noConversation {
+  position: absolute;
+  top: 10%;
+  font-size: 50px;
+  color: rgb(224, 220, 220);
+  cursor: default;
 }

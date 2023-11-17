@@ -4,12 +4,14 @@ import './Table.css'
 import axios from "../../../services/axios-interceptor.js";
 import moment from 'moment'
 import DeclineModal from "./DeclineModal.jsx";
+import AcceptModal from "./AcceptModal.jsx";
 
 
 function PendingReservationTableList({ reservation, fetch , getPendingReservations}) {
     const [name, setName] = useState('')
     const [expoToken, setExpoToken] = useState('')
     const [showDeclineModal, setShowDeclineModal] = useState(false);
+    const [showAcceptModal, setShowAcceptModal] = useState(false);
 
     const findCustomerName = async () => {
         try {
@@ -26,22 +28,15 @@ function PendingReservationTableList({ reservation, fetch , getPendingReservatio
         }
     }
 
-    const acceptReservation = async () => {
-        try {
-            await axios.put(`http://localhost:3000/api/reservations/approve/${reservation.id}/${expoToken}`)
-            fetch()
-        } catch (error) {
-            console.log(error)
-            if (error.response.status === 403 || error.response.status === 401) {
-                localStorage.clear()
-                navigate('/')
-            }
-        }
-    }
 
     const declineReservation = async () => {
         console.log("setShowDeclineModal:", setShowDeclineModal);
             setShowDeclineModal(true);
+    
+    }
+    const acceptReservation = async () => {
+        console.log("setShowAcceptModal:", setShowAcceptModal);
+        setShowAcceptModal(true);
     
     }
 
@@ -71,6 +66,7 @@ function PendingReservationTableList({ reservation, fetch , getPendingReservatio
                 </button>
             </td>
             {showDeclineModal && <DeclineModal fetch={getPendingReservations} reservation={reservation} setShowDeclineModal={setShowDeclineModal} showDeclineModal={showDeclineModal}/>}
+            {showAcceptModal && <AcceptModal fetch={getPendingReservations} reservation={reservation} setShowAcceptModal={setShowAcceptModal} showAcceptModal={showAcceptModal}/>}
         </tr>
     );
 }

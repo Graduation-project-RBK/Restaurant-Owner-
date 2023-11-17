@@ -6,6 +6,7 @@ import axios from "../../../services/axios-interceptor.js";
 import { setNotificationBadge } from "../../features/notificationSlice";
 import { useNavigate } from "react-router-dom";
 import { FaComments, FaEdit } from 'react-icons/fa';
+import { FaList } from "react-icons/fa6";
 import { MdRateReview } from 'react-icons/md';
 import { TbLogout } from 'react-icons/tb'
 import { IoSettingsSharp } from 'react-icons/io5'
@@ -47,7 +48,7 @@ function NavBar() {
         `http://localhost:3000/api/owners/notification`
       );
       dispatch(setNotificationBadge(data));
-
+      console.log(data)
     } catch (error) {
       console.log(error);
       if (error.response.status === 403 || error.response.status === 401) {
@@ -118,7 +119,6 @@ function NavBar() {
                 fill="currentColor"
                 className="h-7 w-7"
               >
-                {console.log(isPremium)}
                 <path
                   fillRule="evenodd"
                   d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
