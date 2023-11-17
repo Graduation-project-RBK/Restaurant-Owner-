@@ -34,7 +34,7 @@ function CityView() {
   };
   return (
     <div className="city-view">
-      <h2 className="head2">Select a City</h2>
+      <h2 className="head2 pb-6">Select a City</h2>
       <div className="city-cards">
         {cities.map((city) => (
           <CityCard
