@@ -1,0 +1,40 @@
+.paymentButton {
+    display: block;
+    width: 30%;
+    background-color: #D2122E;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    color: white;
+    outline: 0;
+    border: 0;
+    border-radius: 10px;
+}
+
+.backButton {
+    display: block;
+    width: 30%;
+    background-color: grey;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    color: white;
+    outline: 0;
+    border: 0;
+    border-radius: 10px;
+}
+
+.button-container-payment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 190px;
+    margin-top: 30px;
+    padding: 0;
+}
+
+#payment-form {
+    border: #F6F9FC solid 1px;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px 0;
+
+}

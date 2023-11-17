@@ -5,6 +5,9 @@ import './Home.css'
 import axios from "../../../services/axios-interceptor.js";
 import NavBar from "./Navbar.jsx";
 import { useNavigate } from "react-router-dom";
+import Settings from "./Settings.jsx";
+import OwnerMap from "./OwnerMap.jsx";
+
 
 function Home() {
   const navigate = useNavigate();
@@ -20,8 +23,9 @@ function Home() {
       return []
     }
     const { main_image, menu_images, extra_images } = restaurant
-    return [main_image, ...menu_images, ...extra_images]
+    return [main_image, ...extra_images]
   }
+
   const renderSlides = getImages().map((image, index) => (
     <div className="image-container" key={index}>
       <img src={image} alt={`carouesel-image-${index}`} className="slide-img" />
@@ -29,14 +33,14 @@ function Home() {
   ));
 
   const getRestaurant = async () => {
+    setLoading(true);
     try {
-      setLoading(true)
       const { data } = await axios.get(`http://localhost:3000/api/restaurants/myRestaurant`)
       setRestaurant(data)
-      setLoading(false)
+
     } catch (error) {
       console.log(error)
-      setLoading(false)
+
       if (error.response.status === 403 || error.response.status === 401) {
         localStorage.clear()
         navigate('/')
@@ -44,34 +48,52 @@ function Home() {
     }
   }
 
+
   useEffect(() => {
     getRestaurant()
     console.log(restaurant.main_image)
-  }, [])
+  }, [navigate])
+
+
 
   return (
-    <div>
+    <div >
       <NavBar />
 
       <div className="App">
-        <Carousel
-          showArrows={true}
-          autoPlay={true}
-          infiniteLoop={true}
-          selectedItem={getImages()[currentIndex]}
-          onChange={handleChange}
-          className="carousel-container"
-        >
-          {renderSlides}
-        </Carousel>
+        <div className="flex flex-wrap justify-between items-baseline flex-row">
+          <Carousel
+            showArrows={true}
+            autoPlay={true}
+            infiniteLoop={true}
+            selectedItem={getImages()[currentIndex]}
+            onChange={handleChange}
+            className="carousel-container"
+            showThumbs={false}
+            showIndicators={true}
+            showStatus={false}
+
+
+          >
+            {renderSlides}
+          </Carousel>
+
+          <OwnerMap lng={restaurant.longtitude} lat={restaurant.latitude} />
+        </div>
+        <Settings />
+
+
 
       </div>
+
       {loading && (
         <div className='loading'>
           <div className='spinner'></div>
         </div>
       )}
+
     </div>
+
 
   );
 }

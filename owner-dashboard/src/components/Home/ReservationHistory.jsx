@@ -40,30 +40,38 @@ function ReservationHistory() {
 
 
     return (
-        <div >
+
+        <div className=""> {/* Add margin-top to create space */}
             <NavBar />
-            <div className="reservation-table">
-                <h2>Pending Reservations</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Number of Guests</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
+            <table className="mt-5 mx-auto text-xs text-center rtl:text-center text-gray-500 dark:text-gray-400 !bg-white" style={{ width: '70%' }}>
+                <thead className="text-xs text-gray-900 uppercase dark:text-gray-400 text-center" >
+                    <tr>
+                        <th scope="col" className="px-6 py-3 text-center !bg-white">
+                            Customer name
+                        </th>
+                        <th scope="col" className="px-6 py-3 text-center !bg-white">
+                            Date
+                        </th>
+                        <th scope="col" className="px-6 py-3 text-center !bg-white">
+                            Time
+                        </th>
+                        <th scope="col" className="px-6 py-3 text-center !bg-white">
+                            Number of Guests
+                        </th>
+                        <th scope="col" className="px-6 py-3 text-center !bg-white">
+                            Status
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
                     {history.map((reservation) => (
 
                         <ExpiredReservationTableList key={reservation.id} reservation={reservation} />
 
                     ))}
-
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
-
     );
 }
 

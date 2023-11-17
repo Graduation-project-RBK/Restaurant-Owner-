@@ -4,6 +4,8 @@ const initialState = {
     token: false,
     role: '',
     hasRestaurant: 'false',
+    isPremium: false,
+
 
 };
 
@@ -22,6 +24,9 @@ const ownerSlice = createSlice({
         setHasRestaurant: (state, action) => {
             state.hasRestaurant = action.payload;
         },
+        setIsPremium: (state, action) => {
+            state.isPremium = action.payload;
+        },
 
 
 
@@ -32,7 +37,9 @@ const ownerSlice = createSlice({
 export const {
     setToken,
     setRole,
-    setHasRestaurant
+    setHasRestaurant,
+    setShow,
+    setIsPremium
 
 
 

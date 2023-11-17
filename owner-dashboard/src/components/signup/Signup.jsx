@@ -104,7 +104,7 @@ function Signup() {
           <div className="absolute bg-black opacity-60 inset-0 z-0" />
           <div className="w-full px-24 z-10">
             <h1 className="text-5xl font-bold text-left tracking-wide">
-              Culinary Empowerment: Restaurant Owners' Login.{" "}
+              Culinary Empowerment: Owner Hub{" "}
             </h1>
             <p className="text-3xl my-4">
               "Savor success, where flavors meet entrepreneurial excellence."
@@ -194,7 +194,7 @@ function Signup() {
                 />
               </div>
               <div className="pb-2 pt-4 relative">
-                <label htmlFor="taxDeclarationChange" className="text-gray-400">Upload Tax Declaration Change Image</label>
+                <label htmlFor="taxDeclarationChange" className="text-gray-400">Upload Tax Declaration Image</label>
                 <input
                   type="file"
                   name="taxDeclarationChange"

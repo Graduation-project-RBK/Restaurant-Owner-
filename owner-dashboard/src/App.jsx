@@ -13,12 +13,13 @@ import RestaurantForm from "./components/addRestaurant/RestaurantForm";
 import ReservationHistory from "./components/Home/ReservationHistory.jsx";
 import Settings from "./components/Home/Settings.jsx";
 import Images from "./components/Home/Images.jsx";
-import Messages from "./components/Home/Messages.jsx";
+import Messages from "./components/Chat/Messages.jsx";
 import Reviews from "./components/Home/Reviews.jsx";
 import EmailVerification from "./components/emailVerification/EmailVerification.jsx";
 import UpsellPage from "./components/Upseller/UpsellPage.jsx";
-
-
+// import { Server } from "socket.io";
+// const io = new Server(server);
+// io.listen(3000);
 
 
 function App() {
@@ -42,7 +43,6 @@ function App() {
         <Route path="/Messages" element={<Messages />} />
         <Route path="/Reviews" element={<Reviews />} />
         <Route path="/options" element={<UpsellPage />} />
-
       </Routes>
 
     </Router>
