@@ -90,7 +90,6 @@ const Messages = () => {
     }
 
     const handleEnter = (e) => {
-        console.log(e.key)
         if (e.key === 'Enter') {
             handleSubmit(e)
             e.target.value = ''
@@ -103,23 +102,34 @@ const Messages = () => {
 
     }, [currentChat])
 
+
     useEffect(() => {
 
+
+        arrivalMessage && currentChat === arrivalMessage.sender &&
+            setMessages((prev) => [...prev, arrivalMessage]); console.log(arrivalMessage)
+
+    }, [arrivalMessage, currentChat])
+
+
+    useEffect(() => {
         scrollRef.current?.scrollIntoView({ behavior: 'smooth' })
-        arrivalMessage && currentChat?.includes(arrivalMessage.sender) &&
-            setMessages([...messages, arrivalMessage]);
 
-    }, [messages, arrivalMessage, currentChat])
-
-
+    }, [messages])
 
 
     useEffect(() => {
-        socket.current = io("ws://localhost:8900", {
-            auth: {
-                token: localStorage.getItem('token')
-            }
-        });
+        if (!socket.current) {
+            socket.current = io("ws://localhost:8900", {
+                auth: {
+                    token: localStorage.getItem('token')
+                }
+            });
+
+
+            socket.current.emit("addUser");
+        }
+
 
         socket.current.on("getMessage", (data) => {
             setArrivalMessage({
@@ -129,11 +139,14 @@ const Messages = () => {
             });
         });
 
-    }, []);
-
-    useEffect(() => {
-        socket.current.emit("addUser");
-
+        return () => {
+            // Clean up the socket connection when the component unmounts
+            // (This will only execute when the entire application unmounts)
+            if (socket.current) {
+                socket.current.disconnect();
+                socket.current = null;
+            }
+        };
 
     }, []);
 
