@@ -68,6 +68,12 @@ function Login() {
       } else if (
         error.response &&
         error.response.status === 403 &&
+        error.response.data.message === "This account is pending the admin's decision."
+      ) {
+        toast.error("This account is pending the admin's decision.");
+      } else if (
+        error.response &&
+        error.response.status === 403 &&
         error.response.data.message === "This account was declined by the admin."
       ) {
         toast.error("This account was declined by the admin.");
@@ -119,7 +125,7 @@ function Login() {
             <div className="absolute bg-black opacity-60 inset-0 z-0" />
           </div>
           <div className="w-full py-6 z-20">
-            <h1 class="text-4xl font-bold tracking-wide text-white-800">
+            <h1 className="text-4xl font-bold tracking-wide text-white-800">
               Reservi login
             </h1>
             <form

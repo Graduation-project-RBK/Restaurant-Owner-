@@ -13,7 +13,6 @@ function Home() {
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState();
   const [restaurant, setRestaurant] = useState({});
-  const [loading, setLoading] = useState(false);
   function handleChange(index) {
     setCurrentIndex(index);
   }
@@ -34,7 +33,6 @@ function Home() {
 
   const getRestaurant = async () => {
     try {
-
       const { data } = await axios.get(`http://localhost:3000/api/restaurants/myRestaurant`)
       setRestaurant(data)
 
@@ -52,7 +50,7 @@ function Home() {
   useEffect(() => {
     getRestaurant()
     console.log(restaurant.main_image)
-  }, [])
+  }, [navigate])
 
 
 
@@ -86,11 +84,7 @@ function Home() {
 
       </div>
 
-      {loading && (
-        <div className='loading'>
-          <div className='spinner'></div>
-        </div>
-      )}
+
 
     </div>
 
