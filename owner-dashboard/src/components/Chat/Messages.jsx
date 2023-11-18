@@ -14,8 +14,10 @@ const Messages = () => {
     const [currentChat, setCurrentChat] = useState(null)
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState('')
-    const [socket, setSocket] = useState(null)
+    const [arrivalMessage, setArrivalMessage] = useState(null)
     const scrollRef = useRef()
+    const socket = useRef()
+
 
     const getConvos = async () => {
         try {
@@ -65,11 +67,19 @@ const Messages = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+        socket.current.emit('sendMessage', {
+            receiverId: currentChat,
+            text: newMessage
+        })
+
+
         try {
 
             const { data } = await axios.post(`http://localhost:3000/api/messages/owner/${currentChat}`, { message: newMessage })
             setMessages([...messages, data])
             setNewMessage('')
+
 
         } catch (error) {
             if (error.response.status === 403 || error.response.status === 401) {
@@ -90,23 +100,42 @@ const Messages = () => {
     useEffect(() => {
         getMessages()
         getConvos()
-        scrollRef.current?.scrollIntoView({ behavior: 'smooth' })
 
     }, [currentChat])
 
     useEffect(() => {
 
         scrollRef.current?.scrollIntoView({ behavior: 'smooth' })
+        arrivalMessage && currentChat?.includes(arrivalMessage.sender) &&
+            setMessages([...messages, arrivalMessage]);
 
-    }, [messages])
+    }, [messages, arrivalMessage, currentChat])
+
+
 
 
     useEffect(() => {
-        setSocket(io("ws://localhost:8900"))
+        socket.current = io("ws://localhost:8900", {
+            auth: {
+                token: localStorage.getItem('token')
+            }
+        });
 
-    }, [])
+        socket.current.on("getMessage", (data) => {
+            setArrivalMessage({
+                sender: data.senderId,
+                message: data.text,
+                createdAt: Date.now(),
+            });
+        });
+
+    }, []);
+
+    useEffect(() => {
+        socket.current.emit("addUser");
 
 
+    }, []);
 
 
 
@@ -132,8 +161,8 @@ const Messages = () => {
                     {currentChat ? (<>
                         <div className="chatBoxTop">
                             {messages.map((message) =>
-                                <div ref={scrollRef}>
-                                    <Message message={message} key={message.id} own={message.sender === 'restaurant'} />
+                                <div ref={scrollRef} key={message.id}>
+                                    <Message message={message} own={message.sender === 'restaurant'} />
                                 </div>
                             )}
                         </div>
