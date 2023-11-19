@@ -24,6 +24,7 @@ const Message = ({ message, own }) => {
             <div className="messageBottom ">{format(message.createdAt)}</div>
 
         </div>
+
     )
 
 
