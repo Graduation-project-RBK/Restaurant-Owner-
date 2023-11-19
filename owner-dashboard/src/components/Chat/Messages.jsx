@@ -81,6 +81,7 @@ const Messages = () => {
             setNewMessage('')
 
 
+
         } catch (error) {
             if (error.response.status === 403 || error.response.status === 401) {
                 localStorage.clear()
@@ -180,7 +181,7 @@ const Messages = () => {
                             )}
                         </div>
                         <div className="chatBoxBottom">
-                            <textarea className="chatMessageInput" placeholder="Write something..." onChange={handleChange} onKeyUp={handleEnter}
+                            <textarea className="chatMessageInput" placeholder="Write something..." onChange={handleChange} onKeyUp={handleEnter} value={newMessage}
                             ></textarea>
                             <button className="chatSubmitButton bg-red-600" onClick={handleSubmit}>Send</button>
                         </div>
