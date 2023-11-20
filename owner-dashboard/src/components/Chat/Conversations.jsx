@@ -5,7 +5,7 @@ import porfileImage from '../../assets/images/man.png'
 
 
 
-const Conversations = ({ customerId }) => {
+const Conversations = ({ customerId, getMessages, getConvos }) => {
 
     const [name, setName] = useState('')
 
@@ -25,7 +25,7 @@ const Conversations = ({ customerId }) => {
 
     useEffect(() => {
         findCustomerName()
-        console.log()
+
     }, [])
 
     return (
