@@ -30,7 +30,8 @@ function IntroductionView() {
 
   return (
     <div>
-      <h1>Introduction</h1>
+      <h1 className='pl-6'>Introduction</h1>
+      
     </div>
   )
 }

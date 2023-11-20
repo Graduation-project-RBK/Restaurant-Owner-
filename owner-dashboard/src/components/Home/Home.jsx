@@ -33,7 +33,6 @@ function Home() {
   ));
 
   const getRestaurant = async () => {
-    setLoading(true);
     try {
       const { data } = await axios.get(`http://localhost:3000/api/restaurants/myRestaurant`)
       setRestaurant(data)
