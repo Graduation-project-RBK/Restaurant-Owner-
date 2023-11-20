@@ -43,7 +43,7 @@ function ReservationTable() {
         <div className=" "> {/* Add margin-top to create space */}
             <NavBar />
         
-            <table className="mt-5 mx-auto text-xs text-center rtl:text-center text-gray-500 dark:text-gray-400 !bg-white" style={{ width: '70%' }}>
+            <table className="mt-5 mx-auto text-xs text-center rtl:text-center text-gray-500 dark:text-gray-400 !bg-white" style={{ width: '70%', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
                 <thead className="text-xs text-gray-900 uppercase dark:text-gray-400 text-center" >
                     <tr>
                         <th scope="col" className="px-6 py-3 text-center !bg-white">
