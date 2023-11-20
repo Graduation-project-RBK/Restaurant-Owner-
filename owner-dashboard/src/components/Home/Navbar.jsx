@@ -9,9 +9,7 @@ import { FaComments, FaEdit } from 'react-icons/fa';
 import { FaList } from "react-icons/fa6";
 import { MdRateReview } from 'react-icons/md';
 import { TbLogout } from 'react-icons/tb'
-import { IoSettingsSharp } from 'react-icons/io5'
 import { Menu, Transition } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { setIsPremium } from "../../features/ownerSlice.js";
 
 
@@ -211,19 +209,21 @@ function NavBar() {
               >
                 <Menu.Items className="absolute right-0 z-10 mt-2 w-50 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                   <div className="py-1">
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a
-                          href="#"
-                          className={classNames(
-                            active ? 'bg-white text-red-600' : 'text-black',
-                            'block px-4 py-2 text-sm'
-                          )}
-                        >
-                          <NavLink to="/Messages"><FaComments style={{ fontSize: '20px' }} />messages</NavLink>
-                        </a>
-                      )}
-                    </Menu.Item>
+                    {isPremium && (
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            href="#"
+                            className={classNames(
+                              active ? 'bg-white text-red-600' : 'text-black',
+                              'block px-4 py-2 text-sm'
+                            )}
+                          >
+                            <NavLink to="/Messages"><FaComments style={{ fontSize: '20px' }} />messages</NavLink>
+                          </a>
+                        )}
+                      </Menu.Item>
+                    )}
                     <Menu.Item>
                       {({ active }) => (
                         <a

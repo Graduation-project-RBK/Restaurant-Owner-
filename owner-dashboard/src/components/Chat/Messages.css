@@ -71,3 +71,12 @@
   color: rgb(224, 220, 220);
   cursor: default;
 }
+
+.noMessages {
+  position: absolute;
+  top: 10%;
+  padding: 10px;
+  font-size: 50px;
+  color: rgb(224, 220, 220);
+  cursor: default;
+}
