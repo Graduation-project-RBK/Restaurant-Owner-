@@ -7,10 +7,10 @@
   align-items: center;
   width: 50%;
 }
-
-.head2 {
-  padding-bottom: 30px;
-}
+/* addRestaurantContainer .head2 {
+  padding-bottom: 20px;
+  padding-left: 10px;
+} */
 
 .category-card,
 .city-card {
@@ -80,13 +80,13 @@
   box-shadow: 4px 4px 12px #c5c5c5, -4px -4px 12px #ffffff;
 }
 
-.container {
-  height: 100vh;
+.addRestaurantContainer {
+  /* height: 100vh; */
   display: flex;
   flex-direction: column;
-  width: 100%;
-  padding-left: 15px;
-  padding-right: 15px;
+  /* width: 100%; */
+  /* padding-left: 15px;
+  padding-right: 15px; */
 }
 
 .view {
@@ -100,7 +100,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .input-wrapper {
@@ -192,12 +192,15 @@ input[type="number"] {
 }
 .images {
   display: flex;
-  justify-content: flex-start;
+  gap: 5px;
+  flex-wrap: wrap;
+  /* justify-content: space-between; */
+  align-items: center;
 }
 .Img {
   margin-left: 150px;
-  width: 25vw;
-  height: 20vw;
+  width: 15vw;
+  height: 25vw;
   object-fit: contain;
 }
 
@@ -252,3 +255,8 @@ input[type="number"] {
   margin-left: 25%;
 }
 
+.mapOwnerContainer {
+  width: 45%;
+  height: 400px;
+  margin-right: 10px;
+}

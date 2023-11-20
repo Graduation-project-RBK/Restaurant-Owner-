@@ -1,10 +1,11 @@
 import "./Message.css";
 import { format } from "timeago.js";
+import porfileImage from '../../assets/images/man.png'
 
 
 
 
-const Message = ({ own }) => {
+const Message = ({ message, own }) => {
 
 
 
@@ -15,14 +16,16 @@ const Message = ({ own }) => {
 
         <div className={own ? "message own" : "message"}>
             <div className="messageTop">
-                <img className="messageImg" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" />
-                <p className="messageText bg-red-500">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-
+                {!own && (<img className="messageImg" src={porfileImage} alt="" />)}
+                <p className="messageText bg-red-600">{message.message}
                 </p>
+                {own && (<img className="ownMessageImg" src={porfileImage} alt="" />)}
+
             </div>
-            <div className="messageBottom ">1 hour ago</div>
+            <div className="messageBottom ">{format(message.createdAt)}</div>
 
         </div>
+
     )
 
 
