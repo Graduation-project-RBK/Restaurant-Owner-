@@ -12,8 +12,8 @@ const initialState = {
   openingTime: "",
   closingTime: "",
   reservationQuota: "",
-  lat: 0,
-  lng: 0,
+  lat: null,
+  lng: null,
   isNextDisabled: true,
   token: "",
 };

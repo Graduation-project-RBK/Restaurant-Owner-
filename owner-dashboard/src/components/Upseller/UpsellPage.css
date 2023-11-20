@@ -4,18 +4,14 @@
     align-items: center;
     flex-direction: row;
     gap: 20px;
-    background-color: rgba(22, 22, 22, 0.941);
+    background-image: "repeating-radial-gradient(  #0c0a0a 80%,#2f312f 90%,#3f4549 90%)";
+    background-size: "65px 65px";
     height: 100vh;
     margin-top: 30px;
 }
 
 
 
-html,
-body {
-    margin: 0;
-    padding: 0;
-}
 
 .navbar-upsell {
     display: flex;
@@ -27,8 +23,6 @@ body {
 
 
 }
-
-
 
 .navbar-brand-upsell {
     text-decoration: none;
@@ -78,26 +72,11 @@ body {
 
 }
 
-.nav-elements-upsell ul {
-    display: flex;
-    justify-content: space-between;
-    list-style-type: none;
-}
 
-.nav-elements-upsell ul li:not(:last-child) {
-    margin-right: 50px;
-}
 
-.nav-elements-upsell ul a {
-    font-size: 16px;
-    font-weight: 400;
-    color: #ff0000;
-    text-decoration: none;
-    color: white;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
+
+
+
 
 .fa.fa-bell {
     color: rgb(255, 255, 255),
@@ -106,23 +85,9 @@ body {
 }
 
 
-.nav-elements-upsell ul a.active {
 
-    color: #ff0000;
-    font-weight: 500;
-    position: relative;
-}
 
-.nav-elements-upsell ul a.active::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: #ff0000;
 
-}
 
 .log {
     margin-left: 1220px;

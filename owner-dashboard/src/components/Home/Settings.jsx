@@ -1,10 +1,10 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "./Navbar";
 import CategoryCard from "../addRestaurant/CategoryCard";
 import customAxios from "../../../services/axios-interceptor";
 import moment from "moment";
 import { toast } from 'react-toastify';
-import CategoryCheckbox from "./ategoryCheckbox";
+import CategoryCheckbox from "./CategoryCheckbox";
 
 const categories = [
   "Italian",
@@ -29,7 +29,7 @@ const Settings = () => {
   const [loading, setLoading] = useState(false);
   const handleInputChange = (e) => {
     const { name, value, type } = e.target;
-  
+
     if (type === "select-multiple") {
       const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
       setSetting({ ...setting, [name]: selectedOptions });
@@ -74,7 +74,7 @@ const Settings = () => {
       setLoading(false);
       console.log(response);
       if (response.status === 201) {
-     
+
         console.log("Restaurant info upadted successfully");
         const responseJson = response.data;
         console.log(responseJson);
@@ -85,9 +85,9 @@ const Settings = () => {
         console.error("Failed to save changes");
         toast.error("Failed to save changes");
       }
-      
-      
-      
+
+
+
     } catch (error) {
       console.error("An error occurred:", error);
       setLoading(false);
@@ -95,37 +95,38 @@ const Settings = () => {
   };
   const getRestaurant = async () => {
     try {
-            setLoading(true)
-          
-        const { data } = await customAxios.get(`http://localhost:3000/api/restaurants/myRestaurant`)
-        setSetting({
-          description: data.description,
-          category: data.category,
-          ReservationQuota: data.reservation_quota,
-          opensAt: moment(data.opening_time).format('HH:mm'),
-          closingTime: moment(data.closing_time).format('HH:mm'),
-          phoneNumber: data.phone_number,
+      setLoading(true)
 
-        })
-        setLoading(false)
-     
+      const { data } = await customAxios.get(`http://localhost:3000/api/restaurants/myRestaurant`)
+      setSetting({
+        description: data.description,
+        category: data.category,
+        ReservationQuota: data.reservation_quota,
+        opensAt: moment(data.opening_time).format('HH:mm'),
+        closingTime: moment(data.closing_time).format('HH:mm'),
+        phoneNumber: data.phone_number,
+
+      })
+      setLoading(false)
+
     } catch (error) {
-        console.log(error)
-        setLoading(false)
-        if (error.response.status === 403 || error.response.status === 401) {
-            localStorage.clear()
-            navigate('/')
-        }
+      console.log(error)
+      setLoading(false)
+      if (error.response.status === 403 || error.response.status === 401) {
+        localStorage.clear()
+        navigate('/')
+      }
     }
 
 
-}
+  }
 
-useEffect(() => {
+  useEffect(() => {
     getRestaurant()
-}, [])
+  }, [])
   return (
-    <div className="ml-1 mt-7 max-w-[600%] mx-auto bg-gray-100 rounded-lg p-5 shadow-sm">
+
+    <div className="mt-7 w-screen mx-auto bg-gray-100 rounded-lg p-5 shadow-sm">
       <h2 className="text-black font-bold text-lg">Your restaurant details</h2>
 
       <div className="mt-4">

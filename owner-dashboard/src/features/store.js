@@ -8,6 +8,7 @@ import ownerReducer from "./ownerSlice.js";
 import declineReducer from "./declineSlice.js";
 import acceptReducer from "./acceptSlice.js";
 import paymentReducer from "./paymentSlice.js";
+import chatReducer from "./chatSlice.js";
 
 const persistConfig = {
   key: "root",
@@ -24,6 +25,7 @@ const store = configureStore({
     decline: declineReducer,
     accept: acceptReducer,
     payment: paymentReducer,
+    chat: chatReducer,
 
 
   },
