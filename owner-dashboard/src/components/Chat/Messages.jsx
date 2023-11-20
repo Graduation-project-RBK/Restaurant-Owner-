@@ -60,7 +60,6 @@ const Messages = () => {
             try {
 
                 const { data } = await axios.get(`http://localhost:3000/api/messages/owner/messages/${currentChat}`)
-                console.log(data)
                 setMessages(data)
             } catch (error) {
                 console.log(error)
@@ -141,8 +140,7 @@ const Messages = () => {
 
 
         arrivalMessage && currentChat === arrivalMessage.sender &&
-            setMessages((prev) => [...prev, arrivalMessage]); console.log(arrivalMessage)
-
+            setMessages((prev) => [...prev, arrivalMessage]);
     }, [arrivalMessage, currentChat])
 
 
@@ -153,7 +151,7 @@ const Messages = () => {
 
 
     useEffect(() => {
-        if (!socket.current && isPremium) {
+        if (!socket.current) {
             socket.current = io("ws://localhost:8900", {
                 auth: {
                     token: localStorage.getItem('token')
