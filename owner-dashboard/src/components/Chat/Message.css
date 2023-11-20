@@ -1,3 +1,13 @@
+.message {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.messageTop {
+    display: flex;
+}
+
 .messageImg {
     width: 32px;
     height: 32px;
@@ -19,16 +29,6 @@
     margin-top: 10px;
 }
 
-.message {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-}
-
-.messageTop {
-    display: flex;
-}
-
 .message.own {
     align-items: flex-end;
 }
@@ -36,4 +36,13 @@
 .message.own .messageText {
     background-color: rgb(245, 241, 241);
     color: black;
+}
+
+.ownMessageImg {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 10px;
+
 }
