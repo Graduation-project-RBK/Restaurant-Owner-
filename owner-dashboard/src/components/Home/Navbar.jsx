@@ -46,7 +46,6 @@ function NavBar() {
         `http://localhost:3000/api/owners/notification`
       );
       dispatch(setNotificationBadge(data));
-      console.log(data)
     } catch (error) {
       console.log(error);
       if (error.response.status === 403 || error.response.status === 401) {
@@ -75,6 +74,7 @@ function NavBar() {
   const checkPremium = async () => {
     try {
       const { data } = await axios.get('http://localhost:3000/api/restaurants/myRestaurant')
+      console.log(data.accountType)
       if (data.accountType === 'PREMIUM') {
         dispatch(setIsPremium(true))
       }
@@ -90,8 +90,9 @@ function NavBar() {
   };
 
   useEffect(() => {
-    checkNotification();
     checkPremium()
+    checkNotification();
+
   }, []);
 
   return (
