@@ -8,7 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { FaComments, FaEdit } from 'react-icons/fa';
 import {MdRateReview} from 'react-icons/md';
 import {TbLogout} from 'react-icons/tb'
-import { FaList } from "react-icons/fa6";
+
+
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
