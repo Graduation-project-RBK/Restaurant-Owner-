@@ -84,6 +84,7 @@ const Messages = () => {
 
     const handleChange = (e) => {
         setNewMessage(e.target.value)
+        console.log(newMessage)
     }
 
     const handleSubmit = async (e) => {
@@ -126,6 +127,7 @@ const Messages = () => {
         if (e.key === 'Enter') {
             handleSubmit(e)
             e.target.value = ''
+
         }
     }
 
