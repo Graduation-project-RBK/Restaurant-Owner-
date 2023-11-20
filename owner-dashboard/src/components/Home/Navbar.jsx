@@ -133,13 +133,9 @@ function NavBar() {
             data-te-collapse-item=""
           >
             {/* Logo */}
-            <div
-              className="mb-4 ml-2 mr-5 mt-3 flex items-center text-red-600 dark:text-red-500 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:mb-0 lg:mt-0 "
-
-              style={{ fontSize: '25px' }}
-            >
-              Reservi.<a className="text-black text-sm" >    for owners</a>
-            </div>
+            <div className="mb-4 ml-2 mr-5 mt-3 flex items-center text-red-600 dark:text-red-500 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:mb-0 lg:mt-0" style={{ fontSize: '25px' }}>
+  <img src="../src/images/owners_auto_x2.jpg" alt="Logo" className="h-20 w-15  mr-2" />
+</div>
             {/* Left navigation links */}
             <ul
               className=" list-style-none mr-auto flex flex-col pl-0 lg:flex-row"

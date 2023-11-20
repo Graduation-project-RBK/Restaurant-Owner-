@@ -194,10 +194,10 @@ const Messages = () => {
     return (
         <div>
             <NavBar />
-            <div className="messenger">
+            <div className="messenger ">
 
-                <div className="chatMenu"></div>
-                <div className="chatMenuWrapper">
+                <div className="chatMenu  "></div>
+                <div className="chatMenuWrapper ">
                     {conversations.map((convo) =>
                         <div onClick={() => dispatch(setCurrentChat(convo.customerId))} key={convo.customerId}>
                             <Conversations customerId={convo.customerId} />

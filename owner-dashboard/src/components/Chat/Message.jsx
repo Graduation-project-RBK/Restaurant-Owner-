@@ -17,7 +17,7 @@ const Message = ({ message, own }) => {
         <div className={own ? "message own" : "message"}>
             <div className="messageTop">
                 {!own && (<img className="messageImg" src={porfileImage} alt="" />)}
-                <p className="messageText bg-red-500">{message.message}
+                <p className="messageText bg-red-600">{message.message}
                 </p>
                 {own && (<img className="ownMessageImg" src={porfileImage} alt="" />)}
 
