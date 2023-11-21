@@ -1,7 +1,7 @@
 import axios from "../../../services/axios-interceptor";
 import { useEffect, useState } from "react";
 import "./Conversations.css";
-import porfileImage from '../../assets/images/man.png';
+import porfileImage from '../../assets/images/icons8-customer-50.png'
 import { useSelector } from "react-redux";
 import { format } from "timeago.js";
 
