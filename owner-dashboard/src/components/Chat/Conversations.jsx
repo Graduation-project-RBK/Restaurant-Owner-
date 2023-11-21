@@ -53,17 +53,21 @@ const Conversations = ({ customerId }) => {
             className={`conversation ${customerId === currentChat ? 'selected' : ''}`}
 
         >
-            <img
-                className="conversationImg"
-                src={porfileImage}
-                alt=""
-            />
+
             <div className="convoInfo">
+                <img
+                    className="conversationImg"
+                    src={porfileImage}
+                    alt=""
+                />
                 <span className="conversationName">{name}</span>
-                <div className="moreConvoInfo">
-                    <span className="latest">{latestMessage.length > 20 ? latestMessage.slice(0, 20) + '...' : latestMessage}</span>
-                    <span className="timeAgo">{format(latestMessageDate)}</span>
-                </div>
+
+
+
+            </div>
+            <div className="moreConvoInfo">
+                <span className="latest">{latestMessage.length > 20 ? latestMessage.slice(0, 20) + '...' : latestMessage}</span>
+                <span className="timeAgo">{format(latestMessageDate)}</span>
             </div>
         </div>
     );

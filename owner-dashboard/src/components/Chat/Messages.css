@@ -15,18 +15,25 @@
 
 .chatOnline {
   flex: 3;
+
 }
 
 .chatMenuWrapper {
   padding: 10px;
-  height: 8%;
+  height: 98%;
   width: 40%;
   color: white;
+  overflow-y: scroll;
+
+
+
+
 }
 
 .chatBoxWrapper {
   padding: 10px;
   height: 8%;
+
   width: 100%;
   color: white;
 
@@ -45,6 +52,7 @@
   width: 70px;
   height: 40px;
   border: none;
+  margin-left: 10px;
   border-radius: 5px;
   cursor: pointer;
   background-color: teal;
@@ -66,7 +74,7 @@
 
 .noConversation {
   position: absolute;
-  top: 10%;
+  top: 20%;
   font-size: 50px;
   color: rgb(224, 220, 220);
   cursor: default;
@@ -79,4 +87,24 @@
   font-size: 50px;
   color: rgb(224, 220, 220);
   cursor: default;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: rgb(220 38 38);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: white;
 }
