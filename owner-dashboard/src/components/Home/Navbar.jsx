@@ -3,7 +3,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { NavLink, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "../../../services/axios-interceptor.js";
-import { setNotificationBadge } from "../../features/notificationSlice";
+import { setNotificationBadge, setMessageNotificationBadge } from "../../features/notificationSlice";
 import { useNavigate } from "react-router-dom";
 import { FaComments, FaEdit } from 'react-icons/fa';
 import { FaList } from "react-icons/fa6";
@@ -11,7 +11,8 @@ import { MdRateReview } from 'react-icons/md';
 import { TbLogout } from 'react-icons/tb'
 import { Menu, Transition } from '@headlessui/react'
 import { setIsPremium } from "../../features/ownerSlice.js";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 function classNames(...classes) {
@@ -38,7 +39,7 @@ function NavBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { notificationBadge } = useSelector((state) => state.notification);
+  const { notificationBadge, messageNotificationBadge } = useSelector((state) => state.notification);
   const { isPremium } = useSelector((state) => state.owner);
   const checkNotification = async () => {
     try {
@@ -46,6 +47,25 @@ function NavBar() {
         `http://localhost:3000/api/owners/notification`
       );
       dispatch(setNotificationBadge(data));
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 403 || error.response.status === 401) {
+        localStorage.clear();
+        navigate("/");
+      }
+    }
+
+  };
+  const checkNewMessage = async () => {
+    try {
+      const { data } = await axios.get(
+        `http://localhost:3000/api/messages/owner/notification`
+      );
+      dispatch(setMessageNotificationBadge(data));
+      if (data === true) {
+        toast.info('You have received a new message!')
+
+      }
     } catch (error) {
       console.log(error);
       if (error.response.status === 403 || error.response.status === 401) {
@@ -91,7 +111,8 @@ function NavBar() {
 
   useEffect(() => {
     checkPremium()
-    checkNotification();
+    checkNotification()
+    checkNewMessage()
 
   }, []);
 
@@ -133,12 +154,8 @@ function NavBar() {
             data-te-collapse-item=""
           >
             {/* Logo */}
-            <div
-              className="mb-4 ml-2 mr-5 mt-3 flex items-center text-red-600 dark:text-red-500 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:mb-0 lg:mt-0 "
-
-              style={{ fontSize: '25px' }}
-            >
-              Reservi.<a className="text-black text-sm" >    for owners</a>
+            <div className="mb-4 ml-2 mr-5 mt-3 flex items-center text-red-600 dark:text-red-500 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:mb-0 lg:mt-0" style={{ fontSize: '25px' }}>
+              <img src="../src/images/owners_auto_x2.jpg" alt="Logo" className="h-20 w-15  mr-2" />
             </div>
             {/* Left navigation links */}
             <ul
@@ -194,9 +211,19 @@ function NavBar() {
             {/* Cart Icon */}
             <Menu as="div" className="relative inline-block text-left">
               <div>
+                {messageNotificationBadge && (
+                  <>
+                    <span className="absolute bottom-12 right-21 h-2 w-2 mt-1 bg-red-500 rounded-full" />
+                    <span className="absolute bottom-12  right-21 h-2 w-2 mt-1 bg-red-500 rounded-full animate-ping" />
+                  </>
+                )}
+
                 <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-black-100=x   shadow-sm ring-1 ring-inset ring-white hover:bg-white hover:text-red-600">
                   <FaList style={{ fontSize: '20px' }} />
                 </Menu.Button>
+                <>
+
+                </>
               </div>
 
               <Transition
@@ -220,6 +247,13 @@ function NavBar() {
                               'block px-4 py-2 text-sm'
                             )}
                           >
+                            {messageNotificationBadge && (
+                              <>
+                                <span className="absolute top-2 right-12 h-2 w-2 mt-1 bg-red-500 rounded-full" />
+                                <span className="absolute top-2  right-12 h-2 w-2 mt-1 bg-red-500 rounded-full animate-ping" />
+                              </>
+                            )}
+
                             <NavLink to="/Messages"><FaComments style={{ fontSize: '20px' }} />messages</NavLink>
                           </a>
                         )}

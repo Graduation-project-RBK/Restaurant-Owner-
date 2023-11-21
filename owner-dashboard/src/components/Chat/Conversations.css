@@ -4,11 +4,16 @@
     padding: 10px;
     cursor: pointer;
     margin-top: 20px;
-
 }
 
 .conversation:hover {
     background-color: rgb(245, 243, 243);
+    color: black;
+}
+
+.selected {
+    background-color: rgb(245, 243, 243);
+    color: black;
 }
 
 .conversationImg {
@@ -19,8 +24,30 @@
     margin-right: 20px;
 }
 
+.convoInfo {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.moreConvoInfo {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+
+}
+
 .conversationName {
     font-weight: 500;
+}
+
+.latest {
+    font-weight: 400;
+}
+
+.timeAgo {
+    font-weight: 300;
+    margin-left: 280px;
 }
 
 @media screen and (max-width: 768px) {
