@@ -82,8 +82,7 @@
 
 .noMessages {
   position: absolute;
-  top: 10%;
-  padding: 10px;
+  top: 20%;
   font-size: 50px;
   color: rgb(224, 220, 220);
   cursor: default;
@@ -102,9 +101,4 @@
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background-color: rgb(220 38 38);
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: white;
 }
