@@ -82,8 +82,7 @@
 
 .noMessages {
   position: absolute;
-  top: 10%;
-  padding: 10px;
+  top: 20%;
   font-size: 50px;
   color: rgb(224, 220, 220);
   cursor: default;
