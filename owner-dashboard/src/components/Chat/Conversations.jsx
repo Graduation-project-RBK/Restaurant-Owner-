@@ -28,7 +28,6 @@ const Conversations = ({ customerId }) => {
         try {
 
             const { data } = await axios.get(`http://localhost:3000/api/messages/owner/messages/${customerId}`)
-            console.log(currentChat)
             setLatesetMessage(data[data.length - 1].message)
             setlatestMessageDate(data[data.length - 1].createdAt)
         } catch (error) {

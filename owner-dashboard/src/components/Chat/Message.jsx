@@ -8,10 +8,9 @@ import axios from "../../../services/axios-interceptor.js";
 
 
 
-const Message = ({ message, own }) => {
+const Message = ({ message, own, customerImage }) => {
 
     const [myImage, setMyImage] = useState('')
-    const [customerImage, setCustomerImage] = useState('')
 
 
     const getRestaurant = async () => {
@@ -29,22 +28,10 @@ const Message = ({ message, own }) => {
         }
     }
 
-    const findCustomerImage = async () => {
-        try {
-            const { data } = await axios.get(`http://localhost:3000/api/owners/customers/${message.customerId}`);
-            setCustomerImage(data.profilePic);
-        } catch (error) {
-            console.log(error);
-            if (error.response.status === 403 || error.response.status === 401) {
-                localStorage.clear();
-                navigate('/');
-            }
-        }
-    };
+
 
     useEffect(() => {
         getRestaurant()
-        findCustomerImage()
     }, [])
 
 
