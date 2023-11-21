@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     notificationBadge: false,
+    messageNotificationBadge: false,
 
 
 
@@ -16,6 +17,9 @@ const notificationSlice = createSlice({
         setNotificationBadge: (state, action) => {
             state.notificationBadge = action.payload;
         },
+        setMessageNotificationBadge: (state, action) => {
+            state.messageNotificationBadge = action.payload;
+        },
 
 
 
@@ -25,6 +29,7 @@ const notificationSlice = createSlice({
 
 export const {
     setNotificationBadge,
+    setMessageNotificationBadge
 
 
 
