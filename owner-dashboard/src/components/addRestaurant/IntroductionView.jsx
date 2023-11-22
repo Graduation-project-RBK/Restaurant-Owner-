@@ -29,9 +29,17 @@ function IntroductionView() {
   })
 
   return (
-    <div>
-      <h1 className='pl-6'>Introduction</h1>
-      
+    <div className='introduction'>
+      <div>
+        <h1 className='text-3xl mb-4'>Introduction</h1>
+      </div>
+      <div >
+        <h1 className='text-5xl mt-4'>Tell Us About Your Restaurant</h1>
+      </div>
+      <div>
+        <p>In this step, we'll ask you which type of property you have and if guests will book the entire place or just a room. Then let us know the location and how many guests can stay.</p>
+      </div>
+
     </div>
   )
 }

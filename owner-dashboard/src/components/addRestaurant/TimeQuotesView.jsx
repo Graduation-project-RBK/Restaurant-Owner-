@@ -1,8 +1,9 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import TimePicker from 'react-time-picker';
-import 'react-time-picker/dist/TimePicker.css';
 import { setOpeningTime, setClosingTime, setReservationQuota, setIsNextDisabled } from '../../features/restaurantSlice';
+import dayjs from 'dayjs';
+import { TimePicker } from 'antd';
+const format = 'HH:mm';
 
 function TimeQuotasView() {
     const { openingTime, closingTime, reservationQuota } = useSelector(state => state.restaurant);
@@ -40,17 +41,9 @@ function TimeQuotasView() {
         <div className="timeQuotascontainer">
 
             <label className='timeQuotasLabel'>Opening Time</label>
-            <TimePicker
-                onChange={handleOpeningTimeChange}
-                value={openingTime}
-                format="HH:mm:ss"
-            />
+            <TimePicker defaultValue={dayjs('09:00', format)} format={format} onChange={handleOpeningTimeChange} />
             <label className='timeQuotasLabel'>Closing Time</label>
-            <TimePicker
-                onChange={handleClosingTimeChange}
-                value={closingTime}
-                format="HH:mm:ss"
-            />
+            <TimePicker defaultValue={dayjs('22:00', format)} format={format} onChange={handleClosingTimeChange} />
             <label className='timeQuotasLabel'>Reservation Quotas</label>
             <input
                 className='timeQuotasInput'
