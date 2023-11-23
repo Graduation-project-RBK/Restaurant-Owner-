@@ -13,7 +13,6 @@ const BasicCard = () => {
         try {
             const { data } = await axios.put(`http://localhost:3000/api/payments/basic`)
             console.log(data)
-            toast.success("Your Basic membership is successfully activated!");
             navigate('/home')
         } catch (error) {
             console.log(error)

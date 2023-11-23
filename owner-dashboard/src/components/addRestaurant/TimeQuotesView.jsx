@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setOpeningTime, setClosingTime, setReservationQuota, setIsNextDisabled } from '../../features/restaurantSlice';
 import dayjs from 'dayjs';
 import { TimePicker } from 'antd';
+import moment from 'moment';
+
 const format = 'HH:mm';
 
 function TimeQuotasView() {
@@ -14,12 +16,14 @@ function TimeQuotasView() {
     }, []);
 
     const handleOpeningTimeChange = (newOpeningTime) => {
-        dispatch(setOpeningTime(newOpeningTime));
+        dispatch(setOpeningTime(newOpeningTime.$d));
+
         checkIsNextDisabled(newOpeningTime, closingTime, reservationQuota);
     };
 
     const handleClosingTimeChange = (newClosingTime) => {
-        dispatch(setClosingTime(newClosingTime));
+        dispatch(setClosingTime(newClosingTime.$d));
+
         checkIsNextDisabled(openingTime, newClosingTime, reservationQuota);
     };
 
