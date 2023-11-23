@@ -1,8 +1,11 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import TimePicker from 'react-time-picker';
-import 'react-time-picker/dist/TimePicker.css';
 import { setOpeningTime, setClosingTime, setReservationQuota, setIsNextDisabled } from '../../features/restaurantSlice';
+import dayjs from 'dayjs';
+import { TimePicker } from 'antd';
+import moment from 'moment';
+
+const format = 'HH:mm';
 
 function TimeQuotasView() {
     const { openingTime, closingTime, reservationQuota } = useSelector(state => state.restaurant);
@@ -13,12 +16,14 @@ function TimeQuotasView() {
     }, []);
 
     const handleOpeningTimeChange = (newOpeningTime) => {
-        dispatch(setOpeningTime(newOpeningTime));
+        dispatch(setOpeningTime(newOpeningTime.$d));
+
         checkIsNextDisabled(newOpeningTime, closingTime, reservationQuota);
     };
 
     const handleClosingTimeChange = (newClosingTime) => {
-        dispatch(setClosingTime(newClosingTime));
+        dispatch(setClosingTime(newClosingTime.$d));
+
         checkIsNextDisabled(openingTime, newClosingTime, reservationQuota);
     };
 
@@ -40,17 +45,9 @@ function TimeQuotasView() {
         <div className="timeQuotascontainer">
 
             <label className='timeQuotasLabel'>Opening Time</label>
-            <TimePicker
-                onChange={handleOpeningTimeChange}
-                value={openingTime}
-                format="HH:mm:ss"
-            />
+            <TimePicker defaultValue={dayjs('24:00', format)} format={format} onChange={handleOpeningTimeChange} />
             <label className='timeQuotasLabel'>Closing Time</label>
-            <TimePicker
-                onChange={handleClosingTimeChange}
-                value={closingTime}
-                format="HH:mm:ss"
-            />
+            <TimePicker defaultValue={dayjs('24:00', format)} format={format} onChange={handleClosingTimeChange} />
             <label className='timeQuotasLabel'>Reservation Quotas</label>
             <input
                 className='timeQuotasInput'

@@ -1,5 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
 import { setName, setDescription, setPhoneNumber, setIsNextDisabled } from '../../features/restaurantSlice';
 
 function NameDescriptionPhoneView() {
@@ -18,10 +20,9 @@ function NameDescriptionPhoneView() {
     checkIsNextDisabled(name, phoneNumber, updatedDescription);
   };
 
-  const handlePhoneNumberChange = (event) => {
-    const updatedPhoneNumber = event.target.value;
-    dispatch(setPhoneNumber(updatedPhoneNumber));
-    checkIsNextDisabled(name, updatedPhoneNumber, description);
+  const handlePhoneNumberChange = (value) => {
+    dispatch(setPhoneNumber(value));
+    checkIsNextDisabled(name, value, description);
   };
 
   const checkIsNextDisabled = (name, phoneNumber, description) => {
@@ -34,40 +35,38 @@ function NameDescriptionPhoneView() {
 
   return (
     <div className="input-wrapper">
-      <label>Name:</label>
-      <input
-        className="input-box"
-        type="textarea"
-        name="restaurantName"
-        value={name}
-        onChange={handleNameChange}
-        placeholder="Enter your restaurant name"
-        required />
-      <span className="underline"></span>
-      <label>Description:</label>
-      <input
-        className="input-box"
-        type="textarea"
-        name="restaurantDescription"
-        value={description}
-        onChange={handleDescriptionChange}
-        placeholder="Enter your restaurant Description"
-        required />
-      <span className="underline"></span>
-      <label>Phone Number:</label>
-      <input
-        className="input-box"
-        type="tel"
-        name="restaurantPhoneNumber"
-        value={phoneNumber}
-        onChange={handlePhoneNumberChange}
-        placeholder="99 999 999"
-        pattern="[0-9]{2}-[0-9]{3}-[0-9]{3}"
-        required />
-      <span className="underline"></span>
-
+      <div>
+        <label>Name:</label>
+        <input
+          className="input-box"
+          type="textarea"
+          name="restaurantName"
+          value={name}
+          onChange={handleNameChange}
+          placeholder="Enter your restaurant name"
+          required
+        />
+        <label>Description:</label>
+        <input
+          className="input-box"
+          type="textarea"
+          name="restaurantDescription"
+          value={description}
+          onChange={handleDescriptionChange}
+          placeholder="Enter your restaurant Description"
+          required
+        />
+      </div>
+      <br></br>
+      <div>
+        <PhoneInput
+          placeholder="Enter phone number"
+          value={phoneNumber}
+          onChange={handlePhoneNumberChange}
+        />
+      </div>
     </div>
-  )
+  );
 }
 
 export default NameDescriptionPhoneView;

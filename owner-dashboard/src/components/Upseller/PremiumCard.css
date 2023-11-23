@@ -1,7 +1,7 @@
 .pack-container-premium {
     max-width: 400px;
     width: 400px;
-    height: 600px;
+    height: 550px;
     border-radius: 12px;
     padding: 1.6rem;
     color: black;
@@ -90,7 +90,7 @@
 }
 
 .button-container-premium {
-    margin-top: 97px;
+    margin-top: 48px;
     padding: 0;
 }
 
