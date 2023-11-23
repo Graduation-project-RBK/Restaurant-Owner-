@@ -102,7 +102,7 @@ const Settings = () => {
         description: data.description,
         category: data.category,
         ReservationQuota: data.reservation_quota,
-        opensAt: moment(data.opening_time).format('HH:mm'),
+        opensAt: moment(data.opening_time,).format('HH:mm'),
         closingTime: moment(data.closing_time).format('HH:mm'),
         phoneNumber: data.phone_number,
 
@@ -126,7 +126,7 @@ const Settings = () => {
   }, [])
   return (
 
-    <div className="mt-7 w-[%] mx-auto bg-white rounded-lg p-5 shadow-sm">
+    <div className="mt-7 w-[60%] mr-auto bg-white rounded-lg p-10 ml-5 shadow-sm" >
       <h2 className="text-black font-bold text-lg">Your restaurant details</h2>
 
       <div className="mt-4">
