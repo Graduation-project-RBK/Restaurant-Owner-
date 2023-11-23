@@ -41,9 +41,9 @@ function TimeQuotasView() {
         <div className="timeQuotascontainer">
 
             <label className='timeQuotasLabel'>Opening Time</label>
-            <TimePicker defaultValue={dayjs('09:00', format)} format={format} onChange={handleOpeningTimeChange} />
+            <TimePicker defaultValue={dayjs('24:00', format)} format={format} onChange={handleOpeningTimeChange} />
             <label className='timeQuotasLabel'>Closing Time</label>
-            <TimePicker defaultValue={dayjs('22:00', format)} format={format} onChange={handleClosingTimeChange} />
+            <TimePicker defaultValue={dayjs('24:00', format)} format={format} onChange={handleClosingTimeChange} />
             <label className='timeQuotasLabel'>Reservation Quotas</label>
             <input
                 className='timeQuotasInput'
