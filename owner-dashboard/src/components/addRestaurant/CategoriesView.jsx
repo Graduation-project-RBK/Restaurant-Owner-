@@ -38,7 +38,7 @@ const CategoriesView = () => {
 
   return (
     <div className="categories-view">
-      <h2 className="head2 pb-6">Select a Category</h2>
+      <h2 className="text-3xl pb-6">Select a Category</h2>
       <div className="category-cards">
         {categories.map((category) => (
           <CategoryCard

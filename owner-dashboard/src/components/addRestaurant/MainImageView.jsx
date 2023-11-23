@@ -62,23 +62,25 @@ const MainImageView = () => {
   return (
     <>
       <div className="pl-6">
-        <h2 className="head2">Main Image</h2>
-        <br></br>
-        <label htmlFor="mainImageInput">
-          <i className="Icon fas fa-plus"></i>
-        </label>
-        <input id="mainImageInput" type="file" style={{ display: "none" }} accept="image/*" onChange={handleImageChange} />
+        <div className="addImages">
+          <h2 className="head2">Main Image</h2>
+          <label htmlFor="mainImageInput">
+            <i className="Icon fas fa-plus"></i>
+          </label>
+          <input id="mainImageInput" type="file" style={{ display: "none" }} accept="image/*" onChange={handleImageChange} />
+        </div>
         <br></br>
         {mainImage && <img className="Img" src={mainImage} alt="Main" />}
       </div>
       <br></br>
       <div className="w-screen pl-6">
-        <h2 className="head2">Menu Images</h2>
-        <br></br>
-        <label htmlFor="menuImagesInput">
-          <i className="Icon fas fa-plus"></i>
-        </label>
-        <input id="menuImagesInput" type="file" style={{ display: "none" }} accept="image/*" onChange={handleMenuImagesChange} multiple max={5} />
+        <div className="addImages">
+          <h2 className="head2">Menu Images</h2>
+          <label htmlFor="menuImagesInput">
+            <i className="Icon fas fa-plus"></i>
+          </label>
+          <input id="menuImagesInput" type="file" style={{ display: "none" }} accept="image/*" onChange={handleMenuImagesChange} multiple max={5} />
+        </div>
         <br></br>
         <div className="images">
           {menuImages.map((image, index) => (
@@ -87,17 +89,16 @@ const MainImageView = () => {
         </div>
       </div>
       <br></br>
-
-      <div className="pl-6">
-        <h2 className="head2">Extra Images</h2>
+      <div className="pl-6 mb-2">
+        <div className="addImages">
+          <h2 className="head2">Extra Images</h2>
+          <label htmlFor="extraImagesInput">
+            <i className="Icon fas fa-plus"></i>
+          </label>
+          <input id="extraImagesInput" type="file" accept="image/*" style={{ display: "none" }} onChange={handleExtraImagesChange} multiple max={5} />
+        </div>
         <br></br>
         <p>This step is optional you can skip it and add your extra images later</p>
-
-        <br></br>
-        <label htmlFor="extraImagesInput">
-          <i className="Icon fas fa-plus"></i>
-        </label>
-        <input id="extraImagesInput" type="file" accept="image/*" style={{ display: "none" }} onChange={handleExtraImagesChange} multiple max={5} />
         <br></br>
         <div className="images">
           {extraImages.map((image, index) => (

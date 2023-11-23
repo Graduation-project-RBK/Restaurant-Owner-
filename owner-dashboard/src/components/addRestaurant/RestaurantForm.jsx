@@ -13,11 +13,13 @@ import LocationPickerView from './addLocation/LocationPickerView.jsx';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const totalSteps = 7;
 const RestaurantForm = () => {
     const navigate = useNavigate()
     const [currentView, setCurrentView] = useState(1);
     const [loading, setLoading] = useState(false);
     const { name, description, phoneNumber, categories, city, mainImage, menuImages, extraImages, openingTime, closingTime, reservationQuota, isNextDisabled, lat, lng } = useSelector(state => state.restaurant);
+
     useEffect(() => {
         const storedView = localStorage.getItem('currentView');
         if (storedView) {
@@ -36,6 +38,11 @@ const RestaurantForm = () => {
         setCurrentView(currentView - 1);
         localStorage.setItem('currentView', currentView - 1);
     };
+
+    const calculateProgressWidth = () => {
+        return ((currentView - 1) / (totalSteps - 1)) * 100 + '%';
+    };
+
     const handleSubmit = async () => {
         setLoading(true);
         const formattedOpeningTime = moment(openingTime, 'HH:mm:ss').toISOString();
@@ -106,22 +113,29 @@ const RestaurantForm = () => {
 
     return (
         <div className='addRestaurantContainer bg-white w-screen h-screen'>
+            <img src="../src/images/owners_auto_x2.jpg" alt="Logo" className="logoImg" />
             <div className='view bg-white w-screen'>
                 {renderView()}
             </div>
             <div className='footer bg-white w-screen' >
-                <div className='leftBtn pl-6'>
-                    {currentView > 1 && (
-                        <button className="btn" onClick={handlePreviousClick}>Back</button>
-                    )}
+                <div className='progress-bar'>
+                    <div className='progress' style={{ width: calculateProgressWidth() }}></div>
                 </div>
-                <div className='righttBtn pr-6'>
-                    {currentView < 7 ? (
-                        <button className="btn" onClick={handleNextClick} disabled={currentView === 1 ? false : isNextDisabled}>Next</button>
-                    ) : (
-                        <button className="btn" onClick={handleSubmit} disabled={isNextDisabled}>Submit</button>
-                    )}
+                <div className='footerButtons'>
+                    <div className='leftBtn pl-6 pb-2'>
+                        {currentView > 1 && (
+                            <button className="btn" onClick={handlePreviousClick}>Back</button>
+                        )}
+                    </div>
+                    <div className='righttBtn pr-6 pb-2'>
+                        {currentView < 7 ? (
+                            <button className="btn" onClick={handleNextClick} disabled={currentView === 1 ? false : isNextDisabled}>Next</button>
+                        ) : (
+                            <button className="btn" onClick={handleSubmit} disabled={isNextDisabled}>Submit</button>
+                        )}
+                    </div>
                 </div>
+
             </div>
             {loading && (
                 <div className='loading'>
