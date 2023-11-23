@@ -29,7 +29,7 @@ function Login() {
         inputs
       );
       toast.success("Successfully Logged In");
-      console.log(data.payload);
+      console.log(data);
       if (data.message === "User hasn't created a restaurant") {
         localStorage.setItem("token", data.token);
 

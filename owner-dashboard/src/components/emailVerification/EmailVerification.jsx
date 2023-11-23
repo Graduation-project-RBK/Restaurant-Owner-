@@ -3,13 +3,13 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from 'react-redux';
 import success from "../../images/success.png"
+import failure from "../../images/404.jpg"
 import "./emailVerification.css"
 
 function EmailVerification() {
 
     const [validUrl, setValidUrl] = useState(true);
     const param = useParams();
-    const dispatch = useDispatch();
 
 
     useEffect(() => {
@@ -18,7 +18,6 @@ function EmailVerification() {
                 console.log(param.token)
                 const { data } = await axios.post(`http://localhost:3000/api/owners/verify/${param.token}`);
                 console.log(data)
-                dispatch(setOwnerId(data.ownerId));
                 setValidUrl(true);
             } catch (error) {
                 console.log(error);
@@ -26,7 +25,9 @@ function EmailVerification() {
             }
         };
         verifyEmail();
-    }, []);
+    }, [param.token]);
+
+
     return (
         <>
             {validUrl ? (
@@ -38,8 +39,11 @@ function EmailVerification() {
                     </Link>
                 </div>
             ) : (
-                <h1>404 Not Found</h1>
-            )}
+                <div className="emailVerficationContainer">
+                    <img src={failure} alt="404" />
+                </div>
+            )
+            }
         </>
     )
 };
