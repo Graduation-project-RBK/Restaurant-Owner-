@@ -13,7 +13,6 @@ function Home() {
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState();
   const [restaurant, setRestaurant] = useState({});
-  const [loading, setLoading] = useState(false);
   function handleChange(index) {
     setCurrentIndex(index);
   }
@@ -33,7 +32,6 @@ function Home() {
   ));
 
   const getRestaurant = async () => {
-    setLoading(true);
     try {
       const { data } = await axios.get(`http://localhost:3000/api/restaurants/myRestaurant`)
       setRestaurant(data)
@@ -59,7 +57,59 @@ function Home() {
   return (
     <div >
       <NavBar />
+      <section class="grid gap-8 my-6 md:grid-cols-3">
+      <div class="p-5 bg-white shadow rounded-2xl">
+        <dl class="space-y-2">
+          <dt class="text-sm font-medium text-gray-500">
+            Reservation Requests for basic restaurants
+          </dt>
 
+          <dd class="text-5xl font-light md:text-6xl">
+            00%
+          </dd>
+          <svg
+            class="w-7 h-7"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          ></svg>
+        </dl>
+      </div>
+      <div class="p-6 bg-white shadow rounded-2xl">
+        <dl class="space-y-2">
+          <dt class="text-sm font-medium text-gray-500">
+           Total Number Reservation 
+          </dt>
+
+          <dd class="text-5xl font-light md:text-6xl">
+            50
+          </dd>
+          <svg
+            class="w-7 h-7"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          ></svg>
+        </dl>
+      </div>
+      <div class="p-6 bg-white shadow rounded-2xl">
+        <dl class="space-y-2">
+          <dt class="text-sm font-medium text-gray-500">
+            Number of cu
+          </dt>
+
+          <dd class="text-5xl font-light md:text-6xl">
+            00%
+          </dd>
+          <svg
+            class="w-7 h-7"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          ></svg>
+        </dl>
+      </div>
+      </section>
       <div className="App">
         <div className="flex flex-wrap justify-between items-baseline flex-row">
           <Carousel
@@ -86,11 +136,7 @@ function Home() {
 
       </div>
 
-      {loading && (
-        <div className='loading'>
-          <div className='spinner'></div>
-        </div>
-      )}
+
 
     </div>
 

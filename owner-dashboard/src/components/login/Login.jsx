@@ -29,7 +29,7 @@ function Login() {
         inputs
       );
       toast.success("Successfully Logged In");
-      console.log(data.payload);
+      console.log(data);
       if (data.message === "User hasn't created a restaurant") {
         localStorage.setItem("token", data.token);
 
@@ -65,6 +65,12 @@ function Login() {
         error.response.data.message === "This account was banned by the admin."
       ) {
         toast.error("This account was banned by the admin.");
+      } else if (
+        error.response &&
+        error.response.status === 403 &&
+        error.response.data.message === "This account is pending the admin's decision."
+      ) {
+        toast.error("This account is pending the admin's decision.");
       } else if (
         error.response &&
         error.response.status === 403 &&

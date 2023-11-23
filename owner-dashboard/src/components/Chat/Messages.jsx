@@ -5,17 +5,29 @@ import Conversations from "./Conversations.jsx";
 import Message from "./Message.jsx";
 import axios from "../../../services/axios-interceptor.js";
 import { io } from "socket.io-client";
-
+import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+import { setCurrentChat } from '../../features/chatSlice.js'
+import { setMessageNotificationBadge } from '../../features/notificationSlice.js'
 
 const Messages = () => {
 
 
     const [conversations, setConversations] = useState([])
-    const [currentChat, setCurrentChat] = useState(null)
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState('')
-    const [socket, setSocket] = useState(null)
+    const [arrivalMessage, setArrivalMessage] = useState(null)
+    const [customerImage, setCustomerImage] = useState('')
+
     const scrollRef = useRef()
+    const socket = useRef()
+    const { isPremium } = useSelector((state) => state.owner);
+    const { currentChat, currentChatName } = useSelector((state) => state.chat);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
 
     const getConvos = async () => {
         try {
@@ -29,11 +41,16 @@ const Messages = () => {
             }
             const uniqueConvos = Object.values(uniqueConversationsMap);
             const sortedConvos = uniqueConvos.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-            console.log(sortedConvos)
             setConversations(sortedConvos)
         } catch (error) {
-            console.log(error)
-            if (error.response.status === 403 || error.response.status === 401) {
+            console.log(error.response.data.message)
+            if (error.response && error.response.status === 403 && error.response.data.message === "Owner account unauthorized") {
+                toast.error("Upgrade to premium to access our chat feature now!");
+                navigate('/home')
+
+            }
+
+            else if (error.response.status === 403 || error.response.status === 401) {
                 localStorage.clear()
                 navigate('/')
             }
@@ -46,11 +63,20 @@ const Messages = () => {
             try {
 
                 const { data } = await axios.get(`http://localhost:3000/api/messages/owner/messages/${currentChat}`)
-                console.log(data)
                 setMessages(data)
             } catch (error) {
                 console.log(error)
-                if (error.response.status === 403 || error.response.status === 401) {
+                if (
+                    error.response &&
+                    error.response.status === 403 &&
+                    error.response.data.message === "Owner account unauthorized"
+                ) {
+                    toast.error("Upgrade to premium to access our chat feature now!");
+                    navigate('/home')
+
+                }
+
+                else if (error.response.status === 403 || error.response.status === 401) {
                     localStorage.clear()
                     navigate('/')
                 }
@@ -65,48 +91,147 @@ const Messages = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        try {
 
-            const { data } = await axios.post(`http://localhost:3000/api/messages/owner/${currentChat}`, { message: newMessage })
-            setMessages([...messages, data])
-            setNewMessage('')
+        let toSend = newMessage
 
-        } catch (error) {
-            if (error.response.status === 403 || error.response.status === 401) {
-                localStorage.clear()
-                navigate('/')
+        if (newMessage.length > 0 && newMessage !== "\n") {
+
+            if (newMessage.slice(-1) === "\n") {
+                toSend = newMessage.slice(0, -1)
+            }
+
+            socket.current.emit('sendMessage', {
+                receiverId: currentChat,
+                text: toSend
+            })
+
+
+            try {
+
+                const { data } = await axios.post(`http://localhost:3000/api/messages/owner/${currentChat}`, { message: toSend })
+                setMessages([...messages, data])
+                setNewMessage('')
+
+
+
+            } catch (error) {
+                console.log(error)
+                if (
+                    error.response &&
+                    error.response.status === 403 &&
+                    error.response.data.message === "Owner account unauthorized"
+                ) {
+                    toast.error("Upgrade to premium to access our chat feature now!");
+                    navigate('/home')
+
+                }
+
+                else if (error.response.status === 403 || error.response.status === 401) {
+                    localStorage.clear()
+                    navigate('/')
+                }
             }
         }
     }
 
     const handleEnter = (e) => {
-        console.log(e.key)
         if (e.key === 'Enter') {
             handleSubmit(e)
             e.target.value = ''
+
         }
     }
+    const removeMessageNotificationBadge = async () => {
+        try {
+            const { data } = await axios.put(
+                `http://localhost:3000/api/messages/owner/notification`
+            );
+            dispatch(setMessageNotificationBadge(data));
+        } catch (error) {
+            console.log(error);
+            if (error.response.status === 403 || error.response.status === 401) {
+                localStorage.clear();
+                navigate("/");
+            }
+        }
+    };
+
 
     useEffect(() => {
         getMessages()
         getConvos()
-        scrollRef.current?.scrollIntoView({ behavior: 'smooth' })
 
     }, [currentChat])
 
+
     useEffect(() => {
 
+
+        arrivalMessage && currentChat === arrivalMessage.sender &&
+            setMessages((prev) => [...prev, arrivalMessage]);
+    }, [arrivalMessage, currentChat])
+
+
+    useEffect(() => {
         scrollRef.current?.scrollIntoView({ behavior: 'smooth' })
 
     }, [messages])
 
+    const findCustomerImage = async () => {
+        if (currentChat) {
+            try {
+                const { data } = await axios.get(`http://localhost:3000/api/owners/customers/${currentChat}`);
+                setCustomerImage(data.profilePic);
+
+            } catch (error) {
+                console.log(error);
+                if (error.response.status === 403 || error.response.status === 401) {
+                    localStorage.clear();
+                    navigate('/');
+                }
+            }
+        }
+    };
+
+
 
     useEffect(() => {
-        setSocket(io("ws://localhost:8900"))
+        removeMessageNotificationBadge()
+        findCustomerImage()
 
-    }, [])
+        if (!socket.current) {
+            socket.current = io("ws://localhost:8900", {
+                auth: {
+                    token: localStorage.getItem('token')
+                }
+            });
 
 
+            socket.current.emit("addUser");
+        }
+
+        if (socket.current) {
+
+            socket.current.on("getMessage", (data) => {
+                setArrivalMessage({
+                    sender: data.senderId,
+                    message: data.text,
+                    createdAt: Date.now(),
+                });
+            });
+
+            return () => {
+                // Clean up the socket connection when the component unmounts
+                // (This will only execute when the entire application unmounts)
+
+                socket.current.disconnect();
+                socket.current = null;
+
+
+            };
+        }
+
+    }, []);
 
 
 
@@ -115,12 +240,12 @@ const Messages = () => {
     return (
         <div>
             <NavBar />
-            <div className="messenger">
+            <div className="messenger ">
 
-                <div className="chatMenu"></div>
-                <div className="chatMenuWrapper">
+                <div className="chatMenu  "></div>
+                <div className="chatMenuWrapper ">
                     {conversations.map((convo) =>
-                        <div onClick={() => setCurrentChat(convo.customerId)} key={convo.customerId}>
+                        <div onClick={() => dispatch(setCurrentChat(convo.customerId))} key={convo.customerId}>
                             <Conversations customerId={convo.customerId} />
                         </div>
                     )}
@@ -132,13 +257,17 @@ const Messages = () => {
                     {currentChat ? (<>
                         <div className="chatBoxTop">
                             {messages.map((message) =>
-                                <div ref={scrollRef}>
-                                    <Message message={message} key={message.id} own={message.sender === 'restaurant'} />
+                                <div ref={scrollRef} key={message.id}>
+                                    <Message message={message} own={message.sender === 'restaurant'} customerImage={customerImage} />
                                 </div>
+                            )}
+                            {!messages.length && (
+                                <span className="noMessages">Send a message to start conversation with {currentChatName.split(' ')[0]} </span>
+
                             )}
                         </div>
                         <div className="chatBoxBottom">
-                            <textarea className="chatMessageInput" placeholder="Write something..." onChange={handleChange} onKeyUp={handleEnter}
+                            <textarea className="chatMessageInput" placeholder="Write something..." onChange={handleChange} onKeyUp={handleEnter} value={newMessage}
                             ></textarea>
                             <button className="chatSubmitButton bg-red-600" onClick={handleSubmit}>Send</button>
                         </div>
