@@ -37,7 +37,7 @@ function IntroductionView() {
         <h1 className='text-5xl mt-4'>Tell Us About Your Restaurant</h1>
       </div>
       <div>
-        <p>In this step, we'll ask you which type of property you have and if guests will book the entire place or just a room. Then let us know the location and how many guests can stay.</p>
+        <p>In this step, we'll ask you which type of restaurant you have, let us know the location and how many guests you can host in a day, Then give us a look into your place!</p>
       </div>
 
     </div>

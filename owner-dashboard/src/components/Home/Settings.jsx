@@ -102,7 +102,7 @@ const Settings = () => {
         description: data.description,
         category: data.category,
         ReservationQuota: data.reservation_quota,
-        opensAt: moment(data.opening_time).format('HH:mm'),
+        opensAt: moment(data.opening_time,).format('HH:mm'),
         closingTime: moment(data.closing_time).format('HH:mm'),
         phoneNumber: data.phone_number,
 

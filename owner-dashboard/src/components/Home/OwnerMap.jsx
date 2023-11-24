@@ -1,12 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import ReactMapGL, { Marker } from 'react-map-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
 
 const OwnerMap = ({ lng, lat }) => {
   const mapRef = useRef();
   const [viewport, setViewport] = useState({
-    width: '100%', // Set the width to a specific value or percentage
-    height: '400px',
     longitude: Number(lng) || 0,
     latitude: Number(lat) || 0,
     zoom: 15,
@@ -26,13 +23,15 @@ const OwnerMap = ({ lng, lat }) => {
   const isValidLatLng = !isNaN(Number(lat)) && !isNaN(Number(lng));
 
   return (
-    <div className="mapOwnerContainer">
+    <div className="mapOwnerContainer" >
       <ReactMapGL
         ref={mapRef}
         mapboxAccessToken={import.meta.env.VITE_MAP_TOKEN}
         {...viewport}
         onViewportChange={(newViewport) => setViewport(newViewport)}
         mapStyle="mapbox://styles/mapbox/streets-v11"
+
+
       >
         {isValidLatLng && (
           <Marker latitude={Number(lat)} longitude={Number(lng)}>
