@@ -38,15 +38,18 @@ const Reviews = () => {
     return (
         <div>
             <NavBar />
-            <div className="container">
-                <div className="mgb-40 padb-30 auto-invert line-b-4 align-center">
-                    <h1 className="font-cond-b fg-text-d lts-md fs-300 fs-300-xs no-mg">Read Customer Reviews</h1>
-                </div>
-                {reviews.length > 0 && (<div className="card-container">
+            <div className="review-container">
+
+                {reviews.length > 0 && (<div className="review-card-container">
 
                     {reviews.map((review) =>
-                        <ReviewsList review={review} key={review.id} />
+                        <>
+                            <ReviewsList review={review} key={review.id} />
+
+                        </>
                     )}
+
+
                 </div>)}
 
 

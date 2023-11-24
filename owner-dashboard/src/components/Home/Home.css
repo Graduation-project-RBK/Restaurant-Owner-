@@ -4,8 +4,6 @@
   flex-direction: column;
   justify-content: left;
   align-items: left;
-
-
 }
 
 .carousel-container {
@@ -18,30 +16,27 @@
 }
 
 .image-container img {
-  object-fit:cover;
+  object-fit: cover;
   height: 405px;
   margin-top: 5px;
-
+  border-radius: 20px;
   display: flex;
 
-
-    margin-right: 100px;
-
+  margin-right: 100px;
 }
 
 .carousel-container {
-    max-width: 700px;
-    max-height: 400px;
-    margin-right: -10px;
+  max-width: 700px;
+  max-height: 400px;
+  margin-right: -10px;
 }
 
-.mapOwnerContainer{
-  width: 45%;
+.mapOwnerContainer {
+  width: 100%;
   height: 400px;
   margin-right: 10px;
-
- margin-top: 5px;
-
+  border-radius: 20px;
+  margin-top: 5px;
 }
 
 .save {

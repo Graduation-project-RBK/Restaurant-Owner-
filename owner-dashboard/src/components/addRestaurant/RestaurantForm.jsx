@@ -47,6 +47,7 @@ const RestaurantForm = () => {
         setLoading(true);
         const formattedOpeningTime = moment(openingTime, 'HH:mm:ss').toISOString();
         const formattedClosingTime = moment(closingTime, 'HH:mm:ss').toISOString();
+        console.log(formattedOpeningTime)
         try {
             const formData = new FormData();
             formData.append("name", name);
