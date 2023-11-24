@@ -213,8 +213,8 @@ function NavBar() {
               <div>
                 {messageNotificationBadge && (
                   <>
-                    <span className="absolute bottom-12 right-21 h-2 w-2 mt-1 bg-red-500 rounded-full" />
-                    <span className="absolute bottom-12  right-21 h-2 w-2 mt-1 bg-red-500 rounded-full animate-ping" />
+                    <span className="absolute left-21 h-2 w-2 mt-1 bg-red-500 rounded-full" />
+                    <span className="absolute  left-21 h-2 w-2 mt-1 bg-red-500 rounded-full animate-ping" />
                   </>
                 )}
 

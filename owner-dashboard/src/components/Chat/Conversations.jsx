@@ -7,6 +7,7 @@ import { format } from "timeago.js";
 
 const Conversations = ({ customerId }) => {
     const [name, setName] = useState('');
+    const [profileImage, setProfileImage] = useState('');
     const { currentChat } = useSelector((state) => state.chat);
     const [latestMessageDate, setlatestMessageDate] = useState([])
     const [latestMessage, setLatesetMessage] = useState([])
@@ -15,6 +16,7 @@ const Conversations = ({ customerId }) => {
         try {
             const { data } = await axios.get(`http://localhost:3000/api/owners/customers/${customerId}`);
             setName(data.fullname);
+            setProfileImage(data.profilePic);
         } catch (error) {
             console.log(error);
             if (error.response.status === 403 || error.response.status === 401) {
@@ -56,7 +58,7 @@ const Conversations = ({ customerId }) => {
             <div className="convoInfo">
                 <img
                     className="conversationImg"
-                    src={porfileImage}
+                    src={profileImage ? profileImage : porfileImage}
                     alt=""
                 />
                 <span className="conversationName">{name}</span>
