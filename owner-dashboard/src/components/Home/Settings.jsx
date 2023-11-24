@@ -126,7 +126,7 @@ const Settings = () => {
   }, [])
   return (
 
-    <div className="mt-7 w-[%] mx-auto bg-white rounded-lg p-5 shadow-sm">
+    <div className="mt-7 max-w-[700px] ml-2 bg-white rounded-lg p-5 shadow-sm">
       <h2 className="text-black font-bold text-lg">Your restaurant details</h2>
 
       <div className="mt-4">

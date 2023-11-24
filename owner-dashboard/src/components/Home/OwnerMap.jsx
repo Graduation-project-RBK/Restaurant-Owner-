@@ -5,8 +5,10 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 const OwnerMap = ({ lng, lat }) => {
   const mapRef = useRef();
   const [viewport, setViewport] = useState({
-    longitude: Number(lng) || 0, 
-    latitude: Number(lat) || 0,   
+    width: '100%', // Set the width to a specific value or percentage
+    height: '400px',
+    longitude: Number(lng) || 0,
+    latitude: Number(lat) || 0,
     zoom: 15,
   });
 
