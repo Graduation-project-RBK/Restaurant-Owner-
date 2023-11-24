@@ -248,7 +248,7 @@ const Images = () => {
 
         <div className="mb-6">
           {/* Choose Extra Images */}
-          <label htmlFor="mainImage" className="flex mt-5 form-label block mb-2">
+          <label htmlFor="mainImage" className="flex mt-5 form-label  mb-2">
             Choose Main Image
             <label
               htmlFor="mainImage"
@@ -301,7 +301,7 @@ const Images = () => {
 
         <div className="mb-6">
           {/* Choose Extra Images */}
-          <label htmlFor="menuImage" className="flex mt-5 form-label block mb-2">
+          <label htmlFor="menuImage" className="flex mt-5 form-label mb-2">
             Add menu Images
             <label
               htmlFor="menuImage"
@@ -355,7 +355,7 @@ const Images = () => {
           {/* Choose Extra Images */}
 
 
-          <label htmlFor="extraImage" className=" flex mt-5 form-label block mb-2">
+          <label htmlFor="extraImage" className=" flex mt-5 form-label mb-2">
             Add Extra Images
             <label
               htmlFor="extraImage"
@@ -409,7 +409,7 @@ const Images = () => {
         <div className="text-center mt-8">
           <button
             onClick={handleSave}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
           >
             Save
           </button>
