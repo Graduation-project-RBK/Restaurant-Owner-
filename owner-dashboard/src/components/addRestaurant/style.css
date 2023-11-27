@@ -83,6 +83,7 @@
   color: white;
   cursor: not-allowed;
 }
+
 .addRestaurantContainer {
   /* height: 100vh; */
   display: flex;
@@ -118,6 +119,7 @@
   width: 50%;
   margin: 50px auto;
 }
+
 .categories-view,
 .city-view {
   display: flex;
@@ -198,6 +200,7 @@
 input[type="number"] {
   width: 50%;
 }
+
 .images {
   display: flex;
   gap: 5px;
@@ -205,14 +208,17 @@ input[type="number"] {
   /* justify-content: space-between; */
   align-items: center;
 }
+
 .addImages {
   display: flex;
   justify-content: space-between;
   width: 9%;
 }
+
 .Img {
   margin-left: 50px;
   width: 15vw;
+  height: 15vw;
   object-fit: contain;
 }
 
@@ -245,7 +251,7 @@ input[type="number"] {
 
 .spinner {
   border: 4px solid rgba(255, 255, 255, 0.3);
-  border-top: 4px solid #3498db;
+  border-top: 4px solid #db3434;
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -256,6 +262,7 @@ input[type="number"] {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }

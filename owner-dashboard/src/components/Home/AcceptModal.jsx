@@ -1,10 +1,10 @@
-import React,{useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from "../../../services/axios-interceptor.js";
 import { useSelector, useDispatch } from 'react-redux'
-import {setShows} from '../../features/acceptSlice.js'
+import { setShows } from '../../features/acceptSlice.js'
 
-function AcceptModal({reservation, setShowAcceptModal }) {
-  const [expoToken, setExpoToken] = useState('') 
+function AcceptModal({ reservation, setShowAcceptModal, fetch }) {
+  const [expoToken, setExpoToken] = useState('')
   const [name, setName] = useState('')
 
 
@@ -17,49 +17,50 @@ function AcceptModal({reservation, setShowAcceptModal }) {
 
   const findCustomerName = async () => {
     try {
-        const { data } = await axios.get(`http://localhost:3000/api/owners/customers/${reservation.customerId}`)
-        setName(data.fullname)
-        setExpoToken(data.expoToken)
-        console.log(data)
+      const { data } = await axios.get(`http://localhost:3000/api/owners/customers/${reservation.customerId}`)
+      setName(data.fullname)
+      setExpoToken(data.expoToken)
+      console.log(data)
     } catch (error) {
-        console.log(error)
-        if (error.response.status === 403 || error.response.status === 401) {
-            localStorage.clear()
-            navigate('/')
-        }
+      console.log(error)
+      if (error.response.status === 403 || error.response.status === 401) {
+        localStorage.clear()
+        navigate('/')
+      }
     }
-}
+  }
 
 
-const acceptReservation = async () => {
+  const acceptReservation = async () => {
     dispatch(setShows(true))
     try {
-        await axios.put(`http://localhost:3000/api/reservations/approve/${reservation.id}/${expoToken}`)
-        closeModal()
+      await axios.put(`http://localhost:3000/api/reservations/approve/${reservation.id}/${expoToken}`)
+      fetch()
+      closeModal()
     } catch (error) {
-        console.log(error)
-        if (error.response.status === 403 || error.response.status === 401) {
-            localStorage.clear()
-            navigate('/')
-        }
+      console.log(error)
+      if (error.response.status === 403 || error.response.status === 401) {
+        localStorage.clear()
+        navigate('/')
+      }
     }
-}
+  }
 
 
 
 
-useEffect(() => {
+  useEffect(() => {
     findCustomerName()
   }, [])
 
-    return (
-      
-  <div
-    id="popup-modal"
-    tabIndex={-1}
-    className="overflow-y-auto overflow-x fixed inset-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full backdrop-filter backdrop-blur-lg"
-    style={{ transform: 'translateY(-5%)' }}
-  >
+  return (
+
+    <div
+      id="popup-modal"
+      tabIndex={-1}
+      className="overflow-y-auto overflow-x fixed inset-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full backdrop-filter backdrop-blur-lg"
+      style={{ transform: 'translateY(-5%)' }}
+    >
       <div className="relative p-4 w-full max-w-md max-h-full">
         <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
           <button
@@ -108,11 +109,11 @@ useEffect(() => {
               data-modal-hide="popup-modal"
               type="button"
               className="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2"
-              onClick={()=>{
-              
+              onClick={() => {
+
                 acceptReservation()
-              
-              }} 
+
+              }}
             >
               Yes, I'm sure
             </button>
@@ -120,18 +121,18 @@ useEffect(() => {
               data-modal-hide="popup-modal"
               type="button"
               className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-              onClick={()=>{
-               closeModal(true);
+              onClick={() => {
+                closeModal(true);
 
               }}
             >
               No, cancel
             </button>
-          </div>  
+          </div>
         </div>
       </div>
     </div>
-    )
-  }
+  )
+}
 
-  export default AcceptModal
+export default AcceptModal
