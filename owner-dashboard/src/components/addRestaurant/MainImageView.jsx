@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setMainImage, setMenuImages, setExtraImages, setIsNextDisabled } from "../../features/restaurantSlice";
+import { CiCirclePlus } from "react-icons/ci";
 
 const MainImageView = () => {
   const dispatch = useDispatch();
@@ -64,8 +65,10 @@ const MainImageView = () => {
       <div className="pl-6">
         <div className="addImages">
           <h2 className="head2">Main Image</h2>
-          <label htmlFor="mainImageInput">
-            <i className="Icon fas fa-plus"></i>
+          <label
+            htmlFor="mainImageInput"
+            className="ml-3 bg-red-500 text-white px-1 py-1 rounded cursor-pointer hover:bg-red-700 inline-block">
+            <CiCirclePlus />
           </label>
           <input id="mainImageInput" type="file" style={{ display: "none" }} accept="image/*" onChange={handleImageChange} />
         </div>
@@ -76,8 +79,10 @@ const MainImageView = () => {
       <div className="w-screen pl-6">
         <div className="addImages">
           <h2 className="head2">Menu Images</h2>
-          <label htmlFor="menuImagesInput">
-            <i className="Icon fas fa-plus"></i>
+          <label
+            htmlFor="menuImagesInput"
+            className="ml-3 bg-red-500 text-white px-1 py-1 rounded cursor-pointer hover:bg-red-700 inline-block">
+            <CiCirclePlus />
           </label>
           <input id="menuImagesInput" type="file" style={{ display: "none" }} accept="image/*" onChange={handleMenuImagesChange} multiple max={5} />
         </div>
@@ -92,8 +97,10 @@ const MainImageView = () => {
       <div className="pl-6 mb-2">
         <div className="addImages">
           <h2 className="head2">Extra Images</h2>
-          <label htmlFor="extraImagesInput">
-            <i className="Icon fas fa-plus"></i>
+          <label
+            htmlFor="extraImagesInput"
+            className="ml-3 bg-red-500 text-white px-1 py-1 rounded cursor-pointer hover:bg-red-700 inline-block">
+            <CiCirclePlus />
           </label>
           <input id="extraImagesInput" type="file" accept="image/*" style={{ display: "none" }} onChange={handleExtraImagesChange} multiple max={5} />
         </div>

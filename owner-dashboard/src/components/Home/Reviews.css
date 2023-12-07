@@ -17,9 +17,12 @@
 }
 
 .img-thumbnail {
-    width: 15%;
-    height: auto;
-    max-width: 150px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    background-color: black;
 }
 
 .review-card-body {

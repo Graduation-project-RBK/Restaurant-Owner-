@@ -21,6 +21,7 @@ function ReservationHistory() {
             const response = await axios.get(`http://localhost:3000/api/restaurants/myRestaurant`)
 
             const { data } = await axios.get(`http://localhost:3000/api/reservations/resolved/${response.data.id}`)
+            console.log(data)
             setHistory(data)
 
         } catch (error) {

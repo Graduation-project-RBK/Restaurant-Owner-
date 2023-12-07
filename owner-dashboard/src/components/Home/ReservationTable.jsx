@@ -16,7 +16,7 @@ function ReservationTable() {
 
     const [showDeclineModal, setShowDeclineModal] = useState(false);
     const [showAcceptModal, setShowAcceptModal] = useState(false);
-  
+
 
 
     const getPendingReservations = async () => {
@@ -37,12 +37,12 @@ function ReservationTable() {
         console.log("showDeclineModal:", showDeclineModal);
         console.log("showAcceptModal:", showAcceptModal);
         getPendingReservations();
-    }, [showDeclineModal,show,shows,showAcceptModal]);
+    }, [showDeclineModal, show, shows, showAcceptModal]);
 
     return (
         <div className=" "> {/* Add margin-top to create space */}
             <NavBar />
-        
+
             <table className="mt-5 mx-auto text-xs text-center rtl:text-center text-gray-500 dark:text-gray-400 !bg-white" style={{ width: '70%', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
                 <thead className="text-xs text-gray-900 uppercase dark:text-gray-400 text-center" >
                     <tr>
@@ -65,11 +65,11 @@ function ReservationTable() {
                 </thead>
                 <tbody>
                     {pending.map((reservation) => (
-                        <PendingReservationTableList key={reservation.id} reservation={reservation} fetchs={getPendingReservations} setShowDeclineModal={setShowDeclineModal} setShowAcceptModal={setShowAcceptModal}/>
+                        <PendingReservationTableList key={reservation.id} reservation={reservation} fetch={getPendingReservations} setShowDeclineModal={setShowDeclineModal} setShowAcceptModal={setShowAcceptModal} />
                     ))}
                 </tbody>
             </table>
-           
+
         </div>
     );
 }
