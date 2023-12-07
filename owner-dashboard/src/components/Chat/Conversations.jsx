@@ -45,7 +45,7 @@ const Conversations = ({ customerId }) => {
     useEffect(() => {
         findCustomerName();
         getMessages()
-    }, []);
+    }, [currentChat]);
 
 
 

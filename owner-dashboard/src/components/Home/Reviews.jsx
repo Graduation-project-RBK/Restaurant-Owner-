@@ -35,12 +35,17 @@ const Reviews = () => {
 
     })
 
+    const sortedReviews = reviews.slice().sort((a, b) => {
+        return new Date(b.createdAt) - new Date(a.createdAt)
+    })
+
+
     return (
         <div>
             <NavBar />
             <div className="review-container">
 
-                {reviews.length > 0 && (<div className="review-card-container">
+                {sortedReviews.length > 0 && (<div className="review-card-container">
 
                     {reviews.map((review) =>
                         <>

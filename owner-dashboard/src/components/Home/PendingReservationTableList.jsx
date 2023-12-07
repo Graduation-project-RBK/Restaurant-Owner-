@@ -11,7 +11,7 @@ import { setCurrentChat, setCurrentChatName } from '../../features/chatSlice.js'
 import { useNavigate } from "react-router-dom";
 
 
-function PendingReservationTableList({ reservation, fetch, getPendingReservations }) {
+function PendingReservationTableList({ reservation, fetch }) {
     const [customer, setCustomer] = useState('')
     const [expoToken, setExpoToken] = useState('')
     const [showDeclineModal, setShowDeclineModal] = useState(false);
@@ -82,8 +82,8 @@ function PendingReservationTableList({ reservation, fetch, getPendingReservation
                     Decline
                 </button>
             </td>
-            {showDeclineModal && <DeclineModal fetch={getPendingReservations} reservation={reservation} setShowDeclineModal={setShowDeclineModal} showDeclineModal={showDeclineModal} />}
-            {showAcceptModal && <AcceptModal fetch={getPendingReservations} reservation={reservation} setShowAcceptModal={setShowAcceptModal} showAcceptModal={showAcceptModal} />}
+            {showDeclineModal && <DeclineModal fetch={fetch} reservation={reservation} setShowDeclineModal={setShowDeclineModal} showDeclineModal={showDeclineModal} />}
+            {showAcceptModal && <AcceptModal fetch={fetch} reservation={reservation} setShowAcceptModal={setShowAcceptModal} showAcceptModal={showAcceptModal} />}
         </tr>
     );
 }

@@ -160,6 +160,7 @@ const Messages = () => {
     useEffect(() => {
         getMessages()
         getConvos()
+        findCustomerImage()
 
     }, [currentChat])
 
@@ -182,6 +183,7 @@ const Messages = () => {
             try {
                 const { data } = await axios.get(`http://localhost:3000/api/owners/customers/${currentChat}`);
                 setCustomerImage(data.profilePic);
+                console.log(data.profilePic)
 
             } catch (error) {
                 console.log(error);
@@ -197,7 +199,6 @@ const Messages = () => {
 
     useEffect(() => {
         removeMessageNotificationBadge()
-        findCustomerImage()
 
         if (!socket.current) {
             socket.current = io("ws://localhost:8900", {

@@ -39,6 +39,7 @@ const Message = ({ message, own, customerImage }) => {
 
         <div className={own ? "message own" : "message"}>
             <div className="messageTop">
+                {console.log(customerImage)}
                 {!own && (<img className="messageImg" src={customerImage ? customerImage : porfileImage} alt="" />)}
                 <p className="messageText bg-red-600">{message.message}
                 </p>
